@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/passage_photo/redis.png">
 <meta property="article:published_time" content="2022-04-27T23:17:28.000Z">
-<meta property="article:modified_time" content="2022-04-29T07:00:43.530Z">
+<meta property="article:modified_time" content="2022-04-29T07:19:52.313Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="面试问题">
 <meta name="twitter:card" content="summary_large_image">
@@ -556,7 +556,7 @@
 <li><p>PriorityQueue<code>: </code>Object[]&#96; 数组来实现二叉堆</p>
 </li>
 <li><p><code>ArrayQueue</code>: <code>Object[]</code> 数组 + 双指针</p>
-<h6 id=""><a href="#" class="headerlink" title=""></a></h6></li>
+<h6 id><a href="#" class="headerlink" title></a></h6></li>
 </ul>
 <p><strong>Map</strong></p>
 <ul>
@@ -806,11 +806,11 @@
 <li>如何判断邮箱是真正存在的？</li>
 </ol>
 <p><strong>电子邮件的发送过程？</strong></p>
-<p>比如我的邮箱是“<a href="mailto:&#x64;&#x61;&#98;&#97;&#x69;&#64;&#x63;&#x73;&#122;&#x68;&#105;&#110;&#97;&#x6e;&#x2e;&#99;&#x6f;&#109;">&#x64;&#x61;&#98;&#97;&#x69;&#64;&#x63;&#x73;&#122;&#x68;&#105;&#110;&#97;&#x6e;&#x2e;&#99;&#x6f;&#109;</a>”，我要向“<a href="mailto:&#x78;&#x69;&#x61;&#x6f;&#x6d;&#x61;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;">&#x78;&#x69;&#x61;&#x6f;&#x6d;&#x61;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#x6d;</a>”发送邮件，整个过程可以简单分为下面几步：</p>
+<p>比如我的邮箱是“<a href="mailto:&#x64;&#97;&#98;&#x61;&#105;&#64;&#99;&#115;&#x7a;&#104;&#105;&#110;&#97;&#110;&#46;&#99;&#111;&#x6d;">&#x64;&#97;&#98;&#x61;&#105;&#64;&#99;&#115;&#x7a;&#104;&#105;&#110;&#97;&#110;&#46;&#99;&#111;&#x6d;</a>”，我要向“<a href="mailto:&#120;&#x69;&#97;&#111;&#x6d;&#97;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#109;">&#120;&#x69;&#97;&#111;&#x6d;&#97;&#x40;&#113;&#x71;&#46;&#x63;&#111;&#109;</a>”发送邮件，整个过程可以简单分为下面几步：</p>
 <ol>
 <li>通过 <strong>SMTP</strong> 协议，我将我写好的邮件交给163邮箱服务器（邮局）。</li>
 <li>163邮箱服务器发现我发送的邮箱是qq邮箱，然后它使用 SMTP协议将我的邮件转发到 qq邮箱服务器。</li>
-<li>qq邮箱服务器接收邮件之后就通知邮箱为“<a href="mailto:&#120;&#x69;&#x61;&#111;&#109;&#97;&#64;&#x71;&#x71;&#46;&#99;&#111;&#x6d;">&#120;&#x69;&#x61;&#111;&#109;&#97;&#64;&#x71;&#x71;&#46;&#99;&#111;&#x6d;</a>”的用户来收邮件，然后用户就通过 <strong>POP3&#x2F;IMAP</strong> 协议将邮件取出。</li>
+<li>qq邮箱服务器接收邮件之后就通知邮箱为“<a href="mailto:&#120;&#x69;&#97;&#111;&#x6d;&#x61;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;">&#120;&#x69;&#97;&#111;&#x6d;&#x61;&#64;&#x71;&#113;&#x2e;&#99;&#111;&#x6d;</a>”的用户来收邮件，然后用户就通过 <strong>POP3&#x2F;IMAP</strong> 协议将邮件取出。</li>
 </ol>
 <p><strong>如何判断邮箱是真正存在的？</strong></p>
 <p>很多场景(比如邮件营销)下面我们需要判断我们要发送的邮箱地址是否真的存在，这个时候我们可以利用 SMTP 协议来检测：</p>
@@ -946,7 +946,7 @@
 <p>本地DNS服务器解析过程</p>
 <figure class="highlight basic"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs basic"><span class="hljs-number">1</span>.向根域名服务器查询，获得到根域名服务器的IP地址<br><span class="hljs-number">2</span>.想根域名服务器咨询.<span class="hljs-keyword">com</span>域名服务器的地址     这次返回的是权威的响应<br><span class="hljs-number">3</span>.根域名放服务器返回.<span class="hljs-keyword">com</span>服务器地址，和名称<br><span class="hljs-number">4</span>.然后向顶级域名服务器咨询bilibili.<span class="hljs-keyword">com</span>的地址<br><span class="hljs-number">5</span>.咨询bilibili权威域名服务器的IP地址		返回结果canonical <span class="hljs-keyword">name</span> ，a开头的域名是一个CDN，也就是内容分发网络，得到他的IP地址，就可以返回给本地DNS服务器，再返回给解析器<br></code></pre></div></td></tr></table></figure>
 
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220330143748941.png" srcset="/img/loading.gif" lazyload alt="image-20220330143748941"></p>
+<p><img src="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220330143748941.png" srcset="/img/loading.gif" lazyload alt="image-20220330143748941"></p>
 <h5 id="状态码"><a href="#状态码" class="headerlink" title="状态码"></a>状态码</h5><p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019/7/%E7%8A%B6%E6%80%81%E7%A0%81.png" srcset="/img/loading.gif" lazyload alt="状态码"></p>
 <h5 id="各种协议与-HTTP-协议之间的关系"><a href="#各种协议与-HTTP-协议之间的关系" class="headerlink" title="各种协议与 HTTP 协议之间的关系"></a>各种协议与 HTTP 协议之间的关系</h5><p><img src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019/7/%E5%90%84%E7%A7%8D%E5%8D%8F%E8%AE%AE%E4%B8%8EHTTP%E5%8D%8F%E8%AE%AE%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB.png" srcset="/img/loading.gif" lazyload alt="各种协议与HTTP协议之间的关系"></p>
 <h5 id="HTTP-是不保存状态的协议-如何保存用户状态"><a href="#HTTP-是不保存状态的协议-如何保存用户状态" class="headerlink" title="HTTP 是不保存状态的协议, 如何保存用户状态?"></a>HTTP 是不保存状态的协议, 如何保存用户状态?</h5><p>HTTP 是一种不保存状态，即无状态（stateless）协议。也就是说 HTTP 协议自身不对请求和响应之间的通信状态进行保存。那么我们保存用户状态呢？Session 机制的存在就是为了解决这个问题，Session 的主要作用就是通过服务端记录用户的状态。典型的场景是购物车，当你要添加商品到购物车的时候，系统不知道是哪个用户操作的，因为 HTTP 协议是无状态的。服务端给特定的用户创建特定的 Session 之后就可以标识这个用户并且跟踪这个用户了（一般情况下，服务器会在一定时间内保存这个 Session，过了时间限制，就会销毁这个 Session）。</p>
@@ -1795,10 +1795,10 @@
 
 
 <p>MySQL读写分离（主从架构模式）</p>
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220216235711229.png" srcset="/img/loading.gif" lazyload alt="image-20220216235711229"></p>
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220216235839462.png" srcset="/img/loading.gif" lazyload alt="image-20220216235839462"></p>
+<p><img src="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220216235711229.png" srcset="/img/loading.gif" lazyload alt="image-20220216235711229"></p>
+<p><img src="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220216235839462.png" srcset="/img/loading.gif" lazyload alt="image-20220216235839462"></p>
 <p>假如更新失败，或者redis挂掉， </p>
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220217000237107.png" srcset="/img/loading.gif" lazyload alt="image-20220217000237107"></p>
+<p><img src="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220217000237107.png" srcset="/img/loading.gif" lazyload alt="image-20220217000237107"></p>
 <h3 id="相关问题-1"><a href="#相关问题-1" class="headerlink" title="相关问题"></a>相关问题</h3><h6 id="Mysql、Oracle默认隔离级别"><a href="#Mysql、Oracle默认隔离级别" class="headerlink" title="Mysql、Oracle默认隔离级别"></a>Mysql、Oracle默认隔离级别</h6><p>参考连接：<a target="_blank" rel="noopener" href="https://www.163.com/dy/article/G3F275VB05381TA2.html">https://www.163.com/dy/article/G3F275VB05381TA2.html</a></p>
 <p> Oracle 默认隔离级别是 Read committed（读已提交）</p>
 <p> MySQL 默认隔离级别是 Repeatable read（可重复读）</p>
@@ -1847,7 +1847,7 @@
 
 
 
-<h2 id="-1"><a href="#-1" class="headerlink" title=""></a></h2><h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h3><h6 id="Lombok插件"><a href="#Lombok插件" class="headerlink" title="Lombok插件"></a>Lombok插件</h6><p>@Data：</p>
+<h2 id="-1"><a href="#-1" class="headerlink" title></a></h2><h2 id="框架"><a href="#框架" class="headerlink" title="框架"></a>框架</h2><h3 id="Mybatis"><a href="#Mybatis" class="headerlink" title="Mybatis"></a>Mybatis</h3><h6 id="Lombok插件"><a href="#Lombok插件" class="headerlink" title="Lombok插件"></a>Lombok插件</h6><p>@Data：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs applescript">注解在类上；提供类所有属性的<span class="hljs-keyword">get</span>和<span class="hljs-keyword">set</span>方法，此外还提供了<span class="hljs-keyword">equals</span>、canEqual、hashCode、toString 方法。<br></code></pre></div></td></tr></table></figure>
 
 <p>@Getter</p>
@@ -1896,7 +1896,7 @@
 <p>在日常工作中，开发人员多数情况下是使用MyBatis的默认缓存配置，但是MyBatis缓存机制有一些不足之处，在使用中容易引起脏数据，形成一些潜在的隐患。</p>
 <p>参考资料：<a target="_blank" rel="noopener" href="https://tech.meituan.com/2018/01/19/mybatis-cache.html">聊聊MyBatis缓存机制</a></p>
 <h5 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h5><h6 id="一级缓存介绍"><a href="#一级缓存介绍" class="headerlink" title="一级缓存介绍"></a>一级缓存介绍</h6><p>在应用运行过程中，我们有可能在一次数据库会话中，执行多次查询条件完全相同的SQL，MyBatis提供了一级缓存的方案优化这部分场景，如果是相同的SQL语句，会优先命中一级缓存，避免直接对数据库进行查询，提高性能。具体执行过程如下图所示。</p>
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220302142440084.png" srcset="/img/loading.gif" lazyload alt="image-20220302142440084"></p>
+<p><img src="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220302142440084.png" srcset="/img/loading.gif" lazyload alt="image-20220302142440084"></p>
 <p>每个SqlSession中持有了Executor，每个Executor中有一个LocalCache。当用户发起查询时，MyBatis根据当前执行的语句生成<code>MappedStatement</code>，在Local Cache进行查询，如果缓存命中的话，直接返回结果给用户，如果缓存没有命中的话，查询数据库，结果写入<code>Local Cache</code>，最后返回结果给用户。具体实现类的类关系图如下图所示。</p>
 <p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2018a/d76ec5fe.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <h6 id="一级缓存配置"><a href="#一级缓存配置" class="headerlink" title="一级缓存配置"></a>一级缓存配置</h6><p>开发者只需在MyBatis的配置文件中，添加如下语句，就可以使用一级缓存。共有两个选项，<code>SESSION</code>或者<code>STATEMENT</code>，默认是<code>SESSION</code>级别，即在一个MyBatis会话中执行的所有语句，都会共享这一个缓存。一种是<code>STATEMENT</code>级别，可以理解为缓存只对当前执行的这一个<code>Statement</code>有效。</p>
@@ -1906,7 +1906,7 @@
 
 
 <h6 id="一级缓存工作流程-amp-源码分析"><a href="#一级缓存工作流程-amp-源码分析" class="headerlink" title="一级缓存工作流程&amp;源码分析"></a>一级缓存工作流程&amp;源码分析</h6><p>工作流程</p>
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220302143402698.png" srcset="/img/loading.gif" lazyload alt="image-20220302143402698"></p>
+<p><img src="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220302143402698.png" srcset="/img/loading.gif" lazyload alt="image-20220302143402698"></p>
 <p>源码分析</p>
 <p><strong>SqlSession</strong>： 对外提供了用户和数据库之间交互需要的所有方法，隐藏了底层的细节。默认实现类是<code>DefaultSqlSession</code>。</p>
 <p><img src="https://awps-assets.meituan.net/mit-x/blog-images-bundle-2018a/ba96bc7f.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
@@ -1981,7 +1981,7 @@
 </ul>
 <h6 id="Spring容器中如何创建对象？"><a href="#Spring容器中如何创建对象？" class="headerlink" title="Spring容器中如何创建对象？"></a><strong>Spring容器中如何创建对象？</strong></h6><p>​	无参构造创建 静态工厂创建 实例工厂创建</p>
 <h6 id="Spring有几种自动装配方式"><a href="#Spring有几种自动装配方式" class="headerlink" title="Spring有几种自动装配方式"></a><strong>Spring有几种自动装配方式</strong></h6><ul>
-<li>基于XML文件的配置 这种配置文件的格式常用<beans>开头，然后运用一系列的bean定义和专门的应用配置选项组成。 Spring XML配置方式是使用被Spring命名空间所支持的一些列XML的标签来实现的。</li>
+<li>基于XML文件的配置 这种配置文件的格式常用<beans>开头，然后运用一系列的bean定义和专门的应用配置选项组成。 Spring XML配置方式是使用被Spring命名空间所支持的一些列XML的标签来实现的。</beans></li>
 </ul>
 <p>​		byname装配     byType装配</p>
 <figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">bean</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;accountService&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;com.something.DefaultAccountService&quot;</span> <span class="hljs-attr">autowire</span> = <span class="hljs-string">&quot;byType&quot;</span>/&gt;</span><br></code></pre></div></td></tr></table></figure>
