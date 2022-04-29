@@ -25,7 +25,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/passage_photo/epoll.jpg">
 <meta property="article:published_time" content="2022-04-28T23:17:28.000Z">
-<meta property="article:modified_time" content="2022-04-28T23:17:28.000Z">
+<meta property="article:modified_time" content="2022-04-29T16:20:44.053Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Java基础">
 <meta name="twitter:card" content="summary_large_image">
@@ -69,8 +69,8 @@
   
 <link rel="stylesheet" href="/css/mac.css">
 <link rel="stylesheet" href="/css/indeximg-hover.css">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css# 鼠标指针.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/gundongtiao.css# 滚动条颜色.css">
 
 
 
@@ -254,12 +254,6 @@
             <!-- SEO header -->
             <h1 style="display: none">Java基础知识笔记</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：2022年4月28日 23:17:28
-                
-              </p>
-            
             <div class="markdown-body">
               <p>第一章 开发前言</p>
 <h3 id="1-1-什么是Java语言"><a href="#1-1-什么是Java语言" class="headerlink" title="1.1 什么是Java语言"></a>1.1 什么是Java语言</h3><p>Java语言是美国Sun公司（Stanford University Network），在1995年推出的高级的编程语言。所谓编程语言，是计算机的语言，人们可以使用编程语言对计算机下达命令，让计算机完成人们需要的功能。</p>
@@ -402,7 +396,7 @@
 <figure class="highlight angelscript"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs angelscript">区域名称						作用<br>寄存器				给CPU使用，和我们开发无关。<br>本地方法			栈JVM在使用操作系统功能的时候使用，和我们开发无关。<br>方法区				存储可以运行的<span class="hljs-keyword">class</span>文件。<br>堆内存				存储对象或者数组，<span class="hljs-symbol">new</span>来创建的，都存储在堆内存。<br>方法栈				方法运行时使用的内存，比如<span class="hljs-symbol">main</span>方法运行，进入方法栈中执行。<br></code></pre></div></td></tr></table></figure>
 
 <p>数组内存，直接打印数组名字即&#x3D;&#x3D;数组的地址&#x3D;&#x3D;</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210916170618237.png" srcset="/img/loading.gif" lazyload alt="image-20210916170618237"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210916170618237.png" srcset="/img/loading.gif" lazyload alt="image-20210916170618237"></p>
 <figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-number">1</span>.main方法进栈<br><span class="hljs-number">2</span>.创建数组，<span class="hljs-keyword">JVM在内存中开辟空间，存储数组</span><br><span class="hljs-keyword"></span><span class="hljs-number">3</span>.数组在内存中有地址，十六位进制数表示<br><span class="hljs-number">4</span>.数组中元素默认初始值为<span class="hljs-number">0</span><br><span class="hljs-number">5</span>.<span class="hljs-keyword">JVM将数组的内存地址赋值给引用变量arr</span><br><span class="hljs-keyword"></span><span class="hljs-number">6</span>.变量arr保存的是数组内存中的地址，因此成为引用数据类型<br></code></pre></div></td></tr></table></figure>
 
 <h2 id="第六章-面向对象"><a href="#第六章-面向对象" class="headerlink" title="第六章 面向对象"></a>第六章 面向对象</h2><p>面向过程：强调步骤。<br>       面向对象：强调对象。</p>
@@ -425,7 +419,7 @@
 <h3 id="6-3-对象内存"><a href="#6-3-对象内存" class="headerlink" title="6.3 对象内存"></a>6.3 对象内存</h3><p>例如</p>
 <figure class="highlight css"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs css"><span class="hljs-number">1</span><span class="hljs-selector-class">.main</span>方法先进栈<br><span class="hljs-number">2</span>.在堆中创建对象，把对象的地址值给one, 堆中方法的地址值也指向方法区地址<br><span class="hljs-number">3</span>.调用方法，方法完成后出栈<br><span class="hljs-number">4</span>.全部完成，<span class="hljs-selector-tag">main</span>出栈<br></code></pre></div></td></tr></table></figure>
 
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210916203007283.png" srcset="/img/loading.gif" lazyload alt="image-20210916203007283"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210916203007283.png" srcset="/img/loading.gif" lazyload alt="image-20210916203007283"></p>
 <h3 id="6-4-局部变量和成员变量"><a href="#6-4-局部变量和成员变量" class="headerlink" title="6.4 局部变量和成员变量"></a>6.4 局部变量和成员变量</h3><p>1.在类中的位置不同</p>
 <figure class="highlight gcode"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gcode">成员变量：类中，方法外<br>局部变量：方法中或者方法声明上<span class="hljs-comment">(形式参数)</span><br></code></pre></div></td></tr></table></figure>
 
@@ -537,7 +531,7 @@
 <h4 id="10-1-常用方法和遍历"><a href="#10-1-常用方法和遍历" class="headerlink" title="10.1 常用方法和遍历"></a>10.1 常用方法和遍历</h4><p>对于元素的操作,基本体现在——增、删、查。常用的方法有：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">add</span><span class="hljs-params">(E e)</span> ：将指定的元素添加到此集合的尾部。<br><span class="hljs-keyword">public</span> E <span class="hljs-title function_">remove</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> ：移除此集合中指定位置上的元素。返回被删除的元素。<br><span class="hljs-keyword">public</span> E <span class="hljs-title function_">get</span><span class="hljs-params">(<span class="hljs-type">int</span> index)</span> ：返回此集合中指定位置上的元素。返回获取的元素。<br><span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">size</span><span class="hljs-params">()</span> ：返回此集合中的元素数。遍历集合时，可以控制索引范围，防止越界。<br></code></pre></div></td></tr></table></figure>
 
-<h4 id="10-2包装类"><a href="#10-2包装类" class="headerlink" title="10.2包装类"></a>10.2包装类</h4><p>ArrayList对象不能存储基本类型，只能存储引用类型的数据。类似<int> 不能写，但是存储基本数据类型对应的包装类型是可以的。所以，想要存储基本类型数据， &lt;&gt; 中的数据类型，必须转换后才能编写，转换写法如下：</int></p>
+<h4 id="10-2包装类"><a href="#10-2包装类" class="headerlink" title="10.2包装类"></a>10.2包装类</h4><p>ArrayList对象不能存储基本类型，只能存储引用类型的数据。类似<int> 不能写，但是存储基本数据类型对应的包装类型是可以的。所以，想要存储基本类型数据， &lt;&gt; 中的数据类型，必须转换后才能编写，转换写法如下：</p>
 <figure class="highlight gradle"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs gradle">基本类型基本类型包装类<br><span class="hljs-keyword">byte</span> 			<span class="hljs-keyword">Byte</span><br><span class="hljs-keyword">short</span> 			<span class="hljs-keyword">Short</span><br><span class="hljs-keyword">int</span> 			Integer<br><span class="hljs-keyword">long</span>			 <span class="hljs-keyword">Long</span><br><span class="hljs-keyword">float</span>			 <span class="hljs-keyword">Float</span><br><span class="hljs-keyword">double</span> 			<span class="hljs-keyword">Double</span><br><span class="hljs-keyword">char</span> 			Character<br><span class="hljs-keyword">boolean</span>			 <span class="hljs-keyword">Boolean</span><br></code></pre></div></td></tr></table></figure>
 
 <p>我们发现，只有Integer和Character需要特殊记忆，其他基本类型只是首字母大写即可 吧  </p>
@@ -594,7 +588,7 @@
 <figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs">是随着类的加载而加载的，且只加载一次。<br>存储于一块固定的内存区域（静态区），所以，可以直接被类名调用。<br>它优先于对象存在，所以，可以被所有对象共享。<br></code></pre></div></td></tr></table></figure>
 
 <p>内存示意图</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210917171721996.png" srcset="/img/loading.gif" lazyload alt="image-20210917171721996"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210917171721996.png" srcset="/img/loading.gif" lazyload alt="image-20210917171721996"></p>
 <h3 id="静态代码块"><a href="#静态代码块" class="headerlink" title="静态代码块"></a>静态代码块</h3><p>静态代码块：定义在成员位置，使用static修饰的代码块{ }。</p>
 <p>位置：类中方法外。</p>
 <p>执行：随着类的加载而执行且执行一次，&#x3D;&#x3D;优先于main方法&#x3D;&#x3D;和&#x3D;&#x3D;构造方法&#x3D;&#x3D;的执行</p>
@@ -645,7 +639,7 @@
 </ol>
 <h3 id="1-6-super和this"><a href="#1-6-super和this" class="headerlink" title="1.6 super和this"></a>1.6 super和this</h3><p>父类空间优先于子类对象产生</p>
 <p>在每次创建子类对象时，先初始化父类空间，再创建其子类对象本身。目的在于子类对象中包含了其对应的父类空间，便可以包含其父类的成员，如果父类成员非private修饰，则子类可以随意使用父类成员。代码体现在子类的构造方法调用时，一定先调用父类的构造方法。理解图解如下：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210920144237852.png" srcset="/img/loading.gif" lazyload alt="image-20210920144237852"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210920144237852.png" srcset="/img/loading.gif" lazyload alt="image-20210920144237852"></p>
 <p>super ：代表父类的存储空间标识(可以理解为父亲的引用)。<br>        this ：代表当前对象的引用(谁调用就代表谁)。</p>
 <h3 id="继承的特点"><a href="#继承的特点" class="headerlink" title="继承的特点"></a>继承的特点</h3><ol>
 <li>Java只支持单继承，不支持多继承。  也就是只能有一个父类，可以多个子类</li>
@@ -845,7 +839,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;  <br>    <span class="hljs-keyword">private</span> String name;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> age;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">toString</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Person&#123;&quot;</span> + <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> + <span class="hljs-string">&quot;, age=&quot;</span> + age + <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br><br>    <span class="hljs-comment">// 省略构造器与Getter Setter</span><br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>在IntelliJ IDEA中，可以点击<code>Code</code>菜单中的<code>Generate...</code>，也可以使用快捷键<code>alt+insert</code>，点击<code>toString()</code>选项。选择需要包含的成员变量并确定。如下图所示：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210921155234372.png" srcset="/img/loading.gif" lazyload alt="image-20210921155234372"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210921155234372.png" srcset="/img/loading.gif" lazyload alt="image-20210921155234372"></p>
 <blockquote>
 <p>小贴士： 在我们直接使用输出语句输出对象名的时候,其实通过该对象调用了其toString()方法。</p>
 </blockquote>
@@ -1090,12 +1084,12 @@
 
 <p>在API中对String类有这样的描述：字符串是常量，它们的值在创建后不能被更改。</p>
 <p>根据这句话分析我们的代码，其实总共产生了三个字符串，即<code>&quot;Hello&quot;</code>、<code>&quot;World&quot;</code>和<code>&quot;HelloWorld&quot;</code>。引用变量s首先指向<code>Hello</code>对象，最终指向拼接出来的新字符串对象，即<code>HelloWord</code> 。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210921164156811.png" srcset="/img/loading.gif" lazyload alt="image-20210921164156811"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210921164156811.png" srcset="/img/loading.gif" lazyload alt="image-20210921164156811"></p>
 <p>由此可知，如果对字符串进行拼接操作，每次拼接，都会构建一个新的String对象，既耗时，又浪费空间。为了解决这一问题，可以使用<code>java.lang.StringBuilder</code>类。</p>
 <h2 id="4-2-StringBuilder概述"><a href="#4-2-StringBuilder概述" class="headerlink" title="4.2 StringBuilder概述"></a>4.2 StringBuilder概述</h2><p>查阅<code>java.lang.StringBuilder</code>的API，StringBuilder又称为可变字符序列，它是一个类似于 String 的字符串缓冲区，通过某些方法调用可以改变该序列的长度和内容。</p>
 <p>原来StringBuilder是个字符串的缓冲区，即它是一个容器，容器中可以装很多字符串。并且能够对其中的字符串进行各种操作。</p>
 <p>它的内部拥有一个数组用来存放字符串内容，进行字符串拼接时，直接在数组中加入新内容。StringBuilder会自动维护数组的扩容。原理如下图所示：(默认16字符空间，超过自动扩充)</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210921164218313.png" srcset="/img/loading.gif" lazyload alt="image-20210921164218313"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210921164218313.png" srcset="/img/loading.gif" lazyload alt="image-20210921164218313"></p>
 <h2 id="4-3-构造方法"><a href="#4-3-构造方法" class="headerlink" title="4.3 构造方法"></a>4.3 构造方法</h2><p>根据StringBuilder的API文档，常用构造方法有2个：</p>
 <ul>
 <li><code>public StringBuilder()</code>：构造一个空的StringBuilder容器。</li>
@@ -1195,7 +1189,7 @@
 <blockquote>
 <p>注意:如果字符串参数的内容无法正确转换为对应的基本类型，则会抛出<code>java.lang.NumberFormatException</code>异常。</p>
 </blockquote>
-<h1 id="第一章-Collection集合"><a href="#第一章-Collection集合" class="headerlink" title="第一章 Collection集合"></a>第一章 Collection集合</h1><h2 id="1-1-集合概述"><a href="#1-1-集合概述" class="headerlink" title="1.1 集合概述"></a>1.1 集合概述</h2><p>在前面基础班我们已经学习过并使用过集合ArrayList<E> ,那么集合到底是什么呢?</E></p>
+<h1 id="第一章-Collection集合"><a href="#第一章-Collection集合" class="headerlink" title="第一章 Collection集合"></a>第一章 Collection集合</h1><h2 id="1-1-集合概述"><a href="#1-1-集合概述" class="headerlink" title="1.1 集合概述"></a>1.1 集合概述</h2><p>在前面基础班我们已经学习过并使用过集合ArrayList<E> ,那么集合到底是什么呢?</p>
 <ul>
 <li><strong>集合</strong>：集合是java中提供的一种容器，可以用来存储多个数据。</li>
 </ul>
@@ -1210,7 +1204,7 @@
 <li><strong>Collection</strong>：单列集合类的根接口，用于存储一系列符合某种规则的元素，它有两个重要的子接口，分别是<code>java.util.List</code>和<code>java.util.Set</code>。其中，&#x3D;&#x3D;<code>List</code>的特点是元素有序、元素可重复&#x3D;&#x3D;。&#x3D;&#x3D;<code>Set</code>的特点是元素无序，而且不可重复&#x3D;&#x3D;。<code>List</code>接口的主要实现类有<code>java.util.ArrayList</code>和<code>java.util.LinkedList</code>，<code>Set</code>接口的主要实现类有<code>java.util.HashSet</code>和<code>java.util.TreeSet</code>。</li>
 </ul>
 <p>从上面的描述可以看出JDK中提供了丰富的集合类库，为了便于初学者进行系统地学习，接下来通过一张图来描述整个集合类的继承体系。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923155147885.png" srcset="/img/loading.gif" lazyload alt="image-20210923155147885"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923155147885.png" srcset="/img/loading.gif" lazyload alt="image-20210923155147885"></p>
 <p>其中，橙色框里填写的都是接口类型，而蓝色框里填写的都是具体的实现类。这几天将针对图中所列举的集合类进行逐一地讲解。</p>
 <p>集合本身是一个工具，它存放在java.util包中。在<code>Collection</code>接口定义着单列集合框架中最最共性的内容。</p>
 <h2 id="1-3-Collection-常用功能"><a href="#1-3-Collection-常用功能" class="headerlink" title="1.3 Collection 常用功能"></a>1.3 Collection 常用功能</h2><p>Collection是所有单列集合的父接口，因此在Collection中定义了单列集合(List和Set)通用的一些方法，这些方法可用于操作所有的单列集合。方法如下：</p>
@@ -1251,7 +1245,7 @@
 </blockquote>
 <h2 id="2-2-迭代器的实现原理"><a href="#2-2-迭代器的实现原理" class="headerlink" title="2.2 迭代器的实现原理"></a>2.2 迭代器的实现原理</h2><p>我们在之前案例已经完成了Iterator遍历集合的整个过程。当遍历集合时，首先通过调用t集合的iterator()方法获得迭代器对象，然后使用hashNext()方法判断集合中是否存在下一个元素，如果存在，则调用next()方法将元素取出，否则说明已到达了集合末尾，停止遍历元素。</p>
 <p>Iterator迭代器对象在遍历集合时，内部采用指针的方式来跟踪集合中的元素，为了让初学者能更好地理解迭代器的工作原理，接下来通过一个图例来演示Iterator对象迭代元素的过程：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\就业班-day02-Collection、泛型\img\迭代器原理图.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\就业班-day02-Collection、泛型\img\迭代器原理图.bmp" srcset="/img/loading.gif" lazyload></p>
 <p>&#x3D;&#x3D;在调用Iterator的next方法之前，迭代器的索引位于第一个元素之前&#x3D;&#x3D;，不指向任何元素，当第一次调用迭代器的next方法后，迭代器的索引会向后移动一位，指向第一个元素并将该元素返回，当再次调用next方法时，迭代器的索引会指向第二个元素并将该元素返回，依此类推，直到hasNext方法返回false，表示到达了集合的末尾，终止对元素的遍历。</p>
 <h2 id="2-3-增强for"><a href="#2-3-增强for" class="headerlink" title="2.3 增强for"></a>2.3 增强for</h2><p>增强for循环(也称for each循环)是<strong>JDK1.5</strong>以后出来的一个高级for循环，专门用来遍历数组和集合的。它的内部原理其实是个&#x3D;&#x3D;Iterator迭代器&#x3D;&#x3D;，所以在遍历的过程中，不能对集合中的元素进行增删操作。</p>
 <p>格式：</p>
@@ -1346,7 +1340,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>    Collection&lt;Intger&gt; list1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();<br>    getElement(list1);<br>    Collection&lt;String&gt; list2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br>    getElement(list2);<br>&#125;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">getElement</span><span class="hljs-params">(Collection&lt;?&gt; coll)</span>&#123;&#125;<br><span class="hljs-comment">//？代表可以接收任意类型</span><br></code></pre></div></td></tr></table></figure>
 
 <blockquote>
-<p>tips:&#x3D;&#x3D;泛型不存在继承关系 Collection<Object> list &#x3D; new ArrayList<String>();这种是错误的。&#x3D;&#x3D;</String></Object></p>
+<p>tips:&#x3D;&#x3D;泛型不存在继承关系 Collection<Object> list &#x3D; new ArrayList<String>();这种是错误的。&#x3D;&#x3D;</p>
 </blockquote>
 <h4 id="通配符高级使用—-受限泛型"><a href="#通配符高级使用—-受限泛型" class="headerlink" title="通配符高级使用—-受限泛型"></a>通配符高级使用—-受限泛型</h4><p>之前设置泛型的时候，实际上是可以任意设置的，只要是类就可以设置。但是在JAVA的泛型中可以指定一个泛型的<strong>上限</strong>和<strong>下限</strong>。</p>
 <p><strong>泛型的上限</strong>：</p>
@@ -1366,10 +1360,10 @@
 <p>使用54张牌打乱顺序,三个玩家参与游戏，三人交替摸牌，每人17张牌，最后三张留作底牌。</p>
 <h2 id="4-2-案例分析"><a href="#4-2-案例分析" class="headerlink" title="4.2 案例分析"></a>4.2 案例分析</h2><ul>
 <li><p>准备牌：</p>
-<p>牌可以设计为一个ArrayList<String>,每个字符串为一张牌。<br>每张牌由花色数字两部分组成，我们可以使用花色集合与数字集合嵌套迭代完成每张牌的组装。<br>牌由Collections类的shuffle方法进行随机排序。</String></p>
+<p>牌可以设计为一个ArrayList<String>,每个字符串为一张牌。<br>每张牌由花色数字两部分组成，我们可以使用花色集合与数字集合嵌套迭代完成每张牌的组装。<br>牌由Collections类的shuffle方法进行随机排序。</p>
 </li>
 <li><p>发牌</p>
-<p>将每个人以及底牌设计为ArrayList<String>,将最后3张牌直接存放于底牌，剩余牌通过对3取模依次发牌。</String></p>
+<p>将每个人以及底牌设计为ArrayList<String>,将最后3张牌直接存放于底牌，剩余牌通过对3取模依次发牌。</p>
 </li>
 <li><p>看牌</p>
 <p>直接打印每个集合。</p>
@@ -1389,7 +1383,7 @@
 <li><p>先进后出（即，存进去的元素，要在后它后面的元素依次取出后，才能取出该元素）。例如，子弹压进弹夹，先压进去的子弹在下面，后压进去的子弹在上面，当开枪时，先弹出上面的子弹，然后才能弹出下面的子弹。</p>
 </li>
 <li><p>栈的入口、出口的都是栈的顶端位置。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172348161.png" srcset="/img/loading.gif" lazyload alt="image-20210923172348161"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172348161.png" srcset="/img/loading.gif" lazyload alt="image-20210923172348161"></p>
 </li>
 </ul>
 <p>这里两个名词需要注意：</p>
@@ -1405,41 +1399,41 @@
 <li>先进先出（即，存进去的元素，要在后它前面的元素依次取出后，才能取出该元素）。例如，小火车过山洞，车头先进去，车尾后进去；车头先出来，车尾后出来。</li>
 <li>队列的入口、出口各占一侧。例如，下图中的左侧为入口，右侧为出口。</li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172358048.png" srcset="/img/loading.gif" lazyload alt="image-20210923172358048"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172358048.png" srcset="/img/loading.gif" lazyload alt="image-20210923172358048"></p>
 <h4 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h4><ul>
 <li><strong>数组</strong>:<strong>Array</strong>,是有序的元素序列，数组是在内存中开辟一段连续的空间，并在此空间存放元素。就像是一排出租屋，有100个房间，从001到100每个房间都有固定编号，通过编号就可以快速找到租房子的人。</li>
 </ul>
 <p>简单的说,采用该结构的集合，对元素的存取有如下的特点：</p>
 <ul>
 <li><p>查找元素快：通过索引，可以快速访问指定位置的元素</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172405607.png" srcset="/img/loading.gif" lazyload alt="image-20210923172405607"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172405607.png" srcset="/img/loading.gif" lazyload alt="image-20210923172405607"></p>
 </li>
 <li><p>增删元素慢</p>
 <ul>
 <li><strong>指定索引位置增加元素</strong>：需要创建一个新数组，将指定新元素存储在指定索引位置，再把原数组元素根据索引，复制到新数组对应索引的位置。</li>
-<li>如下图<img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172442791.png" srcset="/img/loading.gif" lazyload alt="image-20210923172442791"></li>
-<li><strong>指定索引位置删除元素：</strong>需要创建一个新数组，把原数组元素根据索引，复制到新数组对应索引的位置，原数组中指定索引位置元素不复制到新数组中。如下图<img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172500033.png" srcset="/img/loading.gif" lazyload alt="image-20210923172500033"></li>
+<li>如下图<img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172442791.png" srcset="/img/loading.gif" lazyload alt="image-20210923172442791"></li>
+<li><strong>指定索引位置删除元素：</strong>需要创建一个新数组，把原数组元素根据索引，复制到新数组对应索引的位置，原数组中指定索引位置元素不复制到新数组中。如下图<img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172500033.png" srcset="/img/loading.gif" lazyload alt="image-20210923172500033"></li>
 </ul>
 </li>
 </ul>
 <h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><ul>
 <li><strong>链表</strong>:<strong>linked list</strong>,由一系列结点node（链表中每一个元素称为结点）组成，结点可以在运行时i动态生成。每个结点包括两个部分：一个是存储数据元素的数据域，另一个是存储下一个结点地址的指针域。我们常说的链表结构有单向链表与双向链表，那么这里给大家介绍的是<strong>单向链表</strong>。</li>
-<li><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172812372.png" srcset="/img/loading.gif" lazyload alt="image-20210923172812372"></li>
+<li><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172812372.png" srcset="/img/loading.gif" lazyload alt="image-20210923172812372"></li>
 </ul>
 <p>简单的说，采用该结构的集合，对元素的存取有如下的特点：</p>
 <ul>
 <li><p>多个结点之间，通过地址进行连接。例如，多个人手拉手，每个人使用自己的右手拉住下个人的左手，依次类推，这样多个人就连在一起了。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172842184.png" srcset="/img/loading.gif" lazyload alt="image-20210923172842184"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172842184.png" srcset="/img/loading.gif" lazyload alt="image-20210923172842184"></p>
 </li>
 <li><p>查找元素慢：想查找某个元素，需要通过连接的节点，依次向后查找指定元素</p>
 </li>
 <li><p>增删元素快：</p>
 <ul>
 <li><p>增加元素：只需要修改连接下个元素的地址即可。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172902386.png" srcset="/img/loading.gif" lazyload alt="image-20210923172902386"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172902386.png" srcset="/img/loading.gif" lazyload alt="image-20210923172902386"></p>
 </li>
 <li><p>删除元素：只需要修改连接下个元素的地址即可。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172914355.png" srcset="/img/loading.gif" lazyload alt="image-20210923172914355"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172914355.png" srcset="/img/loading.gif" lazyload alt="image-20210923172914355"></p>
 </li>
 </ul>
 </li>
@@ -1450,7 +1444,7 @@
 <p>简单的理解，就是一种类似于我们生活中树的结构，只不过每个结点上都最多只能有两个子结点。</p>
 <p>二叉树是每个节点最多有两个子树的树结构。顶上的叫根结点，两边被称作“左子树”和“右子树”。</p>
 <p>如图：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172936439.png" srcset="/img/loading.gif" lazyload alt="image-20210923172936439"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923172936439.png" srcset="/img/loading.gif" lazyload alt="image-20210923172936439"></p>
 <p>我们要说的是二叉树的一种比较有意思的叫做<strong>红黑树</strong>，红黑树本身就是一颗二叉查找树，将节点插入后，该树仍然是一颗二叉查找树。也就意味着，树的键值仍然是有序的。</p>
 <p>红黑树的约束:</p>
 <ol>
@@ -1496,7 +1490,7 @@
 <blockquote>
 <p>LinkedList是一个双向链表，那么双向链表是什么样子的呢，我们用个图了解下</p>
 </blockquote>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923190413022.png" srcset="/img/loading.gif" lazyload alt="image-20210923190413022"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923190413022.png" srcset="/img/loading.gif" lazyload alt="image-20210923190413022"></p>
 <p>实际开发中对一个集合元素的添加与删除经常涉及到首尾操作，而LinkedList提供了大量首尾操作的方法。这些方法我们作为了解即可：</p>
 <ul>
 <li><code>public void addFirst(E e)</code>:将指定元素插入此列表的开头。</li>
@@ -1532,10 +1526,10 @@
 <h2 id="2-2-HashSet集合存储数据的结构（哈希表）"><a href="#2-2-HashSet集合存储数据的结构（哈希表）" class="headerlink" title="2.2  HashSet集合存储数据的结构（哈希表）"></a>2.2  HashSet集合存储数据的结构（哈希表）</h2><p>什么是哈希表呢？</p>
 <p>在<strong>JDK1.8</strong>之前，哈希表底层采用数组+链表实现，即使用链表处理冲突，同一hash值的链表都存储在一个链表里。但是当位于一个桶中的元素较多，即hash值相等的元素较多时，通过key值依次查找的效率较低。而JDK1.8中，哈希表存储采用数组+链表+红黑树实现，当链表长度超过阈值（8）时，将链表转换为红黑树，这样大大减少了查找时间。</p>
 <p>简单的来说，哈希表是由数组+链表+红黑树（JDK1.8增加了红黑树部分）实现的，如下图所示。!</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923190652216.png" srcset="/img/loading.gif" lazyload alt="image-20210923190652216"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923190652216.png" srcset="/img/loading.gif" lazyload alt="image-20210923190652216"></p>
 <p>看到这张图就有人要问了，这个是怎么存储的呢？</p>
 <p>为了方便大家的理解我们结合一个存储流程图来说明一下：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923190705695.png" srcset="/img/loading.gif" lazyload alt="image-20210923190705695"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923190705695.png" srcset="/img/loading.gif" lazyload alt="image-20210923190705695"></p>
 <p>总而言之，<strong>JDK1.8</strong>引入红黑树大程度优化了HashMap的性能，那么对于我们来讲保证HashSet集合元素的唯一，其实就是根据对象的hashCode和equals方法来决定的。如果我们往集合中存放自定义的对象，那么保证其唯一，就必须复写hashCode和equals方法建立属于当前对象的比较方式。</p>
 <h2 id="2-3-HashSet存储自定义类型元素"><a href="#2-3-HashSet存储自定义类型元素" class="headerlink" title="2.3  HashSet存储自定义类型元素"></a>2.3  HashSet存储自定义类型元素</h2><p>给HashSet中存放自定义类型元素时，需要重写对象中的hashCode和equals方法，建立自己的比较方式，才能保证HashSet集合中的对象唯一</p>
 <p>创建自定义Student类</p>
@@ -1624,7 +1618,7 @@
 <p>再次测试，代码就OK 了效果如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Student&#123;name=<span class="hljs-string">&#x27;jack&#x27;</span>, age=<span class="hljs-number">16</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;abc&#x27;</span>, age=<span class="hljs-number">16</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;mark&#x27;</span>, age=<span class="hljs-number">16</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;ace&#x27;</span>, age=<span class="hljs-number">17</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;rose&#x27;</span>, age=<span class="hljs-number">18</span>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h2 id="2-5-扩展"><a href="#2-5-扩展" class="headerlink" title="2.5 扩展"></a>2.5 扩展</h2><p>如果在使用的时候，想要独立的定义规则去使用 可以采用Collections.sort(List list,Comparetor<T> c)方式，自己定义规则：</T></p>
+<h2 id="2-5-扩展"><a href="#2-5-扩展" class="headerlink" title="2.5 扩展"></a>2.5 扩展</h2><p>如果在使用的时候，想要独立的定义规则去使用 可以采用Collections.sort(List list,Comparetor<T> c)方式，自己定义规则：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">Collections.sort(list, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Comparator</span>&lt;Student&gt;() &#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">compare</span><span class="hljs-params">(Student o1, Student o2)</span> &#123;<br>        <span class="hljs-keyword">return</span> o2.getAge()-o1.getAge();<span class="hljs-comment">//以学生的年龄降序</span><br>    &#125;<br>&#125;);<br></code></pre></div></td></tr></table></figure>
 
 <p>效果：</p>
@@ -1642,7 +1636,7 @@
 
 <h1 id="第一章-Map集合"><a href="#第一章-Map集合" class="headerlink" title="第一章 Map集合"></a>第一章 Map集合</h1><h2 id="1-1-概述-1"><a href="#1-1-概述-1" class="headerlink" title="1.1 概述"></a>1.1 概述</h2><p>现实生活中，我们常会看到这样的一种集合：IP地址与主机名，身份证号与个人，系统用户名与系统用户对象等，这种一一对应的关系，就叫做映射。Java提供了专门的集合类用来存放这种对象关系的对象，即<code>java.util.Map</code>接口。</p>
 <p>我们通过查看<code>Map</code>接口描述，发现<code>Map</code>接口下的集合与<code>Collection</code>接口下的集合，它们存储数据的形式不同，如下图。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923201434279.png" srcset="/img/loading.gif" lazyload alt="image-20210923201434279"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923201434279.png" srcset="/img/loading.gif" lazyload alt="image-20210923201434279"></p>
 <ul>
 <li><code>Collection</code>中的集合，元素是孤立存在的（理解为单身），向集合中存储元素采用一个个元素的方式存储。</li>
 <li><code>Map</code>中的集合，元素是成对存在的(理解为夫妻)。每个元素由键与值两部分组成，通过键可以找对所对应的值。</li>
@@ -1685,7 +1679,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MapDemo01</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">//创建Map集合对象 </span><br>        HashMap&lt;String, String&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String,String&gt;();<br>        <span class="hljs-comment">//添加元素到集合 </span><br>        map.put(<span class="hljs-string">&quot;胡歌&quot;</span>, <span class="hljs-string">&quot;霍建华&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;郭德纲&quot;</span>, <span class="hljs-string">&quot;于谦&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;薛之谦&quot;</span>, <span class="hljs-string">&quot;大张伟&quot;</span>);<br><br>        <span class="hljs-comment">//获取所有的键  获取键集</span><br>        Set&lt;String&gt; keys = map.keySet();<br>        <span class="hljs-comment">// 遍历键集 得到 每一个键</span><br>        <span class="hljs-keyword">for</span> (String key : keys) &#123;<br>          	<span class="hljs-comment">//key  就是键</span><br>            <span class="hljs-comment">//获取对应值</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> map.get(key);<br>            System.out.println(key+<span class="hljs-string">&quot;的CP是：&quot;</span>+value);<br>        &#125;  <br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>遍历图解：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923202357709.png" srcset="/img/loading.gif" lazyload alt="image-20210923202357709"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923202357709.png" srcset="/img/loading.gif" lazyload alt="image-20210923202357709"></p>
 <h2 id="1-5-Entry键值对对象"><a href="#1-5-Entry键值对对象" class="headerlink" title="1.5  Entry键值对对象"></a>1.5  Entry键值对对象</h2><p>我们已经知道，<code>Map</code>中存放的是两种对象，一种称为<strong>key</strong>(键)，一种称为<strong>value</strong>(值)，它们在在<code>Map</code>中是一一对应关系，这一对对象又称做<code>Map</code>中的一个<code>Entry(项)</code>。<code>Entry</code>将键值对的对应关系封装成了对象。即键值对对象，这样我们在遍历<code>Map</code>集合时，就可以从每一个键值对（<code>Entry</code>）对象中获取对应的键与对应的值。</p>
 <p> 既然Entry表示了一对键和值，那么也同样提供了获取对应键和对应值得方法：</p>
 <ul>
@@ -1709,7 +1703,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">MapDemo02</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 创建Map集合对象 </span><br>        HashMap&lt;String, String&gt; map = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;String,String&gt;();<br>        <span class="hljs-comment">// 添加元素到集合 </span><br>        map.put(<span class="hljs-string">&quot;胡歌&quot;</span>, <span class="hljs-string">&quot;霍建华&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;郭德纲&quot;</span>, <span class="hljs-string">&quot;于谦&quot;</span>);<br>        map.put(<span class="hljs-string">&quot;薛之谦&quot;</span>, <span class="hljs-string">&quot;大张伟&quot;</span>);<br><br>        <span class="hljs-comment">// 获取 所有的 entry对象  entrySet</span><br>        Set&lt;Entry&lt;String,String&gt;&gt; entrySet = map.entrySet();<br><br>        <span class="hljs-comment">// 遍历得到每一个entry对象</span><br>        <span class="hljs-keyword">for</span> (Entry&lt;String, String&gt; entry : entrySet) &#123;<br>           	<span class="hljs-comment">// 解析 </span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> entry.getKey();<br>            <span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> entry.getValue();  <br>            System.out.println(key+<span class="hljs-string">&quot;的CP是:&quot;</span>+value);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>遍历图解：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923202346126.png" srcset="/img/loading.gif" lazyload alt="image-20210923202346126"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923202346126.png" srcset="/img/loading.gif" lazyload alt="image-20210923202346126"></p>
 <blockquote>
 <p>tips：Map集合不能直接使用迭代器或者foreach进行遍历。但是转成Set之后就可以使用了。</p>
 </blockquote>
@@ -1763,51 +1757,51 @@
 <h2 id="2-2-Debug追踪"><a href="#2-2-Debug追踪" class="headerlink" title="2.2 Debug追踪"></a>2.2 Debug追踪</h2><p><strong>使用IDEA的断点调试功能，查看程序的运行过程</strong></p>
 <ol>
 <li><p>在有效代码行，点击行号右边的空白区域，设置断点，程序执行到断点将停止，我们可以手动来运行程序 	</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug1.png" srcset="/img/loading.gif" lazyload></p>
 </li>
-<li><p>点击Debug运行模式       <img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug2.png" srcset="/img/loading.gif" lazyload>                                                                                                                                                                      </p>
+<li><p>点击Debug运行模式       <img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug2.png" srcset="/img/loading.gif" lazyload>                                                                                                                                                                      </p>
 </li>
 <li><p>程序停止在断点上不再执行，而IDEA最下方打开了Debug调试窗口  </p>
-<p> <img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug3.png" srcset="/img/loading.gif" lazyload><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug4.png" srcset="/img/loading.gif" lazyload></p>
+<p> <img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug3.png" srcset="/img/loading.gif" lazyload><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug4.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>Debug调试窗口介绍</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug5.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug5.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8，代码向下执行一行,第九行执行完毕，执行到第10行（第10行还未执行）</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug6.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug6.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>切换到控制台面板，控制台显示 请录入一个字符串： 并且等待键盘录入</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug7.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug7.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8，程序继续向后执行，执行键盘录入操作，在控制台录入数据 ababcea</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug8.png" srcset="/img/loading.gif" lazyload></p>
-<p>回车之后效果：<img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug9.png" srcset="/img/loading.gif" lazyload></p>
-<p>调试界面效果：<img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug0.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug8.png" srcset="/img/loading.gif" lazyload></p>
+<p>回车之后效果：<img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug9.png" srcset="/img/loading.gif" lazyload></p>
+<p>调试界面效果：<img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug0.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>此时到达findChar方法，快捷键F7，进入方法findChar</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug11.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug11.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8 接续执行，创建了map对象，变量区域显示</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug12.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug12.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8 接续执行，进入到循环中，循环变量i为 0,F8再继续执行，就获取到变量c赋值为字符‘a’ 字节值97</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug13.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug13.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8 接续执行，进入到判断语句中，因为该字符 不在Map集合键集中，再按F8执行，进入该判断中</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug14.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug14.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8 接续执行，循环结束，进入下次循环，此时map中已经添加一对儿元素</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug15.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug15.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>快捷键F8 接续执行，进入下次循环，再继续上面的操作，我们就可以看到代码每次是如何执行的了</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug16.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug16.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>如果不想继续debug,那么可以使用快捷键F9,程序正常执行到结束，程序结果在控制台显示</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug17.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\debug17.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ol>
 <h1 id="第三章-模拟斗地主洗牌发牌"><a href="#第三章-模拟斗地主洗牌发牌" class="headerlink" title="第三章  模拟斗地主洗牌发牌"></a>第三章  模拟斗地主洗牌发牌</h1><h2 id="3-1-案例介绍"><a href="#3-1-案例介绍" class="headerlink" title="3.1 案例介绍"></a>3.1 案例介绍</h2><p>按照斗地主的规则，完成洗牌发牌的动作。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\斗地主.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\斗地主.png" srcset="/img/loading.gif" lazyload></p>
 <p>具体规则：</p>
 <ol>
 <li>组装54张扑克牌将</li>
@@ -1830,7 +1824,7 @@
 <ol start="3">
 <li>发牌：</li>
 </ol>
-<p>将每个人以及底牌设计为ArrayList<String>,将最后3张牌直接存放于底牌，剩余牌通过对3取模依次发牌。</String></p>
+<p>将每个人以及底牌设计为ArrayList<String>,将最后3张牌直接存放于底牌，剩余牌通过对3取模依次发牌。</p>
 <p>存放的过程中要求数字大小与斗地主规则的大小对应。</p>
 <p>将代表不同纸牌的数字分配给不同的玩家与底牌。</p>
 <ol start="4">
@@ -1838,7 +1832,7 @@
 </ol>
 <p>通过Map集合找到对应字符展示。</p>
 <p>通过查询纸牌与数字的对应关系，由数字转成纸牌字符串再进行展示。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料1\img\斗地主分析.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料1\img\斗地主分析.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="3-3-实现代码步骤"><a href="#3-3-实现代码步骤" class="headerlink" title="3.3  实现代码步骤"></a>3.3  实现代码步骤</h2><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Poker</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * 1组装54张扑克牌</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-comment">// 1.1 创建Map集合存储</span><br>        HashMap&lt;Integer, String&gt; pokerMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">HashMap</span>&lt;Integer, String&gt;();<br>        <span class="hljs-comment">// 1.2 创建 花色集合 与 数字集合</span><br>        ArrayList&lt;String&gt; colors = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br>        ArrayList&lt;String&gt; numbers = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br><br>        <span class="hljs-comment">// 1.3 存储 花色 与数字</span><br>        Collections.addAll(colors, <span class="hljs-string">&quot;♦&quot;</span>, <span class="hljs-string">&quot;♣&quot;</span>, <span class="hljs-string">&quot;♥&quot;</span>, <span class="hljs-string">&quot;♠&quot;</span>);<br>        Collections.addAll(numbers, <span class="hljs-string">&quot;2&quot;</span>, <span class="hljs-string">&quot;A&quot;</span>, <span class="hljs-string">&quot;K&quot;</span>, <span class="hljs-string">&quot;Q&quot;</span>, <span class="hljs-string">&quot;J&quot;</span>, <span class="hljs-string">&quot;10&quot;</span>, <span class="hljs-string">&quot;9&quot;</span>, <span class="hljs-string">&quot;8&quot;</span>, <span class="hljs-string">&quot;7&quot;</span>, <span class="hljs-string">&quot;6&quot;</span>, <span class="hljs-string">&quot;5&quot;</span>, <span class="hljs-string">&quot;4&quot;</span>, <span class="hljs-string">&quot;3&quot;</span>);<br>        <span class="hljs-comment">// 设置 存储编号变量</span><br>        <span class="hljs-type">int</span> <span class="hljs-variable">count</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br>        pokerMap.put(count++, <span class="hljs-string">&quot;大王&quot;</span>);<br>        pokerMap.put(count++, <span class="hljs-string">&quot;小王&quot;</span>);<br>        <span class="hljs-comment">// 1.4 创建牌 存储到map集合中</span><br>        <span class="hljs-keyword">for</span> (String number : numbers) &#123;<br>            <span class="hljs-keyword">for</span> (String color : colors) &#123;<br>                <span class="hljs-type">String</span> <span class="hljs-variable">card</span> <span class="hljs-operator">=</span> color + number;<br>                pokerMap.put(count++, card);<br>            &#125;<br>        &#125;<br>        <span class="hljs-comment">/*</span><br><span class="hljs-comment">         * 2 将54张牌顺序打乱</span><br><span class="hljs-comment">         */</span><br>        <span class="hljs-comment">// 取出编号 集合</span><br>        Set&lt;Integer&gt; numberSet = pokerMap.keySet();<br>        <span class="hljs-comment">// 因为要将编号打乱顺序 所以 应该先进行转换到 list集合中</span><br>        ArrayList&lt;Integer&gt; numberList = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();<br>        numberList.addAll(numberSet);<br><br>        <span class="hljs-comment">// 打乱顺序</span><br>        Collections.shuffle(numberList);<br><br>        <span class="hljs-comment">// 3 完成三个玩家交替摸牌，每人17张牌，最后三张留作底牌</span><br>        <span class="hljs-comment">// 3.1 发牌的编号</span><br>        <span class="hljs-comment">// 创建三个玩家编号集合 和一个 底牌编号集合</span><br>        ArrayList&lt;Integer&gt; noP1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();<br>        ArrayList&lt;Integer&gt; noP2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();<br>        ArrayList&lt;Integer&gt; noP3 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();<br>        ArrayList&lt;Integer&gt; dipaiNo = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;Integer&gt;();<br><br>        <span class="hljs-comment">// 3.2发牌的编号</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; numberList.size(); i++) &#123;<br>            <span class="hljs-comment">// 获取该编号</span><br>            <span class="hljs-type">Integer</span> <span class="hljs-variable">no</span> <span class="hljs-operator">=</span> numberList.get(i);<br>            <span class="hljs-comment">// 发牌</span><br>            <span class="hljs-comment">// 留出底牌</span><br>            <span class="hljs-keyword">if</span> (i &gt;= <span class="hljs-number">51</span>) &#123;<br>                dipaiNo.add(no);<br>            &#125; <span class="hljs-keyword">else</span> &#123;<br>                <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) &#123;<br>                    noP1.add(no);<br>                &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">1</span>) &#123;<br>                    noP2.add(no);<br>                &#125; <span class="hljs-keyword">else</span> &#123;<br>                    noP3.add(no);<br>                &#125;<br>            &#125;<br>        &#125;<br><br>        <span class="hljs-comment">// 4 查看三人各自手中的牌（按照牌的大小排序）、底牌</span><br>        <span class="hljs-comment">// 4.1 对手中编号进行排序</span><br>        Collections.sort(noP1);<br>        Collections.sort(noP2);<br>        Collections.sort(noP3);<br>        Collections.sort(dipaiNo);<br><br>        <span class="hljs-comment">// 4.2 进行牌面的转换</span><br>        <span class="hljs-comment">// 创建三个玩家牌面集合 以及底牌牌面集合</span><br>        ArrayList&lt;String&gt; player1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br>        ArrayList&lt;String&gt; player2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br>        ArrayList&lt;String&gt; player3 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br>        ArrayList&lt;String&gt; dipai = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ArrayList</span>&lt;String&gt;();<br><br>        <span class="hljs-comment">// 4.3转换</span><br>        <span class="hljs-keyword">for</span> (Integer i : noP1) &#123;<br>            <span class="hljs-comment">// 4.4 根据编号找到 牌面 pokerMap</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">card</span> <span class="hljs-operator">=</span> pokerMap.get(i);<br>            <span class="hljs-comment">// 添加到对应的 牌面集合中</span><br>            player1.add(card);<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (Integer i : noP2) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">card</span> <span class="hljs-operator">=</span> pokerMap.get(i);<br>            player2.add(card);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (Integer i : noP3) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">card</span> <span class="hljs-operator">=</span> pokerMap.get(i);<br>            player3.add(card);<br>        &#125;<br>        <span class="hljs-keyword">for</span> (Integer i : dipaiNo) &#123;<br>            <span class="hljs-type">String</span> <span class="hljs-variable">card</span> <span class="hljs-operator">=</span> pokerMap.get(i);<br>            dipai.add(card);<br>        &#125;<br><br>        <span class="hljs-comment">//4.5 查看</span><br>        System.out.println(<span class="hljs-string">&quot;令狐冲：&quot;</span>+player1);<br>        System.out.println(<span class="hljs-string">&quot;石破天：&quot;</span>+player2);<br>        System.out.println(<span class="hljs-string">&quot;鸠摩智：&quot;</span>+player3);<br>        System.out.println(<span class="hljs-string">&quot;底牌：&quot;</span>+dipai);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 
@@ -1852,7 +1846,7 @@
 <p>异常指的并不是语法错误,语法错了,编译不通过,不会产生字节码文件,根本不能运行.</p>
 </blockquote>
 <h2 id="1-2-异常体系"><a href="#1-2-异常体系" class="headerlink" title="1.2 异常体系"></a>1.2 异常体系</h2><p>异常机制其实是帮助我们<strong>找到</strong>程序中的问题，异常的根类是<code>java.lang.Throwable</code>，其下有两个子类：<code>java.lang.Error</code>与<code>java.lang.Exception</code>，平常所说的异常指<code>java.lang.Exception</code>。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\异常体系.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\异常体系.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>Throwable体系：</strong></p>
 <ul>
 <li><strong>Error</strong>:严重错误Error，无法通过处理的错误，只能事先避免，好比绝症。</li>
@@ -1870,14 +1864,14 @@
 </li>
 </ul>
 <p><em><strong>出现异常,不要紧张,把异常的简单类名,拷贝到API中去查。</strong></em></p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\简单的异常查看.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\简单的异常查看.bmp" srcset="/img/loading.gif" lazyload></p>
 <h2 id="1-3-异常分类"><a href="#1-3-异常分类" class="headerlink" title="1.3 异常分类"></a>1.3 异常分类</h2><p>我们平常说的异常就是指Exception，因为这类异常一旦出现，我们就要对代码进行更正，修复程序。</p>
 <p><strong>异常(Exception)的分类</strong>:根据在编译时期还是运行时期去检查异常?</p>
 <ul>
 <li><strong>编译时期异常</strong>:checked异常。在编译时期,就会检查,如果没有处理异常,则编译失败。(如日期格式化异常)</li>
 <li><strong>运行时期异常</strong>:runtime异常。在运行时期,检查异常.在编译时期,运行异常不会编译器检测(不报错)。(如数学异常)</li>
 </ul>
-<p>​    <img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\异常的分类.png" srcset="/img/loading.gif" lazyload></p>
+<p>​    <img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\异常的分类.png" srcset="/img/loading.gif" lazyload></p>
 <h2 id="1-4-异常的产生过程解析"><a href="#1-4-异常的产生过程解析" class="headerlink" title="1.4     异常的产生过程解析"></a>1.4     异常的产生过程解析</h2><p>先运行下面的程序，程序会产生一个数组索引越界异常ArrayIndexOfBoundsException。我们通过图解来解析下异常产生的过程。</p>
 <p> 工具类</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ArrayTools</span> &#123;<br>    <span class="hljs-comment">// 对给定的数组通过给定的角标获取元素。</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getElement</span><span class="hljs-params">(<span class="hljs-type">int</span>[] arr, <span class="hljs-type">int</span> index)</span> &#123;<br>        <span class="hljs-type">int</span> <span class="hljs-variable">element</span> <span class="hljs-operator">=</span> arr[index];<br>        <span class="hljs-keyword">return</span> element;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -1886,7 +1880,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ExceptionDemo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-type">int</span>[] arr = &#123; <span class="hljs-number">34</span>, <span class="hljs-number">12</span>, <span class="hljs-number">67</span> &#125;;<br>        intnum = ArrayTools.getElement(arr, <span class="hljs-number">4</span>)<br>        System.out.println(<span class="hljs-string">&quot;num=&quot;</span> + num);<br>        System.out.println(<span class="hljs-string">&quot;over&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <p>上述程序执行过程图解：</p>
-<p> <img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\异常产生过程.png" srcset="/img/loading.gif" lazyload></p>
+<p> <img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\异常产生过程.png" srcset="/img/loading.gif" lazyload></p>
 <h1 id="第二章-异常的处理"><a href="#第二章-异常的处理" class="headerlink" title="第二章 异常的处理"></a>第二章 异常的处理</h1><p>Java异常处理的五个关键字：<strong>try、catch、finally、throw、throws</strong></p>
 <h2 id="2-1-抛出异常throw"><a href="#2-1-抛出异常throw" class="headerlink" title="2.1 	抛出异常throw"></a>2.1 	抛出异常throw</h2><p>在编写程序时，我们必须要考虑程序出现问题的情况。比如，在定义方法时，方法需要接受参数。那么，当调用方法使用接受到的参数时，首先需要先对参数数据进行合法的判断，数据若不合法，就应该告诉调用者，传递合法的数据进来。这时需要使用抛出异常的方式来告诉调用者。</p>
 <p>在java中，提供了一个<strong>throw</strong>关键字，它用来抛出一个指定的异常对象。那么，抛出一个异常具体如何操作呢？</p>
@@ -1974,7 +1968,7 @@
 <blockquote>
 <p>当只有在try或者catch中调用退出JVM的相关方法,此时finally才不会执行,否则finally永远会执行。</p>
 </blockquote>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\死了都要try.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\死了都要try.bmp" srcset="/img/loading.gif" lazyload></p>
 <h2 id="2-5-异常注意事项"><a href="#2-5-异常注意事项" class="headerlink" title="2.5   异常注意事项"></a>2.5   异常注意事项</h2><ul>
 <li><p>多个异常使用捕获又该如何处理呢？</p>
 <ol>
@@ -2022,7 +2016,7 @@
 <li><strong>并发</strong>：指两个或多个事件在<strong>同一个时间段内</strong>发生。</li>
 <li><strong>并行</strong>：指两个或多个事件在<strong>同一时刻</strong>发生（同时发生）。</li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\并行与并发.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\并行与并发.bmp" srcset="/img/loading.gif" lazyload></p>
 <p>在操作系统中，安装了多个程序，并发指的是在一段时间内宏观上有多个程序同时运行，这在单 CPU 系统中，每一时刻只能有一道程序执行，即微观上这些程序是分时的交替运行，只不过是给人的感觉是同时运行，那是因为分时交替运行的时间是非常短的。</p>
 <p>而在多个 CPU 系统中，则这些可以并发执行的程序便可以分配到多个处理器上（CPU），实现多任务并行执行，即利用每个处理器来处理一个可以并发执行的程序，这样多个程序便可以同时执行。目前电脑市场上说的多核 CPU，便是多核处理器，核 越多，并行处理的程序越多，能大大的提高电脑运行的效率。</p>
 <blockquote>
@@ -2037,9 +2031,9 @@
 </ul>
 <p>我们可以再电脑底部任务栏，右键—–&gt;打开任务管理器,可以查看当前任务的进程：</p>
 <p><strong>进程</strong></p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\进程概念.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\进程概念.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>线程</strong></p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\线程概念.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\线程概念.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>线程调度:</strong></p>
 <ul>
 <li><p>分时调度</p>
@@ -2050,12 +2044,12 @@
 <ul>
 <li>设置线程的优先级</li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\设置线程优先级.bmp" srcset="/img/loading.gif" lazyload alt="设置线程优先级"></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\设置线程优先级.bmp" srcset="/img/loading.gif" lazyload alt="设置线程优先级"></p>
 <ul>
 <li><p>抢占式调度详解</p>
 <p>大部分操作系统都支持多进程并发运行，现在的操作系统几乎都支持同时运行多个程序。比如：现在我们上课一边使用编辑器，一边使用录屏软件，同时还开着画图板，dos窗口等软件。此时，这些程序是在同时运行，”感觉这些软件好像在同一时刻运行着“。</p>
 <p>实际上，CPU(中央处理器)使用抢占式调度模式在多个线程间进行着高速的切换。对于CPU的一个核而言，某个时刻，只能执行一个线程，而 CPU的在多个线程间切换速度相对我们的感觉要快，看上去就是在同一时刻运行。<br>其实，多线程程序并不能提高程序的运行速度，但能够提高程序运行效率，让CPU的使用率更高。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料2\img\抢占式调度.bmp" srcset="/img/loading.gif" lazyload alt="抢占式调度"></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料2\img\抢占式调度.bmp" srcset="/img/loading.gif" lazyload alt="抢占式调度"></p>
 </li>
 </ul>
 </li>
@@ -2079,11 +2073,11 @@
 <p>测试类</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Demo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;这里是main线程&quot;</span>);<br>        <span class="hljs-type">MyThread</span> <span class="hljs-variable">mt</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyThread</span>(<span class="hljs-string">&quot;小强&quot;</span>);<br>        mt.start();<span class="hljs-comment">//开启了一个新的线程</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">20</span>; i++) &#123;<br>      	  System.out.println(<span class="hljs-string">&quot;旺财:&quot;</span>+i);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923213334595.png" srcset="/img/loading.gif" lazyload alt="image-20210923213334595"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923213334595.png" srcset="/img/loading.gif" lazyload alt="image-20210923213334595"></p>
 <p>程序启动运行main时候，java虚拟机启动一个进程，主线程main在main()调用时候被创建。随着调用mt的对象的start方法，另外一个新的线程也启动了，这样，整个应用就在多线程下运行。</p>
 <p>通过这张图我们可以很清晰的看到多线程的执行流程，那么为什么可以完成并发执行呢？我们再来讲一讲原理。</p>
 <p>多线程执行时，到底在内存中是如何运行的呢？以上个程序为例，进行图解说明：多线程执行时，在栈内存中，其实每一个执行线程都有一片自己所属的栈内存空间。进行方法的压栈和弹栈。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923213450049.png" srcset="/img/loading.gif" lazyload alt="image-20210923213450049"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923213450049.png" srcset="/img/loading.gif" lazyload alt="image-20210923213450049"></p>
 <p>当执行线程的任务结束了，线程自动在栈内存中释放了。但是当所有的执行线程都结束了，那么进程就结束了。</p>
 <h2 id="1-2-Thread类"><a href="#1-2-Thread类" class="headerlink" title="1.2 Thread类"></a>1.2 Thread类</h2><p>在上一天内容中我们已经可以完成最基本的线程开启，那么在我们完成操作过程中用到了java.lang.Thread 类，API中该类中定义了有关线程的一些方法，具体如下：</p>
 <p>构造方法：</p>
@@ -2134,7 +2128,7 @@
 <p>测试类</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Demo</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">//创建线程任务对象</span><br>        <span class="hljs-type">Ticket</span> <span class="hljs-variable">ticket</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Ticket</span>();<br>        <span class="hljs-comment">//创建三个窗口对象</span><br>        <span class="hljs-type">Thread</span> <span class="hljs-variable">t1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(ticket, <span class="hljs-string">&quot;窗口1&quot;</span>);<br>        <span class="hljs-type">Thread</span> <span class="hljs-variable">t2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(ticket, <span class="hljs-string">&quot;窗口2&quot;</span>);<br>        <span class="hljs-type">Thread</span> <span class="hljs-variable">t3</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(ticket, <span class="hljs-string">&quot;窗口3&quot;</span>);<br>        <span class="hljs-comment">//同时卖票</span><br>        t1.start();<br>        t2.start();<br>        t3.start();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923221645603.png" srcset="/img/loading.gif" lazyload alt="image-20210923221645603"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923221645603.png" srcset="/img/loading.gif" lazyload alt="image-20210923221645603"></p>
 <p>发现程序出现了两个问题：</p>
 <ol>
 <li><p>相同的票数,比如5这张票被卖了两回。</p>
@@ -2182,7 +2176,7 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Ticket</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Runnable</span>&#123;<br>    <span class="hljs-keyword">private</span> <span class="hljs-type">int</span> <span class="hljs-variable">ticket</span> <span class="hljs-operator">=</span> <span class="hljs-number">100</span>;<br>    <span class="hljs-type">Lock</span> <span class="hljs-variable">lock</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ReentrantLock</span>();<br>    <span class="hljs-comment">/*</span><br><span class="hljs-comment">    * 执行卖票操作</span><br><span class="hljs-comment">    */</span><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>        <span class="hljs-comment">//每个窗口卖票的操作</span><br>        <span class="hljs-comment">//窗口 永远开启</span><br>        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;<br>            lock.lock();<br>            <span class="hljs-keyword">if</span>(ticket&gt;<span class="hljs-number">0</span>)&#123;<span class="hljs-comment">//有票 可以卖</span><br>            <span class="hljs-comment">//出票操作</span><br>            <span class="hljs-comment">//使用sleep模拟一下出票时间</span><br>            <span class="hljs-keyword">try</span> &#123;<br>          	  Thread.sleep(<span class="hljs-number">50</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>            <span class="hljs-comment">// TODO Auto‐generated catch block</span><br>           	 e.printStackTrace();<br>            &#125;<br>            <span class="hljs-comment">//获取当前线程对象的名字</span><br>            <span class="hljs-type">String</span> <span class="hljs-variable">name</span> <span class="hljs-operator">=</span> Thread.currentThread().getName();<br>          	  System.out.println(name+<span class="hljs-string">&quot;正在卖:&quot;</span>+ticket‐‐);<br>            &#125;<br>           	 lock.unlock(); <br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="第三章-线程状态"><a href="#第三章-线程状态" class="headerlink" title="第三章 线程状态"></a>第三章 线程状态</h1><h2 id="3-1-线程状态概述"><a href="#3-1-线程状态概述" class="headerlink" title="3.1 线程状态概述"></a>3.1 线程状态概述</h2><p>当线程被创建并启动以后，它既不是一启动就进入了执行状态，也不是一直处于执行状态。在线程的生命周期中，有几种状态呢？在API中java.lang.Thread.State 这个枚举中给出了六种线程状态：<br>这里先列出各个线程状态发生的条件，下面将会对每种状态进行详细解析</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923224357597.png" srcset="/img/loading.gif" lazyload alt="image-20210923224357597"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923224357597.png" srcset="/img/loading.gif" lazyload alt="image-20210923224357597"></p>
 <p>我们不需要去研究这几种状态的实现原理，我们只需知道在做线程操作中存在这样的状态。那我们怎么去理解这几个状态呢，新建与被终止还是很容易理解的，我们就研究一下线程从Runnable（可运行）状态与非运行状态之间的转换问题。</p>
 <h2 id="3-2-Timed-Waiting（计时等待）"><a href="#3-2-Timed-Waiting（计时等待）" class="headerlink" title="3.2 Timed Waiting（计时等待）"></a>3.2 Timed Waiting（计时等待）</h2><p>Timed Waiting在API中的描述为：一个正在限时等待另一个线程执行一个（唤醒）动作的线程处于这一状态。单独的去理解这句话，真是玄之又玄，其实我们在之前的操作中已经接触过这个状态了，在哪里呢？<br>在我们写卖票的案例中，为了减少线程执行太快，现象不明显等问题，我们在run方法中添加了sleep语句，这样就强制当前正在执行的线程休眠（暂停执行），以“减慢线程”。<br>其实当我们调用了sleep方法之后，当前执行的线程就进入到“休眠状态”，其实就是所谓的Timed Waiting(计时等待)，那么我们通过一个案例加深对该状态的一个理解。</p>
 <p>实现一个计数器，计数到100，在每个数字之间暂停1秒，每隔10个数字输出一个字符串<br>代码：</p>
@@ -2195,10 +2189,10 @@
 <li>sleep与锁无关，线程睡眠到期自动苏醒，并返回到Runnable（可运行）状态。</li>
 </ol>
 <p>小提示：sleep()中指定的时间是线程不会运行的最短时间。因此，sleep()方法不能保证该线程睡眠到期后就开始立刻执行</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923224932600.png" srcset="/img/loading.gif" lazyload alt="image-20210923224932600"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923224932600.png" srcset="/img/loading.gif" lazyload alt="image-20210923224932600"></p>
 <h2 id="3-3-BLOCKED（锁阻塞）"><a href="#3-3-BLOCKED（锁阻塞）" class="headerlink" title="3.3 BLOCKED（锁阻塞）"></a>3.3 BLOCKED（锁阻塞）</h2><p>Blocked状态在API中的介绍为：一个正在阻塞等待一个监视器锁（锁对象）的线程处于这一状态。<br>我们已经学完同步机制，那么这个状态是非常好理解的了。比如，线程A与线程B代码中使用同一锁，如果线程A获取到锁，线程A进入到Runnable状态，那么线程B就进入到Blocked锁阻塞状态。<br>这是由Runnable状态进入Blocked状态。除此Waiting以及Time Waiting状态也会在某种情况下进入阻塞状态，而这部分内容作为扩充知识点带领大家了解一下。</p>
 <p>Blocked 线程状态图</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923225022131.png" srcset="/img/loading.gif" lazyload alt="image-20210923225022131"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923225022131.png" srcset="/img/loading.gif" lazyload alt="image-20210923225022131"></p>
 <h2 id="3-4-Waiting（无限等待）"><a href="#3-4-Waiting（无限等待）" class="headerlink" title="3.4 Waiting（无限等待）"></a>3.4 Waiting（无限等待）</h2><p>Wating状态在API中介绍为：一个正在无限期等待另一个线程执行一个特别的（唤醒）动作的线程处于这一状态。<br>那么我们之前遇到过这种状态吗？答案是并没有，但并不妨碍我们进行一个简单深入的了解。我们通过一段代码来</p>
 <p>学习一下：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">WaitingTest</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Object</span> <span class="hljs-variable">obj</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>();<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>        <span class="hljs-comment">// 演示waiting</span><br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>                <span class="hljs-keyword">while</span> (<span class="hljs-literal">true</span>)&#123;<br>                    <span class="hljs-keyword">synchronized</span> (obj)&#123;<br>                        <span class="hljs-keyword">try</span> &#123;<br>                            System.out.println( Thread.currentThread().getName() +<span class="hljs-string">&quot;=== 获取到锁对象，调用wait方法，进入waiting状态，释放锁对象&quot;</span>);<br>                                    obj.wait(); <span class="hljs-comment">//无限等待</span><br>                            <span class="hljs-comment">//obj.wait(5000); //计时等待, 5秒 时间到，自动醒来</span><br>                        &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                            e.printStackTrace();<br>                        &#125;<br>                        System.out.println( Thread.currentThread().getName() + <span class="hljs-string">&quot;=== 从waiting状态醒来，获取到锁对象，继续执行了&quot;</span>);<br>                    &#125;<br>                &#125;<br>            &#125;<br>        &#125;,<span class="hljs-string">&quot;等待线程&quot;</span>).start();<br>        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Runnable</span>() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;<br>                <span class="hljs-comment">// while (true)&#123; //每隔3秒 唤醒一次</span><br>                <span class="hljs-keyword">try</span> &#123;<br>                    System.out.println( Thread.currentThread().getName() +<span class="hljs-string">&quot;‐‐‐‐‐ 等待3秒钟&quot;</span>);<br>                    Thread.sleep(<span class="hljs-number">3000</span>);<br>                &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>                    e.printStackTrace();<br>                &#125;<br>                <span class="hljs-keyword">synchronized</span> (obj)&#123;<br>                    System.out.println( Thread.currentThread().getName() +<span class="hljs-string">&quot;‐‐‐‐‐ 获取到锁对象,调用notify方法，释放锁对象&quot;</span>);<br>                            obj.notify();<br>                &#125;<br>            &#125;<br>            <span class="hljs-comment">// &#125;</span><br>        &#125;,<span class="hljs-string">&quot;唤醒线程&quot;</span>).start();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -2206,13 +2200,13 @@
 <p>通过上述案例我们会发现，一个调用了某个对象的 Object.wait 方法的线程会等待另一个线程调用此对象的Object.notify()方法 或 Object.notifyAll()方法。</p>
 <p>其实waiting状态并不是一个线程的操作，它体现的是多个线程间的通信，可以理解为多个线程之间的协作关系，多个线程会争取锁，同时相互之间又存在协作关系。就好比在公司里你和你的同事们，你们可能存在晋升时的竞争，但更多时候你们更多是一起合作以完成某些任务。</p>
 <p>当多个线程协作时，比如A，B线程，如果A线程在Runnable（可运行）状态中调用了wait()方法那么A线程就进入了Waiting（无限等待）状态，同时失去了同步锁。假如这个时候B线程获取到了同步锁，在运行状态中调用了notify()方法，那么就会将无限等待的A线程唤醒。注意是唤醒，如果获取到锁对象，那么A线程唤醒后就进入Runnable（可运行）状态；如果没有获取锁对象，那么就进入到Blocked（锁阻塞状态）。<br>Waiting 线程状态图</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923225817125.png" srcset="/img/loading.gif" lazyload alt="image-20210923225817125"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923225817125.png" srcset="/img/loading.gif" lazyload alt="image-20210923225817125"></p>
 <p>补充</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923225827659.png" srcset="/img/loading.gif" lazyload alt="image-20210923225827659"></p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20210923225827659.png" srcset="/img/loading.gif" lazyload alt="image-20210923225827659"></p>
 <p>我们在翻阅API的时候会发现Timed Waiting（计时等待） 与 Waiting（无限等待） 状态联系还是很紧密的，比如Waiting（无限等待） 状态中wait方法是空参的，而timed waiting（计时等待） 中wait方法是带参的。这种带参的方法，其实是一种倒计时操作，相当于我们生活中的小闹钟，我们设定好时间，到时通知，可是如果提前得到（唤醒）通知，那么设定好时间在通知也就显得多此一举了，那么这种设计方案其实是一举两得。如果没有得到（唤醒）通知，那么线程就处于Timed Waiting状态,直到倒计时完毕自动醒来；如果在倒计时期间得到（唤醒）通知，那么线程从Timed Waiting状态立刻唤醒。</p>
 <h1 id="第一章-等待唤醒机制"><a href="#第一章-等待唤醒机制" class="headerlink" title="第一章 等待唤醒机制"></a>第一章 等待唤醒机制</h1><h2 id="1-1-线程间通信"><a href="#1-1-线程间通信" class="headerlink" title="1.1 线程间通信"></a>1.1 线程间通信</h2><p><strong>概念：</strong>多个线程在处理同一个资源，但是处理的动作（线程的任务）却不相同。</p>
 <p>比如：线程A用来生成包子的，线程B用来吃包子的，包子可以理解为同一资源，线程A与线程B处理的动作，一个是生产，一个是消费，那么线程A与线程B之间就存在线程通信问题。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料4\img\线程间通信.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料4\img\线程间通信.bmp" srcset="/img/loading.gif" lazyload></p>
 <p><strong>为什么要处理线程间通信：</strong></p>
 <p>多个线程并发执行时, 在默认情况下CPU是随机切换线程的，当我们需要多个线程来共同完成一件任务，并且我们希望他们有规律的执行, 那么多线程之间需要一些协调通信，以此来帮我们达到多线程共同操作一份数据。</p>
 <p><strong>如何保证线程间通信有效利用资源：</strong></p>
@@ -2263,7 +2257,7 @@
 <p>执行效果：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">包子铺开始做包子<br>包子造好了：冰皮五仁<br>吃货来吃吧<br>吃货正在吃冰皮五仁包子<br>包子铺开始做包子<br>包子造好了：薄皮牛肉大葱<br>吃货来吃吧<br>吃货正在吃薄皮牛肉大葱包子<br>包子铺开始做包子<br>包子造好了：冰皮五仁<br>吃货来吃吧<br>吃货正在吃冰皮五仁包子<br></code></pre></div></td></tr></table></figure>
 
-<h1 id="第二章-线程池"><a href="#第二章-线程池" class="headerlink" title="第二章 线程池"></a>第二章 线程池</h1><h2 id="2-1-线程池思想概述"><a href="#2-1-线程池思想概述" class="headerlink" title="2.1 线程池思想概述"></a>2.1 线程池思想概述</h2><p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料4\img\游泳池.jpg" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第二章-线程池"><a href="#第二章-线程池" class="headerlink" title="第二章 线程池"></a>第二章 线程池</h1><h2 id="2-1-线程池思想概述"><a href="#2-1-线程池思想概述" class="headerlink" title="2.1 线程池思想概述"></a>2.1 线程池思想概述</h2><p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料4\img\游泳池.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>我们使用线程的时候就去创建一个线程，这样实现起来非常简便，但是就会有一个问题：</p>
 <p>如果并发的线程数量很多，并且每个线程都是执行一个时间很短的任务就结束了，这样频繁创建线程就会大大降低系统的效率，因为频繁创建线程和销毁线程需要时间。</p>
 <p>那么有没有一种办法使得线程可以复用，就是执行完一个任务，并不被销毁，而是可以继续执行其他的任务？</p>
@@ -2272,7 +2266,7 @@
 <li><strong>线程池：</strong>其实就是一个容纳多个线程的容器，其中的线程可以反复使用，省去了频繁创建线程对象的操作，无需反复创建线程而消耗过多资源。</li>
 </ul>
 <p>由于线程池中有很多操作都是与优化资源相关的，我们在这里就不多赘述。我们通过一张图来了解线程池的工作原理：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料4\img\线程池原理.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料4\img\线程池原理.bmp" srcset="/img/loading.gif" lazyload></p>
 <p>合理利用线程池能够带来三个好处：</p>
 <ol>
 <li>降低资源消耗。减少了创建和销毁线程的次数，每个工作线程都可以被重复利用，可执行多个任务。</li>
@@ -2308,7 +2302,7 @@
 
 
 
-<h1 id="第三章-Lambda表达式"><a href="#第三章-Lambda表达式" class="headerlink" title="第三章 Lambda表达式"></a>第三章 Lambda表达式</h1><h2 id="3-1-函数式编程思想概述"><a href="#3-1-函数式编程思想概述" class="headerlink" title="3.1 函数式编程思想概述"></a>3.1 函数式编程思想概述</h2><p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料4\img\03-Overview.png" srcset="/img/loading.gif" lazyload></p>
+<h1 id="第三章-Lambda表达式"><a href="#第三章-Lambda表达式" class="headerlink" title="第三章 Lambda表达式"></a>第三章 Lambda表达式</h1><h2 id="3-1-函数式编程思想概述"><a href="#3-1-函数式编程思想概述" class="headerlink" title="3.1 函数式编程思想概述"></a>3.1 函数式编程思想概述</h2><p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料4\img\03-Overview.png" srcset="/img/loading.gif" lazyload></p>
 <p>在数学中，<strong>函数</strong>就是有输入量、输出量的一套计算方案，也就是“拿什么东西做什么事情”。相对而言，面向对象过分强调“必须通过对象的形式来做事情”，而函数式思想则尽量忽略面向对象的复杂语法——<strong>强调做什么，而不是以什么形式做</strong>。</p>
 <p>面向对象的思想:</p>
 <p>​	做一件事情,找一个能解决这个事情的对象,调用对象的方法,完成事情.</p>
@@ -2328,9 +2322,9 @@
 </ul>
 <h2 id="3-3-编程思想转换"><a href="#3-3-编程思想转换" class="headerlink" title="3.3 编程思想转换"></a>3.3 编程思想转换</h2><h3 id="做什么，而不是怎么做"><a href="#做什么，而不是怎么做" class="headerlink" title="做什么，而不是怎么做"></a>做什么，而不是怎么做</h3><p>我们真的希望创建一个匿名内部类对象吗？不。我们只是为了做这件事情而<strong>不得不</strong>创建一个对象。我们真正希望做的事情是：将<code>run</code>方法体内的代码传递给<code>Thread</code>类知晓。</p>
 <p><strong>传递一段代码</strong>——这才是我们真正的目的。而创建对象只是受限于面向对象语法而不得不采取的一种手段方式。那，有没有更加简单的办法？如果我们将关注点从“怎么做”回归到“做什么”的本质上，就会发现只要能够更好地达到目的，过程与形式其实并不重要。</p>
-<h3 id="生活举例"><a href="#生活举例" class="headerlink" title="生活举例"></a>生活举例</h3><p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料4\img\01-交通方式.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="生活举例"><a href="#生活举例" class="headerlink" title="生活举例"></a>生活举例</h3><p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料4\img\01-交通方式.png" srcset="/img/loading.gif" lazyload></p>
 <p>当我们需要从北京到上海时，可以选择高铁、汽车、骑行或是徒步。我们的真正目的是到达上海，而如何才能到达上海的形式并不重要，所以我们一直在探索有没有比高铁更好的方式——搭乘飞机。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\课件资料4\img\02-Lambda.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="C:\Users\baixxq\Desktop\新建文件夹\课件资料4\img\02-Lambda.png" srcset="/img/loading.gif" lazyload></p>
 <p>而现在这种飞机（甚至是飞船）已经诞生：2014年3月Oracle所发布的Java 8（JDK 1.8）中，加入了<strong>Lambda表达式</strong>的重量级新特性，为我们打开了新世界的大门。</p>
 <h2 id="3-4-体验Lambda的更优写法"><a href="#3-4-体验Lambda的更优写法" class="headerlink" title="3.4 体验Lambda的更优写法"></a>3.4 体验Lambda的更优写法</h2><p>借助Java 8的全新语法，上述<code>Runnable</code>接口的匿名内部类写法可以通过更简单的Lambda表达式达到等效：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Demo02LambdaRunnable</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		<span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(() -&gt; System.out.println(<span class="hljs-string">&quot;多线程任务执行！&quot;</span>)).start(); <span class="hljs-comment">// 启动线程</span><br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
@@ -2554,7 +2548,7 @@
 <p><strong>实现代码</strong>：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">DiGuiDemo</span> &#123;<br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;<br>		<span class="hljs-comment">//计算1~num的和，使用递归完成</span><br>		<span class="hljs-type">int</span> <span class="hljs-variable">num</span> <span class="hljs-operator">=</span> <span class="hljs-number">5</span>;<br>      	<span class="hljs-comment">// 调用求和的方法</span><br>		<span class="hljs-type">int</span> <span class="hljs-variable">sum</span> <span class="hljs-operator">=</span> getSum(num);<br>      	<span class="hljs-comment">// 输出结果</span><br>		System.out.println(sum);<br>		<br>	&#125;<br>  	<span class="hljs-comment">/*</span><br><span class="hljs-comment">  	  通过递归算法实现.</span><br><span class="hljs-comment">  	  参数列表:int </span><br><span class="hljs-comment">  	  返回值类型: int </span><br><span class="hljs-comment">  	*/</span><br>	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">getSum</span><span class="hljs-params">(<span class="hljs-type">int</span> num)</span> &#123;<br>      	<span class="hljs-comment">/* </span><br><span class="hljs-comment">      	   num为1时,方法返回1,</span><br><span class="hljs-comment">      	   相当于是方法的出口,num总有是1的情况</span><br><span class="hljs-comment">      	*/</span><br>		<span class="hljs-keyword">if</span>(num == <span class="hljs-number">1</span>)&#123;<br>			<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>		&#125;<br>      	<span class="hljs-comment">/*</span><br><span class="hljs-comment">          num不为1时,方法返回 num +(num-1)的累和</span><br><span class="hljs-comment">          递归调用getSum方法</span><br><span class="hljs-comment">        */</span><br>		<span class="hljs-keyword">return</span> num + getSum(num-<span class="hljs-number">1</span>);<br>	&#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="代码执行图解"><a href="#代码执行图解" class="headerlink" title="代码执行图解"></a>代码执行图解</h3><p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\1\img\day08_01_递归累和.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="代码执行图解"><a href="#代码执行图解" class="headerlink" title="代码执行图解"></a>代码执行图解</h3><p><img src="C:\Users\baixxq\Desktop\新建文件夹\1\img\day08_01_递归累和.jpg" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>小贴士：递归一定要有条件限定，保证递归能够停止下来，次数不要太多，否则会发生栈内存溢出。</p>
 </blockquote>
@@ -2619,7 +2613,7 @@
 <li><strong>字节流</strong> ：以字节为单位，读写数据的流。</li>
 <li><strong>字符流</strong> ：以字符为单位，读写数据的流。</li>
 </ul>
-<h2 id="1-3-IO的流向说明图解"><a href="#1-3-IO的流向说明图解" class="headerlink" title="1.3 IO的流向说明图解"></a>1.3 IO的流向说明图解</h2><p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\2\img\1_io.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="1-3-IO的流向说明图解"><a href="#1-3-IO的流向说明图解" class="headerlink" title="1.3 IO的流向说明图解"></a>1.3 IO的流向说明图解</h2><p><img src="C:\Users\baixxq\Desktop\新建文件夹\2\img\1_io.jpg" srcset="/img/loading.gif" lazyload></p>
 <h2 id="1-4-顶级父类们"><a href="#1-4-顶级父类们" class="headerlink" title="1.4 顶级父类们"></a>1.4 顶级父类们</h2><table>
 <thead>
 <tr>
@@ -2630,13 +2624,13 @@
 </thead>
 <tbody><tr>
 <td align="center"><strong>字节流</strong></td>
-<td align="center">字节输入流<br><strong>InputStream</strong></td>
-<td align="center">字节输出流<br><strong>OutputStream</strong></td>
+<td align="center">字节输入流<br /><strong>InputStream</strong></td>
+<td align="center">字节输出流<br /><strong>OutputStream</strong></td>
 </tr>
 <tr>
 <td align="center"><strong>字符流</strong></td>
-<td align="center">字符输入流<br><strong>Reader</strong></td>
-<td align="center">字符输出流<br><strong>Writer</strong></td>
+<td align="center">字符输入流<br /><strong>Reader</strong></td>
+<td align="center">字符输出流<br /><strong>Writer</strong></td>
 </tr>
 </tbody></table>
 <h1 id="第二章-字节流"><a href="#第二章-字节流" class="headerlink" title="第二章 字节流"></a>第二章 字节流</h1><h2 id="2-1-一切皆为字节"><a href="#2-1-一切皆为字节" class="headerlink" title="2.1 一切皆为字节"></a>2.1 一切皆为字节</h2><p>一切文件数据(文本、图片、视频等)在存储时，都是以二进制数字的形式保存，都一个一个的字节，那么传输时一样如此。所以，字节流可以传输任意文件数据。在操作流的时候，我们要时刻明确，无论使用什么样的流对象，底层传输的始终为二进制数据。</p>
@@ -2761,7 +2755,7 @@
 <p>小贴士：</p>
 <p>使用数组读取，每次读取多个字节，减少了系统间的IO操作次数，从而提高了读写的效率，建议开发中使用。</p>
 </blockquote>
-<h2 id="2-6-字节流练习：图片复制"><a href="#2-6-字节流练习：图片复制" class="headerlink" title="2.6 字节流练习：图片复制"></a>2.6 字节流练习：图片复制</h2><h3 id="复制原理图解"><a href="#复制原理图解" class="headerlink" title="复制原理图解"></a>复制原理图解</h3><p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/Users\baixxq\Desktop\新建文件夹\2\img\2_copy.jpg" srcset="/img/loading.gif" lazyload></p>
+<h2 id="2-6-字节流练习：图片复制"><a href="#2-6-字节流练习：图片复制" class="headerlink" title="2.6 字节流练习：图片复制"></a>2.6 字节流练习：图片复制</h2><h3 id="复制原理图解"><a href="#复制原理图解" class="headerlink" title="复制原理图解"></a>复制原理图解</h3><p><img src="C:\Users\baixxq\Desktop\新建文件夹\2\img\2_copy.jpg" srcset="/img/loading.gif" lazyload></p>
 <h3 id="案例实现"><a href="#案例实现" class="headerlink" title="案例实现"></a>案例实现</h3><p>复制图片文件，代码使用演示：</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Copy</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;<br>        <span class="hljs-comment">// 1.创建流对象</span><br>        <span class="hljs-comment">// 1.1 指定数据源</span><br>        <span class="hljs-type">FileInputStream</span> <span class="hljs-variable">fis</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(<span class="hljs-string">&quot;D:\\test.jpg&quot;</span>);<br>        <span class="hljs-comment">// 1.2 指定目的地</span><br>        <span class="hljs-type">FileOutputStream</span> <span class="hljs-variable">fos</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(<span class="hljs-string">&quot;test_copy.jpg&quot;</span>);<br><br>        <span class="hljs-comment">// 2.读写数据</span><br>        <span class="hljs-comment">// 2.1 定义数组</span><br>        <span class="hljs-type">byte</span>[] b = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];<br>        <span class="hljs-comment">// 2.2 定义长度</span><br>        <span class="hljs-type">int</span> len;<br>        <span class="hljs-comment">// 2.3 循环读取</span><br>        <span class="hljs-keyword">while</span> ((len = fis.read(b))!=-<span class="hljs-number">1</span>) &#123;<br>            <span class="hljs-comment">// 2.4 写出数据</span><br>            fos.write(b, <span class="hljs-number">0</span> , len);<br>        &#125;<br><br>        <span class="hljs-comment">// 3.关闭资源</span><br>        fos.close();<br>        fis.close();<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
@@ -2925,16 +2919,16 @@
 <li>打印流</li>
 </ul>
 <h2 id="教学目标"><a href="#教学目标" class="headerlink" title="教学目标"></a>教学目标</h2><ul>
-<li><input disabled type="checkbox"> 能够使用字节缓冲流读取数据到程序</li>
-<li><input disabled type="checkbox"> 能够使用字节缓冲流写出数据到文件</li>
-<li><input disabled type="checkbox"> 能够明确字符缓冲流的作用和基本用法</li>
-<li><input disabled type="checkbox"> 能够使用缓冲流的特殊功能</li>
-<li><input disabled type="checkbox"> 能够阐述编码表的意义</li>
-<li><input disabled type="checkbox"> 能够使用转换流读取指定编码的文本文件</li>
-<li><input disabled type="checkbox"> 能够使用转换流写入指定编码的文本文件</li>
-<li><input disabled type="checkbox"> 能够说出打印流的特点</li>
-<li><input disabled type="checkbox"> 能够使用序列化流写出对象到文件</li>
-<li><input disabled type="checkbox"> 能够使用反序列化流读取文件到程序中</li>
+<li><input disabled="" type="checkbox"> 能够使用字节缓冲流读取数据到程序</li>
+<li><input disabled="" type="checkbox"> 能够使用字节缓冲流写出数据到文件</li>
+<li><input disabled="" type="checkbox"> 能够明确字符缓冲流的作用和基本用法</li>
+<li><input disabled="" type="checkbox"> 能够使用缓冲流的特殊功能</li>
+<li><input disabled="" type="checkbox"> 能够阐述编码表的意义</li>
+<li><input disabled="" type="checkbox"> 能够使用转换流读取指定编码的文本文件</li>
+<li><input disabled="" type="checkbox"> 能够使用转换流写入指定编码的文本文件</li>
+<li><input disabled="" type="checkbox"> 能够说出打印流的特点</li>
+<li><input disabled="" type="checkbox"> 能够使用序列化流写出对象到文件</li>
+<li><input disabled="" type="checkbox"> 能够使用反序列化流读取文件到程序中</li>
 </ul>
 <h1 id="第一章-缓冲流"><a href="#第一章-缓冲流" class="headerlink" title="第一章 缓冲流"></a>第一章 缓冲流</h1><p>昨天学习了基本的一些流，作为IO流的入门，今天我们要见识一些更强大的流。比如能够高效读写的缓冲流，能够转换编码的转换流，能够持久化存储对象的序列化流等等。这些功能更为强大的流，都是在基本的流对象基础之上创建而来的，就像穿上铠甲的武士一样，相当于是对基本流对象的一种增强。</p>
 <h2 id="1-1-概述-3"><a href="#1-1-概述-3" class="headerlink" title="1.1 概述"></a>1.1 概述</h2><p>缓冲流,也叫高效流，是对4个基本的<code>FileXxx</code> 流的增强，所以也是4个流，按照数据类型分类：</p>
@@ -3006,7 +3000,7 @@
 <h3 id="字符集"><a href="#字符集" class="headerlink" title="字符集"></a>字符集</h3><ul>
 <li>**字符集 <code>Charset</code>**：也叫编码表。是一个系统支持的所有字符的集合，包括各国家文字、标点符号、图形符号、数字等。</li>
 </ul>
-<p>计算机要准确的存储和识别各种字符集符号，需要进行字符编码，一套字符集必然至少有一套字符编码。常见字符集有ASCII字符集、GBK字符集、Unicode字符集等。<img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload\JAVA黑马课\02-Java语进阶\day10_缓冲流、转换流、序列化流、Files\课件资料\课件资料\img\1_charset.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>计算机要准确的存储和识别各种字符集符号，需要进行字符编码，一套字符集必然至少有一套字符编码。常见字符集有ASCII字符集、GBK字符集、Unicode字符集等。<img src="F:\BaiduNetdiskDownload\JAVA黑马课\02-Java语进阶\day10_缓冲流、转换流、序列化流、Files\课件资料\课件资料\img\1_charset.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>可见，当指定了<strong>编码</strong>，它所对应的<strong>字符集</strong>自然就指定了，所以<strong>编码</strong>才是我们最终要关心的。</p>
 <ul>
 <li><strong>ASCII字符集</strong> ：<ul>
@@ -3063,7 +3057,7 @@
 
 <h3 id="指定编码写出"><a href="#指定编码写出" class="headerlink" title="指定编码写出"></a>指定编码写出</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">OutputDemo</span> &#123;   <br>    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;   <br>        <span class="hljs-comment">// 定义文件路径      </span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">FileName</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;E:\\out.txt&quot;</span>;      	<span class="hljs-comment">// 创建流对象,默认UTF8编码    </span><br>        <span class="hljs-type">OutputStreamWriter</span> <span class="hljs-variable">osw</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OutputStreamWriter</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(FileName));        <span class="hljs-comment">// 写出数据      	</span><br>        osw.write(<span class="hljs-string">&quot;你好&quot;</span>); <span class="hljs-comment">// 保存为6个字节      </span><br>        osw.close();      			<span class="hljs-comment">// 定义文件路径	</span><br>        <span class="hljs-type">String</span> <span class="hljs-variable">FileName2</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;E:\\out2.txt&quot;</span>;     	<span class="hljs-comment">// 创建流对象,指定GBK编码      </span><br>        <span class="hljs-type">OutputStreamWriter</span> <span class="hljs-variable">osw2</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OutputStreamWriter</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(FileName2),<span class="hljs-string">&quot;GBK&quot;</span>);    <br>        <span class="hljs-comment">// 写出数据      	</span><br>        osw2.write(<span class="hljs-string">&quot;你好&quot;</span>);<span class="hljs-comment">// 保存为4个字节      </span><br>        osw2.close();    <br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
-<h3 id="转换流理解图解"><a href="#转换流理解图解" class="headerlink" title="转换流理解图解"></a>转换流理解图解</h3><p><strong>转换流是字节与字符间的桥梁！</strong><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload\JAVA黑马课\02-Java语进阶\day10_缓冲流、转换流、序列化流、Files\课件资料\课件资料\img\2_zhuanhuan.jpg" srcset="/img/loading.gif" lazyload></p>
+<h3 id="转换流理解图解"><a href="#转换流理解图解" class="headerlink" title="转换流理解图解"></a>转换流理解图解</h3><p><strong>转换流是字节与字符间的桥梁！</strong><img src="F:\BaiduNetdiskDownload\JAVA黑马课\02-Java语进阶\day10_缓冲流、转换流、序列化流、Files\课件资料\课件资料\img\2_zhuanhuan.jpg" srcset="/img/loading.gif" lazyload></p>
 <h2 id="2-5-练习：转换文件编码"><a href="#2-5-练习：转换文件编码" class="headerlink" title="2.5 练习：转换文件编码"></a>2.5 练习：转换文件编码</h2><p>将GBK编码的文本文件，转换为UTF-8编码的文本文件。</p>
 <h3 id="案例分析-1"><a href="#案例分析-1" class="headerlink" title="案例分析"></a>案例分析</h3><ol>
 <li>指定GBK编码的转换流，读取文本文件。</li>
@@ -3072,7 +3066,7 @@
 <h3 id="案例实现-2"><a href="#案例实现-2" class="headerlink" title="案例实现"></a>案例实现</h3><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">TransDemo</span> &#123;   <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> &#123;      <br>    <span class="hljs-comment">// 1.定义文件路径     	</span><br>    <span class="hljs-type">String</span> <span class="hljs-variable">srcFile</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;file_gbk.txt&quot;</span>;    <br>    <span class="hljs-type">String</span> <span class="hljs-variable">destFile</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;file_utf8.txt&quot;</span>;		<span class="hljs-comment">// 2.创建流对象   </span><br>    <span class="hljs-comment">// 2.1 转换输入流,指定GBK编码      </span><br>    <span class="hljs-type">InputStreamReader</span> <span class="hljs-variable">isr</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">InputStreamReader</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileInputStream</span>(srcFile) , <span class="hljs-string">&quot;GBK&quot;</span>);    	<span class="hljs-comment">// 2.2 转换输出流,默认utf8编码     </span><br>    <span class="hljs-type">OutputStreamWriter</span> <span class="hljs-variable">osw</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OutputStreamWriter</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(destFile));		<span class="hljs-comment">// 3.读写数据    	// 3.1 定义数组       </span><br>    <span class="hljs-type">char</span>[] cbuf = <span class="hljs-keyword">new</span> <span class="hljs-title class_">char</span>[<span class="hljs-number">1024</span>];    	<span class="hljs-comment">// 3.2 定义长度      </span><br>    <span class="hljs-type">int</span> len;    	<span class="hljs-comment">// 3.3 循环读取      </span><br>    <span class="hljs-keyword">while</span> ((len = isr.read(cbuf))!=-<span class="hljs-number">1</span>) &#123;            <span class="hljs-comment">// 循环写出       </span><br>        osw.write(cbuf,<span class="hljs-number">0</span>,len);        &#125;    	<br>    <span class="hljs-comment">// 4.释放资源       </span><br>    osw.close();       <br>    isr.close();  <br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
 
 <h1 id="第三章-序列化"><a href="#第三章-序列化" class="headerlink" title="第三章 序列化"></a>第三章 序列化</h1><h2 id="3-1-概述-1"><a href="#3-1-概述-1" class="headerlink" title="3.1 概述"></a>3.1 概述</h2><p>Java 提供了一种对象<strong>序列化</strong>的机制。用一个字节序列可以表示一个对象，该字节序列包含该<code>对象的数据</code>、<code>对象的类型</code>和<code>对象中存储的属性</code>等信息。字节序列写出到文件之后，相当于文件中<strong>持久保存</strong>了一个对象的信息。 </p>
-<p>反之，该字节序列还可以从文件中读取回来，重构对象，对它进行<strong>反序列化</strong>。<code>对象的数据</code>、<code>对象的类型</code>和<code>对象中存储的数据</code>信息，都可以用来在内存中创建对象。看图理解序列化： <img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload\JAVA黑马课\02-Java语进阶\day10_缓冲流、转换流、序列化流、Files\课件资料\课件资料\img\3_xuliehua.jpg" srcset="/img/loading.gif" lazyload></p>
+<p>反之，该字节序列还可以从文件中读取回来，重构对象，对它进行<strong>反序列化</strong>。<code>对象的数据</code>、<code>对象的类型</code>和<code>对象中存储的数据</code>信息，都可以用来在内存中创建对象。看图理解序列化： <img src="F:\BaiduNetdiskDownload\JAVA黑马课\02-Java语进阶\day10_缓冲流、转换流、序列化流、Files\课件资料\课件资料\img\3_xuliehua.jpg" srcset="/img/loading.gif" lazyload></p>
 <h2 id="3-2-ObjectOutputStream类"><a href="#3-2-ObjectOutputStream类" class="headerlink" title="3.2 ObjectOutputStream类"></a>3.2 ObjectOutputStream类</h2><p><code>java.io.ObjectOutputStream </code> 类，将Java对象的原始数据类型写出到文件,实现对象的持久存储。</p>
 <h3 id="构造方法-10"><a href="#构造方法-10" class="headerlink" title="构造方法"></a>构造方法</h3><ul>
 <li><code>public ObjectOutputStream(OutputStream out) </code>： 创建一个指定OutputStream的ObjectOutputStream。</li>
@@ -3148,18 +3142,18 @@
 <li>ServerSocket</li>
 </ul>
 <h2 id="教学目标-1"><a href="#教学目标-1" class="headerlink" title="教学目标"></a>教学目标</h2><ul>
-<li><input disabled type="checkbox"> 能够辨别UDP和TCP协议特点</li>
-<li><input disabled type="checkbox"> 能够说出TCP协议下两个常用类名称</li>
-<li><input disabled type="checkbox"> 能够编写TCP协议下字符串数据传输程序</li>
-<li><input disabled type="checkbox"> 能够理解TCP协议下文件上传案例</li>
-<li><input disabled type="checkbox"> 能够理解TCP协议下案例2</li>
+<li><input disabled="" type="checkbox"> 能够辨别UDP和TCP协议特点</li>
+<li><input disabled="" type="checkbox"> 能够说出TCP协议下两个常用类名称</li>
+<li><input disabled="" type="checkbox"> 能够编写TCP协议下字符串数据传输程序</li>
+<li><input disabled="" type="checkbox"> 能够理解TCP协议下文件上传案例</li>
+<li><input disabled="" type="checkbox"> 能够理解TCP协议下案例2</li>
 </ul>
 <h1 id="第一章-网络编程入门"><a href="#第一章-网络编程入门" class="headerlink" title="第一章 网络编程入门"></a>第一章 网络编程入门</h1><h2 id="1-1软件结构"><a href="#1-1软件结构" class="headerlink" title="1.1软件结构"></a>1.1软件结构</h2><ul>
 <li><strong>C&#x2F;S结构</strong> ：全称为Client&#x2F;Server结构，是指客户端和服务器结构。常见程序有ＱＱ、迅雷等软件。</li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/1_cs.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/1_cs.jpg" srcset="/img/loading.gif" lazyload></p>
 <p><strong>B&#x2F;S结构</strong> ：全称为Browser&#x2F;Server结构，是指浏览器和服务器结构。常见浏览器有谷歌、火狐等。</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/2_bs.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/2_bs.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>两种架构各有优势，但是无论哪种架构，都离不开网络的支持。<strong>网络编程</strong>，就是在一定的协议下，实现两台计算机的通信的程序。</p>
 <h2 id="1-2-网络通信协议"><a href="#1-2-网络通信协议" class="headerlink" title="1.2 网络通信协议"></a>1.2 网络通信协议</h2><ul>
 <li><p><strong>网络通信协议：</strong>通过计算机网络可以使多台计算机实现连接，位于同一个网络中的计算机在进行连接和通信时需要遵守一定的规则，这就好比在道路中行驶的汽车一定要遵守交通规则一样。在计算机网络中，这些连接和通信的规则被称为网络通信协议，它对数据的传输格式、传输速率、传输步骤等做了统一规定，通信双方必须同时遵守才能完成数据交换。</p>
@@ -3167,7 +3161,7 @@
 <li><p><strong>TCP&#x2F;IP协议：</strong> 传输控制协议&#x2F;因特网互联协议( Transmission Control Protocol&#x2F;Internet Protocol)，是Internet最基本、最广泛的协议。它定义了计算机如何连入因特网，以及数据如何在它们之间传输的标准。它的内部包含一系列的用于处理数据通信的协议，并采用了4层的分层模型，每一层都呼叫它的下一层所提供的协议来完成自己的需求。</p>
 </li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/3_tcp_ip.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/3_tcp_ip.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>上图中，TCP&#x2F;IP协议中的四层分别是应用层、传输层、网络层和链路层，每层分别负责不同的通信功能。<br>链路层：链路层是用于定义物理传输通道，通常是对某些网络连接设备的驱动协议，例如针对光纤、网线提供的驱动。<br>网络层：网络层是整个TCP&#x2F;IP协议的核心，它主要用于将传输的数据进行分组，将分组数据发送到目标计算机或者网络。<br>运输层：主要使网络程序进行通信，在进行网络通信时，可以采用TCP协议，也可以采用UDP协议。<br>应用层：主要负责应用程序的协议，例如HTTP协议、FTP协议等。</p>
 <h2 id="1-3-协议分类"><a href="#1-3-协议分类" class="headerlink" title="1.3 协议分类"></a>1.3 协议分类</h2><p>通信的协议还是比较复杂的，<code>java.net</code> 包中包含的类和接口，它们提供低层次的通信细节。我们可以直接使用这些类和接口，来专注于网络程序开发，而不用考虑通信的细节。</p>
 <p><code>java.net</code> 包中提供了两种常见的网络协议的支持：</p>
@@ -3177,7 +3171,7 @@
 <p>但是在使用UDP协议传送数据时，由于UDP的面向无连接性，不能保证数据的完整性，因此在传输重要数据时不建议使用UDP协议。UDP的交换过程如下图所示。</p>
 </li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/UDP通信图解.bmp" srcset="/img/loading.gif" lazyload alt="UDP通信图解"></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/UDP通信图解.bmp" srcset="/img/loading.gif" lazyload alt="UDP通信图解"></p>
 <p>特点:数据被限制在64kb以内，超出这个范围就不能发送了。</p>
 <p>数据报(Datagram):网络传输的基本单位 </p>
 <ul>
@@ -3193,7 +3187,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/4_tcp.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/4_tcp.jpg" srcset="/img/loading.gif" lazyload></p>
 <p>​    完成三次握手，连接建立后，客户端和服务器就可以开始进行数据传输了。由于这种面向连接的特性，TCP协议可以保证传输数据的安全，所以应用十分广泛，例如下载文件、浏览网页等。</p>
 <h2 id="1-4-网络编程三要素"><a href="#1-4-网络编程三要素" class="headerlink" title="1.4 网络编程三要素"></a>1.4 网络编程三要素</h2><h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><ul>
 <li><strong>协议：</strong>计算机网络通信必须遵守的规则，已经介绍过了，不再赘述。</li>
@@ -3297,7 +3291,7 @@
 <blockquote>
 <p>到此，客户端向服务端发送数据成功。</p>
 </blockquote>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/5_简单通信.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/5_简单通信.jpg" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>自此，服务端向客户端回写数据。</p>
 </blockquote>
@@ -3324,7 +3318,7 @@
 <li>【服务端】输入流，读取文件数据到服务端程序。</li>
 <li>【服务端】输出流，写出文件数据到服务器硬盘中。</li>
 </ol>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/6_upload.jpg" srcset="/img/loading.gif" lazyload>    </p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/6_upload.jpg" srcset="/img/loading.gif" lazyload>    </p>
 <h4 id="基本实现"><a href="#基本实现" class="headerlink" title="基本实现"></a>基本实现</h4><p><strong>服务端实现：</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileUpload_Server</span> &#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;        System.out.println(<span class="hljs-string">&quot;服务器 启动.....  &quot;</span>);        <span class="hljs-comment">// 1. 创建服务端ServerSocket      	ServerSocket serverSocket = new ServerSocket(6666);  		// 2. 建立连接         Socket accept = serverSocket.accept();      	// 3. 创建流对象      	// 3.1 获取输入流,读取文件数据        BufferedInputStream bis = new BufferedInputStream(accept.getInputStream());        // 3.2 创建输出流,保存到本地 .        BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(&quot;copy.jpg&quot;));		// 4. 读写数据        byte[] b = new byte[1024 * 8];        int len;        while ((len = bis.read(b)) != -1) &#123;            bos.write(b, 0, len);        &#125;        //5. 关闭 资源        bos.close();        bis.close();        accept.close();        System.out.println(&quot;文件上传已保存&quot;);    &#125;&#125;</span><br></code></pre></div></td></tr></table></figure>
 
@@ -3359,7 +3353,7 @@
 <li>【服务端】获取输出流，回写数据。</li>
 <li>【客户端】获取输入流，解析回写数据。</li>
 </ol>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/6_upload2.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/6_upload2.jpg" srcset="/img/loading.gif" lazyload></p>
 <h4 id="回写实现"><a href="#回写实现" class="headerlink" title="回写实现"></a>回写实现</h4><figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">FileUpload_Server</span> &#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;        System.out.println(<span class="hljs-string">&quot;服务器 启动.....  &quot;</span>);        <span class="hljs-comment">// 1. 创建服务端ServerSocket        ServerSocket serverSocket = new ServerSocket(6666);        // 2. 循环接收,建立连接        while (true) &#123;            Socket accept = serverSocket.accept();          	/*          	3. socket对象交给子线程处理,进行读写操作               Runnable接口中,只有一个run方法,使用lambda表达式简化格式            */            new Thread(() -&gt; &#123;                try (                    //3.1 获取输入流对象                    BufferedInputStream bis = new BufferedInputStream(accept.getInputStream());                    //3.2 创建输出流对象, 保存到本地 .                    FileOutputStream fis = new FileOutputStream(System.currentTimeMillis() + &quot;.jpg&quot;);                    BufferedOutputStream bos = new BufferedOutputStream(fis);                ) &#123;                    // 3.3 读写数据                    byte[] b = new byte[1024 * 8];                    int len;                    while ((len = bis.read(b)) != -1) &#123;                        bos.write(b, 0, len);                    &#125;                    // 4.=======信息回写===========================                    System.out.println(&quot;back ........&quot;);                    OutputStream out = accept.getOutputStream();                    out.write(&quot;上传成功&quot;.getBytes());                    out.close();                    //================================                    //5. 关闭 资源                    bos.close();                    bis.close();                    accept.close();                    System.out.println(&quot;文件上传已保存&quot;);                &#125; catch (IOException e) &#123;                    e.printStackTrace();                &#125;            &#125;).start();        &#125;    &#125;&#125;</span><br></code></pre></div></td></tr></table></figure>
 
 <p><strong>客户端实现：</strong></p>
@@ -3371,15 +3365,15 @@
 <h3 id="案例分析-3"><a href="#案例分析-3" class="headerlink" title="案例分析"></a>案例分析</h3><ol>
 <li><p>准备页面数据，web文件夹。</p>
 <p>复制到我们Module中，比如复制到day08中</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/复制.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/复制.png" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>我们模拟服务器端，ServerSocket类监听端口，使用浏览器访问</p>
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;    	<span class="hljs-type">ServerSocket</span> <span class="hljs-variable">server</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(<span class="hljs-number">8000</span>);    	<span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> server.accept();    	<span class="hljs-type">InputStream</span> <span class="hljs-variable">in</span> <span class="hljs-operator">=</span> socket.getInputStream();   	    <span class="hljs-type">byte</span>[] bytes = <span class="hljs-keyword">new</span> <span class="hljs-title class_">byte</span>[<span class="hljs-number">1024</span>];    	<span class="hljs-type">int</span> <span class="hljs-variable">len</span> <span class="hljs-operator">=</span> in.read(bytes);    	System.out.println(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>(bytes,<span class="hljs-number">0</span>,len));    	socket.close();    	server.close();&#125;<br></code></pre></div></td></tr></table></figure>
 
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/无法访问.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/无法访问.jpg" srcset="/img/loading.gif" lazyload></p>
 </li>
 <li><p>服务器程序中字节输入流可以读取到浏览器发来的请求信息</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/读取访问信息.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/读取访问信息.jpg" srcset="/img/loading.gif" lazyload></p>
 </li>
 </ol>
 <p>GET&#x2F;web&#x2F;index.html HTTP&#x2F;1.1是浏览器的请求消息。&#x2F;web&#x2F;index.html为浏览器想要请求的服务器端的资源,使用字符串切割方式获取到请求的资源。</p>
@@ -3391,7 +3385,7 @@
 <h3 id="访问效果"><a href="#访问效果" class="headerlink" title="访问效果"></a>访问效果</h3><ul>
 <li><strong>火狐</strong></li>
 </ul>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/效果图1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/效果图1.png" srcset="/img/loading.gif" lazyload></p>
 <blockquote>
 <p>小贴士：不同的浏览器，内核不一样，解析效果有可能不一样。</p>
 </blockquote>
@@ -3400,8 +3394,8 @@
 <figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ServerDemo</span> &#123;    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> IOException &#123;        <span class="hljs-type">ServerSocket</span> <span class="hljs-variable">server</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServerSocket</span>(<span class="hljs-number">8888</span>);        <span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>)&#123;            <span class="hljs-type">Socket</span> <span class="hljs-variable">socket</span> <span class="hljs-operator">=</span> server.accept();            <span class="hljs-keyword">new</span> <span class="hljs-title class_">Thread</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Web</span>(socket)).start();        &#125;    &#125;    <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">Web</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Runnable</span>&#123;        <span class="hljs-keyword">private</span> Socket socket;        <span class="hljs-keyword">public</span> <span class="hljs-title function_">Web</span><span class="hljs-params">(Socket socket)</span>&#123;            <span class="hljs-built_in">this</span>.socket=socket;        &#125;        <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">run</span><span class="hljs-params">()</span> &#123;            <span class="hljs-keyword">try</span>&#123;                <span class="hljs-comment">//转换流,读取浏览器请求第一行                BufferedReader readWb = new                        BufferedReader(new InputStreamReader(socket.getInputStream()));                String requst = readWb.readLine();                //取出请求资源的路径                String[] strArr = requst.split(&quot; &quot;);                System.out.println(Arrays.toString(strArr));                String path = strArr[1].substring(1);                System.out.println(path);                FileInputStream fis = new FileInputStream(path);                System.out.println(fis);                byte[] bytes= new byte[1024];                int len = 0 ;                //向浏览器 回写数据                OutputStream out = socket.getOutputStream();                out.write(&quot;HTTP/1.1 200 OK\r\n&quot;.getBytes());                out.write(&quot;Content-Type:text/html\r\n&quot;.getBytes());                out.write(&quot;\r\n&quot;.getBytes());                while((len = fis.read(bytes))!=-1)&#123;                    out.write(bytes,0,len);                &#125;                fis.close();                out.close();                readWb.close();                socket.close();            &#125;catch(Exception ex)&#123;            &#125;        &#125;    &#125;&#125;</span><br></code></pre></div></td></tr></table></figure>
 
 <p><strong>访问效果：</strong></p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/效果图2.png" srcset="/img/loading.gif" lazyload>图解：</p>
-<p><img src="/2022/04/28/Java%E5%9F%BA%E7%A1%80/img%5CBS%E9%80%9A%E4%BF%A1.bmp" srcset="/img/loading.gif" lazyload></p>
+<p><img src="F:/BaiduNetdiskDownload/JAVA黑马课/02-Java语进阶/day11_网络编程/课件资料/img/效果图2.png" srcset="/img/loading.gif" lazyload>图解：</p>
+<p><img src="/img%5CBS%E9%80%9A%E4%BF%A1.bmp" srcset="/img/loading.gif" lazyload></p>
 
             </div>
             <hr>
@@ -3685,7 +3679,7 @@
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":170,"height":340},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":150,"height":300},"mobile":{"show":false},"react":{"opacity":0.7},"log":false});</script></body>
 </html>
 
 
