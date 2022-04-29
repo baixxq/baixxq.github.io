@@ -20,7 +20,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试高频问题">
 <meta property="og:url" content="http://example.com/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="橙子味小白的博客">
 <meta property="og:description" content="笔记未整理，仅供自己使用">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/passage_photo/redis.png">
@@ -32,7 +32,7 @@
 <meta name="twitter:image" content="http://example.com/img/passage_photo/redis.png">
   
   
-  <title>面试高频问题 - Hexo</title>
+  <title>面试高频问题 - 橙子味小白的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -804,11 +804,11 @@
 <li>如何判断邮箱是真正存在的？</li>
 </ol>
 <p><strong>电子邮件的发送过程？</strong></p>
-<p>比如我的邮箱是“<a href="mailto:&#100;&#97;&#x62;&#97;&#x69;&#x40;&#x63;&#x73;&#x7a;&#x68;&#105;&#110;&#97;&#x6e;&#46;&#x63;&#111;&#x6d;">&#100;&#97;&#x62;&#97;&#x69;&#x40;&#x63;&#x73;&#x7a;&#x68;&#105;&#110;&#97;&#x6e;&#46;&#x63;&#111;&#x6d;</a>”，我要向“<a href="mailto:&#x78;&#105;&#97;&#x6f;&#109;&#97;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">&#x78;&#105;&#97;&#x6f;&#109;&#97;&#x40;&#113;&#x71;&#x2e;&#x63;&#x6f;&#x6d;</a>”发送邮件，整个过程可以简单分为下面几步：</p>
+<p>比如我的邮箱是“<a href="mailto:&#100;&#97;&#x62;&#x61;&#x69;&#64;&#99;&#x73;&#122;&#x68;&#105;&#x6e;&#x61;&#110;&#46;&#x63;&#x6f;&#109;">&#100;&#97;&#x62;&#x61;&#x69;&#64;&#99;&#x73;&#122;&#x68;&#105;&#x6e;&#x61;&#110;&#46;&#x63;&#x6f;&#109;</a>”，我要向“<a href="mailto:&#120;&#105;&#x61;&#x6f;&#x6d;&#x61;&#64;&#x71;&#x71;&#46;&#x63;&#111;&#109;">&#120;&#105;&#x61;&#x6f;&#x6d;&#x61;&#64;&#x71;&#x71;&#46;&#x63;&#111;&#109;</a>”发送邮件，整个过程可以简单分为下面几步：</p>
 <ol>
 <li>通过 <strong>SMTP</strong> 协议，我将我写好的邮件交给163邮箱服务器（邮局）。</li>
 <li>163邮箱服务器发现我发送的邮箱是qq邮箱，然后它使用 SMTP协议将我的邮件转发到 qq邮箱服务器。</li>
-<li>qq邮箱服务器接收邮件之后就通知邮箱为“<a href="mailto:&#x78;&#x69;&#97;&#111;&#x6d;&#x61;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#109;">&#x78;&#x69;&#97;&#111;&#x6d;&#x61;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#109;</a>”的用户来收邮件，然后用户就通过 <strong>POP3&#x2F;IMAP</strong> 协议将邮件取出。</li>
+<li>qq邮箱服务器接收邮件之后就通知邮箱为“<a href="mailto:&#120;&#x69;&#x61;&#111;&#109;&#x61;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;">&#120;&#x69;&#x61;&#111;&#109;&#x61;&#64;&#x71;&#x71;&#x2e;&#x63;&#x6f;&#x6d;</a>”的用户来收邮件，然后用户就通过 <strong>POP3&#x2F;IMAP</strong> 协议将邮件取出。</li>
 </ol>
 <p><strong>如何判断邮箱是真正存在的？</strong></p>
 <p>很多场景(比如邮件营销)下面我们需要判断我们要发送的邮箱地址是否真的存在，这个时候我们可以利用 SMTP 协议来检测：</p>
