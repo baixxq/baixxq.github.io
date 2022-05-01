@@ -259,7 +259,7 @@
               </p>
             
             <div class="markdown-body">
-              <h3 id="一、查看是否被收录"><a href="#一、查看是否被收录" class="headerlink" title="一、查看是否被收录"></a>一、查看是否被收录</h3><p>首先查看你的博客地址是否已经被Google收录，在Google的搜索栏中搜索：<code>site:https://xxxx.github.io</code>，其中<a target="_blank" rel="noopener" href="https://xxxx.github.io为你的博客地址,如果结果是尝试使用google/">https://xxxx.github.io为你的博客地址，如果结果是尝试使用Google</a> Search Console，则意味着没有被收录。</p>
+              <h3 id="一、查看是否被收录"><a href="#一、查看是否被收录" class="headerlink" title="一、查看是否被收录"></a>一、查看是否被收录</h3><p>首先查看你的博客地址是否已经被Google收录，在Google的搜索栏中搜索：<code>site:https://xxxx.github.io</code>，其中 <code>https://xxxx.github.io</code> 为你的博客地址，如果结果是提示您尝试使用Google Search Console，则意味着没有被收录。</p>
 <p>如果搜索出你想要的结果，那么不用继续往下看了。</p>
 <h3 id="二、搜索资源提交"><a href="#二、搜索资源提交" class="headerlink" title="二、搜索资源提交"></a>二、搜索资源提交</h3><p>进入Google Web Master，点击： <a target="_blank" rel="noopener" href="https://search.google.com/search-console/about">Google Search Console</a>（若未登录谷歌账号，需要先登录谷歌账号）</p>
 <p>点击<code>网址前缀</code>添加（网域方式验证方式单一），提交你的博客网址，然后跳转到如下界面进行验证。</p>
@@ -268,25 +268,25 @@
 <p>我这里选了DNS解析验证，加入一条TXT类型的记录即可</p>
 <p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205011908405.png" srcset="/img/loading.gif" lazyload alt="image-20220501190806916"></p>
 <h3 id="三、添加站点地图"><a href="#三、添加站点地图" class="headerlink" title="三、添加站点地图"></a>三、添加站点地图</h3><p>站点地图(Site Map)是用来注明网站结构的文件，我们希望搜索引擎的爬虫了解我们的网站结构,以便于高效爬取内容，快速建立索引。</p>
-<p>首先为Hexo安装hexo-generator-sitemap插件，在Hexo博客目录下运行：</p>
+<p>首先为 Hexo 安装 <code>hexo-generator-sitemap</code> 插件，在Hexo博客目录下运行：</p>
 <figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">npm install hexo-generator-sitemap --save<br></code></pre></div></td></tr></table></figure>
 
-<h5 id="重新编译"><a href="#重新编译" class="headerlink" title="重新编译"></a>重新编译</h5><p>配置Hexo的_config.yml文件，添加如下字段:</p>
+<h4 id="重新编译"><a href="#重新编译" class="headerlink" title="重新编译"></a>重新编译</h4><p>配置 Hexo 的 <code>_config.yml</code> 文件，添加如下字段:</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">sitemap:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">sitemap.xml</span><br></code></pre></div></td></tr></table></figure>
 
 <p>然后重新生成博客文件，运行</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">hexo</span> <span class="hljs-string">clean</span><br><span class="hljs-string">hexo</span> <span class="hljs-string">g</span><br><span class="hljs-string">hexo</span> <span class="hljs-string">d</span><br></code></pre></div></td></tr></table></figure>
 
-<p>此时应该可以在public目录下看到sitemap.xml文件了。</p>
-<h5 id="将中文网页名称转换为固定字符串"><a href="#将中文网页名称转换为固定字符串" class="headerlink" title="将中文网页名称转换为固定字符串"></a>将中文网页名称转换为固定字符串</h5><p>hexo默认生成的页面是你的title名，即title是中文那么网站访问的路径也是中文，这样是很不利于搜索引擎收录的，让我们使用插件来解决这个问题，安装缩短链接插件：</p>
+<p>此时应该可以在 <code>public</code> 目录下看到 <code>sitemap.xml</code>文件了。</p>
+<h4 id="将中文网页名称转换为固定字符串"><a href="#将中文网页名称转换为固定字符串" class="headerlink" title="将中文网页名称转换为固定字符串"></a>将中文网页名称转换为固定字符串</h4><p>hexo默认生成的页面是你的 title 名，即 title 是中文那么网站访问的路径也是中文，这样是很不利于搜索引擎收录的，让我们使用插件来解决这个问题，安装缩短链接插件：</p>
 <figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">npm install hexo-abbrlink --save<br></code></pre></div></td></tr></table></figure>
 
-<p>hexo的_config.yml 添加如下配置：</p>
+<p>hexo 的 <code>_config.yml</code> 添加如下配置：</p>
 <figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">permalink:</span> <span class="hljs-string">posts/:abbrlink.html</span><br><span class="hljs-attr">abbrlink:</span><br>  <span class="hljs-attr">alg:</span> <span class="hljs-string">crc32</span>  <span class="hljs-comment"># 算法：crc16(default) and crc32</span><br>  <span class="hljs-attr">rep:</span> <span class="hljs-string">hex</span>    <span class="hljs-comment"># 进制：dec(default) and hex</span><br><span class="hljs-attr">permalink_defaults:</span><br><span class="hljs-attr">pretty_urls:</span><br>  <span class="hljs-attr">trailing_index:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br>  <span class="hljs-attr">trailing_html:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></code></pre></div></td></tr></table></figure>
 
-<p>安装完毕后此时再clean <code>hexo g</code> 会发现生成的网页名称不再是中文，而是固定的字符串，访问路径也统一变成了posts&#x2F;xxx.html，这种简单的访问路径比较利于搜索引擎收录。</p>
-<h5 id="添加-x2F-测试站点地图"><a href="#添加-x2F-测试站点地图" class="headerlink" title="添加&#x2F;测试站点地图"></a>添加&#x2F;测试站点地图</h5><p>回到之前提交搜索资源的页面，在左边侧边栏找到  <code>站点地图</code> ,添加新的站点地图，将https:&#x2F;&#x2F;你的博客仓库名&#x2F;sitemap.xml提交并刷新，就可以看到博客的网站结构了。</p>
-<p>例如：我的是仓库是baixxq.github.io ，那就是<a target="_blank" rel="noopener" href="https://baixxq.github.io/sitemap.xml">https://baixxq.github.io/sitemap.xml</a> ，下图我这里用了域名解析。</p>
+<p>安装完毕后此时再 clean ，<code>hexo g</code> 会发现生成的网页名称不再是中文，而是固定的字符串，访问路径也统一变成了<code>posts/xxx.html</code>，这种简单的访问路径比较利于搜索引擎收录。</p>
+<h4 id="添加-x2F-测试站点地图"><a href="#添加-x2F-测试站点地图" class="headerlink" title="添加&#x2F;测试站点地图"></a>添加&#x2F;测试站点地图</h4><p>回到之前提交搜索资源的页面，在左边侧边栏找到  <code>站点地图</code> ,添加新的站点地图，将https:&#x2F;&#x2F;你的博客仓库名&#x2F;sitemap.xml提交并刷新，就可以看到博客的网站结构了。</p>
+<p>例如：我的是仓库是 baixxq.github.io ，那就是 <code>https://baixxq.github.io/sitemap.xml</code> ，下图我这里用了域名解析。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205011915258.png" srcset="/img/loading.gif" lazyload alt="image-20220501191549821"></p>
 <p>OK，大功告成，静待谷歌收录。</p>
 
