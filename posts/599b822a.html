@@ -16,23 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="解决海量数据的存储和分析计算问题">
+    <meta name="description" content="jsDelivr提供免费公共CDN加速服务，通过使用jsDelivr可以直接加速Github项目上的静态资源。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Zookeeper笔记">
-<meta property="og:url" content="http://example.com/2022/04/29/Zookeeper%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:title" content="使用jsDelivr加速GitHub Pages博客">
+<meta property="og:url" content="http://example.com/posts/599b822a.html">
 <meta property="og:site_name" content="橙子味小白的博客">
-<meta property="og:description" content="解决海量数据的存储和分析计算问题">
+<meta property="og:description" content="jsDelivr提供免费公共CDN加速服务，通过使用jsDelivr可以直接加速Github项目上的静态资源。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/passage_photo/Zookeeper.png">
-<meta property="article:published_time" content="2022-04-29T10:32:28.000Z">
-<meta property="article:modified_time" content="2022-04-29T17:32:28.000Z">
+<meta property="og:image" content="http://example.com/img/passage_photo/jsdelivr.png">
+<meta property="article:published_time" content="2022-04-30T22:21:45.000Z">
+<meta property="article:modified_time" content="2022-05-01T10:32:21.000Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Zookeeper">
+<meta property="article:tag" content="Hexo博客">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/passage_photo/Zookeeper.png">
+<meta name="twitter:image" content="http://example.com/img/passage_photo/jsdelivr.png">
   
   
-  <title>Zookeeper笔记 - 橙子味小白的博客</title>
+  <title>使用jsDelivr加速GitHub Pages博客 - 橙子味小白的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Zookeeper笔记">
+            <span class="h2" id="subtitle" title="使用jsDelivr加速GitHub Pages博客">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-29 10:32" pubdate>
-        2022年4月29日 10:32:28
+      <time datetime="2022-04-30 22:21" pubdate>
+        2022年4月30日 22:21:45
       </time>
     </span>
   
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      1.3k 字
     </span>
   
 
@@ -213,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      12 分钟
     </span>
   
 
@@ -250,88 +250,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Zookeeper笔记</h1>
+            <h1 style="display: none">使用jsDelivr加速GitHub Pages博客</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年4月29日 17:32:28
+                  本文最后更新于：2022年5月1日 10:32:21
                 
               </p>
             
             <div class="markdown-body">
-              <h2 id="第1-章-Zookeeper-入门"><a href="#第1-章-Zookeeper-入门" class="headerlink" title="第1 章 Zookeeper 入门"></a>第1 章 Zookeeper 入门</h2><h3 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h3><p>Zookeeper 是一个开源的分布式的，为分布式框架提供协调服务的Apache 项目。</p>
-<p><strong>Zookeeper工作机制</strong></p>
-<p>Zookeeper从设计模式角度来理解：是一个基于<strong>观察者模式</strong>设计的<strong>分布式</strong>服务管理框架，它负责存储和管理大家都关心的数据，然后接受观察者的注册，一旦这些数据的状态发生变化，Zookeeper就将负责通知已经在Zookeeper上注册的那些观察者做出相应的反应。</p>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/1.png" srcset="/img/loading.gif" lazyload alt="1"></p>
-<h3 id="1-2-特点"><a href="#1-2-特点" class="headerlink" title="1.2 特点"></a>1.2 特点</h3><p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/2.png" srcset="/img/loading.gif" lazyload alt="2"></p>
+              <p>最近发现部署在Github上的个人博客网站访问加载的时间越来越久了，本身Github就已经很慢了，这个加载的速度令人难以接受，特别是对于有图片等比较大的文件需要加载的时候。于是开始考虑有没有什么方法能加速一下。优化独立博客的加载速度有一些不同的思路，对应不同的方案：</p>
 <ul>
-<li><p>Zookeeper：一个领导者（Leader），多个跟随者（Follower）组成的集群。</p>
-</li>
-<li><p>集群中只要有半数以上节点存活，Zookeeper集群就能正常服务。所以Zookeeper适合安装奇数台服务器。</p>
-</li>
-<li><p>全局数据一致：每个Server保存一份相同的数据副本，Client无论连接到哪个Server，数据都是一致的。</p>
-</li>
-<li><p>更新请求顺序执行，来自同一个Client的更新请求按其发送顺序依次执行。</p>
-</li>
-<li><p>数据更新原子性，一次数据更新要么成功，要么失败。</p>
-</li>
-<li><p>实时性，在一定时间范围内，Client能读到最新数据。</p>
-</li>
+<li>优化博客代码，精简需要加载的资源；</li>
+<li>将博客部署到国内访问快的服务器上；</li>
+<li>部署到国内的代码托管平台，比如 Gitee 和 Coding 等；</li>
+<li>采用 CDN 加速</li>
 </ul>
-<h3 id="1-3-数据结构"><a href="#1-3-数据结构" class="headerlink" title="1.3 数据结构"></a>1.3 数据结构</h3><p>ZooKeeper 数据模型的结构与Unix 文件系统很类似，整体上可以看作是一棵树，每个节点称做一个ZNode。每一个ZNode 默认能够存储1MB 的数据(不能存储海量数据)，每个ZNode 都可以通过其路径唯一标识。</p>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/image-20220429105725581.png" srcset="/img/loading.gif" lazyload alt="image-20220429105725581"></p>
-<h3 id="1-4-应用场景"><a href="#1-4-应用场景" class="headerlink" title="1.4 应用场景"></a>1.4 应用场景</h3><p>提供的服务包括：统一命名服务、统一配置管理、统一集群管理、服务器节点动态上下线、软负载均衡等。</p>
-<ol>
-<li>统一命名服务</li>
-</ol>
+<p>因为还是期望只在 GitHub 上管理博客，所以采用了CDN。</p>
+<h3 id="CDN加速的原理"><a href="#CDN加速的原理" class="headerlink" title="CDN加速的原理"></a>CDN加速的原理</h3><p>CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</p>
+<p>  国内提供CDN加速的大厂有很多，<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://cn.aliyun.com/product/cdn">阿里云</a>、<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://cloud.tencent.com/product/cdn">腾讯云</a>、百度云、<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://portal.qiniu.com/signup?code=3liwfwr7z4eoi">七牛云</a>等等，听说腾讯云太不稳定，其他的又需要付费，而且需要域名备案，域名备案有需要有一台ESC…最终选择白嫖的 jsDelivr 。</p>
+<p>jsDelivr 是国外的一家优秀的公共CDN 服务提供商，也是首个「打通中国大陆（网宿公司运营）与海外的免费CDN 服务」。 jsDelivr 有一个十分好用的功能——它可以加速Github 仓库的文件。 我们可以借此搭建一个免费、全球访问速度超快的图床。</p>
+<p>PicGo 工具一键上传，操作简单高效，GitHub 和 jsDelivr 都是大厂，不用担心跑路问题，不用担心速度和容量问题，而且完全免费，可以说是目前免费图床的最佳解决方案！</p>
+<p>简单说明以上三个工具的使用情形：</p>
 <ul>
-<li>在分布式环境下，经常需要对应用&#x2F;服务进行统一命名，便于识别。例如：IP不容易记住，而域名容易记住。</li>
+<li>GitHub 图库：用于存放我们需要使用的文章配图文件的仓库；</li>
+<li>jsDelivr ：用于 CDN 加速，在 Markdown 文本编辑器中直接引用 jsDelivr 的图片外链，即可快速访问图片资源；</li>
+<li>PicGo：用于 Markdown 写作端生成对应的 jsDelivr 图片外链，配合 Typora 编辑器时可直接拖拽图片自动生成外链使用。（<strong>故推荐 Typora 客户端 + PicGo 客户端搭配使用，食用效果更佳！</strong>）</li>
 </ul>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/image-20220429124109629.png" srcset="/img/loading.gif" lazyload alt="image-20220429124109629"></p>
-<ol start="2">
-<li>统一配置管理</li>
-</ol>
-<ul>
-<li><p>分布式环境下，配置文件同步非常常见。</p>
-<p>（1）一般要求一个集群中，所有节点的配置信息是一致的，比如Kafka 集群。</p>
-<p>（2）对配置文件修改后，希望能够快速同步到各个节点上。</p>
-</li>
-<li><p>配置管理可交由ZooKeeper实现。</p>
-<p>（1）可将配置信息写入ZooKeeper上的一个Znode。</p>
-<p>（2）各个客户端服务器监听这个Znode。</p>
-<p>（3）一旦Znode中的数据被修改，ZooKeeper将通知各个客户端服务器。</p>
-</li>
-</ul>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/image-20220429124539314.png" srcset="/img/loading.gif" lazyload alt="image-20220429124539314"></p>
-<ol start="3">
-<li>统一集群管理</li>
-</ol>
-<ul>
-<li><p>分布式环境中，实时掌握每个节点的状态是必要的。</p>
-<p>（1）可根据节点实时状态做出一些调整。</p>
-</li>
-<li><p>ZooKeeper可以实现实时监控节点状态变化</p>
-<p>（1）可将节点信息写入ZooKeeper上的一个ZNode。</p>
-<p>（2）监听这个ZNode可获取它的实时状态变化。</p>
-</li>
-</ul>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/image-20220429124832277.png" srcset="/img/loading.gif" lazyload alt="image-20220429124832277"></p>
-<ol start="4">
-<li>服务器动态上下线</li>
-</ol>
-<ul>
-<li>客户端能实时洞察到服务器上下线的变化</li>
-</ul>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/image-20220429124959856.png" srcset="/img/loading.gif" lazyload alt="image-20220429124959856"></p>
-<ol start="5">
-<li>软负载均衡</li>
-</ol>
-<ul>
-<li>在Zookeeper中记录每台服务器的访问数，让访问数最少的服务器去处理最新的客户端请求</li>
-</ul>
-<p><img src="/Zookeeper%E7%AC%94%E8%AE%B0/image-20220429125057897.png" srcset="/img/loading.gif" lazyload alt="image-20220429125057897"></p>
-<h2 id="第2章-Zookeeper本地安装"><a href="#第2章-Zookeeper本地安装" class="headerlink" title="第2章 Zookeeper本地安装"></a>第2章 Zookeeper本地安装</h2><h3 id="2-1-本地模式-安装"><a href="#2-1-本地模式-安装" class="headerlink" title="2.1 本地模式 安装"></a>2.1 本地模式 安装</h3><p>官网下载地址：</p>
-<p><a target="_blank" rel="noopener" href="https://zookeeper.apache.org/">https://zookeeper.apache.org/</a></p>
+<h3 id="使用-jsDelivr-免费加速-GitHub-Pages-博客的静态资源"><a href="#使用-jsDelivr-免费加速-GitHub-Pages-博客的静态资源" class="headerlink" title="使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源"></a>使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源</h3><h4 id="1-在Github上创建个人仓库"><a href="#1-在Github上创建个人仓库" class="headerlink" title="1.在Github上创建个人仓库"></a>1.在Github上创建个人仓库</h4><p>在Github上创建个人仓库，权限必须是public，因为要给别人访问鸭，我这里命名为<code>blog-static</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302239481.png" srcset="/img/loading.gif" lazyload alt="image-20220430223948475"></p>
+<p>生成一个有 repo 权限的 GitHub Token</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302242556.png" srcset="/img/loading.gif" lazyload alt="image-20220430224204706"></p>
+<h4 id="2-PicGo图床配置"><a href="#2-PicGo图床配置" class="headerlink" title="2.PicGo图床配置"></a>2.PicGo图床配置</h4><p>GitHub项目请戳<a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">这里</a>，图床工具的下载链接可以在 <code>README </code>中获取。</p>
+<p>配置参数如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302247127.png" srcset="/img/loading.gif" lazyload alt="image-20220430224702084"></p>
+<p>自定义域名规则：</p>
+<p>这里以我创建的 GitHub 仓库   <code>blog-static-source</code>为例，配置为 <code>https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名</code></p>
+<p>访问规则：</p>
+<p>比如仓库中<code>img</code>下有一个<code>main.jpg</code> 访问方式 <code>https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名/img/main.jpg</code></p>
+<h4 id="3-Typora配置"><a href="#3-Typora配置" class="headerlink" title="3.Typora配置"></a>3.Typora配置</h4><p>Typora配置好PicGo图床后，方便图片在线存储</p>
+<p>点击软件工具栏，文件 –&gt; 偏好设置 –&gt; 图像 –&gt; 配置picgo</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302256597.png" srcset="/img/loading.gif" lazyload alt="image-20220430225559038"></p>
+<p>点击验证图片上传选项，就可以看到仓库里有图片了。</p>
 
             </div>
             <hr>
@@ -341,7 +301,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/">大数据</a>
+                      <a class="hover-with-bg" href="/categories/Hexo%E5%8D%9A%E5%AE%A2/">Hexo博客</a>
                     
                   </div>
                 
@@ -349,7 +309,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Zookeeper/">Zookeeper</a>
+                      <a class="hover-with-bg" href="/tags/Hexo%E5%8D%9A%E5%AE%A2/">Hexo博客</a>
                     
                   </div>
                 
@@ -366,18 +326,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/29/fluid%E7%BE%8E%E5%8C%96/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Fluid美化</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/28/epoll/">
-                        <span class="hidden-mobile">selecr,poll,epoll模型</span>
+                      <a href="/posts/1c8b7c78.html">
+                        <span class="hidden-mobile">Fluid美化</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -387,6 +341,35 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@1/dist/Waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"blog-comment-source.vercel.app","path":"window.location.pathname","placeholder":"支持匿名评论鸭","meta":["nick","mail"],"requiredMeta":[],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","avatar":"retro","avatarCDN":"https://seccdn.libravatar.org/avatar/","avatarForce":false,"wordLimit":0,"pageSize":10,"highlight":true},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        new Waline(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          Fluid.plugins.initFancyBox('#waline .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>
@@ -597,7 +580,7 @@
             qrcodes: [{"src":"/img/wechat_pay.png","caption":"微信","title":"微信鼓励码"},{"src":"/img/ali_pay.jpg","caption":"支付宝","title":"支付宝鼓励码"}]
         }).init();
     </script>
-    <!-- hexo injector body_end end --></body>
+    <!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
 </html>
 
 
