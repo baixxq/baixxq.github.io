@@ -16,23 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="笔记未整理，仅供自己使用">
+    <meta name="description" content="Redis是一个开源的key-value存储系统。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="selecr,poll,epoll模型">
-<meta property="og:url" content="http://example.com/posts/d2e535d8.html">
+<meta property="og:title" content="Redis学习">
+<meta property="og:url" content="http://example.com/2022/04/27/Redis%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
-<meta property="og:description" content="笔记未整理，仅供自己使用">
+<meta property="og:description" content="Redis是一个开源的key-value存储系统。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/passage_photo/epoll.jpg">
-<meta property="article:published_time" content="2022-04-28T23:17:28.000Z">
-<meta property="article:modified_time" content="2022-05-01T10:29:11.474Z">
+<meta property="og:image" content="http://example.com/img/passage_photo/redis.png">
+<meta property="article:published_time" content="2022-04-27T23:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-01T10:50:42.418Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="操作系统">
+<meta property="article:tag" content="Redis">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/passage_photo/epoll.jpg">
+<meta name="twitter:image" content="http://example.com/img/passage_photo/redis.png">
   
   
-  <title>selecr,poll,epoll模型 - 橙子味小白的博客</title>
+  <title>Redis学习 - 橙子味小白的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="selecr,poll,epoll模型">
+            <span class="h2" id="subtitle" title="Redis学习">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-28 23:17" pubdate>
-        2022年4月28日 23:17:28
+      <time datetime="2022-04-27 23:17" pubdate>
+        2022年4月27日 23:17:28
       </time>
     </span>
   
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      481 字
+      2k 字
     </span>
   
 
@@ -213,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5 分钟
+      17 分钟
     </span>
   
 
@@ -250,31 +250,53 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">selecr,poll,epoll模型</h1>
+            <h1 style="display: none">Redis学习</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月1日 10:29:11
+                  本文最后更新于：2022年5月1日 10:50:42
                 
               </p>
             
             <div class="markdown-body">
-              <h3 id="select"><a href="#select" class="headerlink" title="select"></a>select</h3><p><img src="/img%5Cpassage_photo%5Cselect.jpg" srcset="/img/loading.gif" lazyload alt="select"></p>
-<p>fd[i] 监听socket编号，有就把相应的编号加入，rset对应的是fd_set，是一个bitMap类型，最默认1024</p>
-<p>同时有一个max最大编号</p>
-<p>fd_set数据结构定义如下，可以看出fd_set是一个整型<strong>数组</strong>，用于保存socket文件描述符</p>
-<ol>
-<li>用户线程调用select，将fd_set从用户空间拷贝到内核空间 </li>
-<li>内核在内核空间对fd_set遍历一遍，检查是否有就绪的socket描述符，如果没有的话，就会进入休眠，直到有就绪的socket描述符</li>
-<li>内核返回select的结果给用户线程，即就绪的文件描述符数量  </li>
-<li>用户拿到就绪文件描述符数量后，再次对fd_set进行遍历，找出就绪的文件描述符</li>
-<li>用户线程对就绪的文件描述符进行读写操作</li>
-</ol>
-<p>缺点</p>
-<p>每次调用select，都需要将fd_set从用户空间拷贝到内核空间，当fd很多时，这个开销很大</p>
-<p>最大连接数（支持的最大文件描述符数量）有限制，一般为1024</p>
-<p>每次有活跃的socket描述符时，都需要遍历一次fd_set，造成大量的时间开销，时间复杂度是O(n)</p>
-<p>将fd_set从用户空间拷贝到内核空间，内核空间也需要对fd_set遍历一遍</p>
+              <p> Redis是一个开源的key-value存储系统。和Memcached类似，它支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set –有序集合)和hash（哈希类型）。这些数据类型都支持push&#x2F;pop、add&#x2F;remove及取交集并集和差集及更丰富的操作，而且这些操作都是原子性的。在此基础上，Redis支持各种不同方式的排序。 与memcached一样，为了保证效率，数据都是缓存在内存中。区别的是Redis会周期性的把更新的数据写入磁盘或者把修改操作写入追加的记录文件。并且在此基础上实现了master-slave(主从)同步。</p>
+<h3 id="1、Redis快速安装"><a href="#1、Redis快速安装" class="headerlink" title="1、Redis快速安装"></a>1、Redis快速安装</h3><p>1、要安装gcc， 安装wget     进入到 &#x2F;usr&#x2F;local&#x2F;src&#x2F;    下载压缩包 </p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment"># 安装gcc  wget </span><br><span class="hljs-string">yum</span> <span class="hljs-string">-y</span> <span class="hljs-string">install</span> <span class="hljs-string">gcc</span> <span class="hljs-string">wget</span><br><span class="hljs-comment"># 进入到 /usr/local/src/目录</span><br><span class="hljs-string">cd</span> <span class="hljs-string">/usr/local/src/</span><br><span class="hljs-comment">#下载压缩包</span><br><span class="hljs-string">wget</span> <span class="hljs-string">http://download.redis.io/releases/redis-6.2.6.tar.gz</span><br></code></pre></div></td></tr></table></figure>
+
+<p>2、解压缩</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#解压缩</span><br><span class="hljs-string">tar</span> <span class="hljs-string">zxvf</span> <span class="hljs-string">redis-6.2.6.tar.gz</span><br><span class="hljs-comment">#安装</span><br><span class="hljs-string">make</span> <span class="hljs-string">&amp;</span> <span class="hljs-string">make</span> <span class="hljs-string">install</span><br></code></pre></div></td></tr></table></figure>
+
+<p>3、后台启动运行，按需求设置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#进入 解压后的 redis-6.2.6 ，修改配置文件 redis.conf</span><br><span class="hljs-string">bind</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span>     	<span class="hljs-comment"># 或者直接注释，允许所有访问</span><br><span class="hljs-string">daemonize</span> <span class="hljs-literal">yes</span>	 	<span class="hljs-comment"># 后台运行</span><br><span class="hljs-string">requirepass</span> <span class="hljs-string">baixxq</span>	 <span class="hljs-comment"># 密码</span><br></code></pre></div></td></tr></table></figure>
+
+<p>4、开启自启动，按需求设置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">vi</span> <span class="hljs-string">/etc/systemd/system/redis.service</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml">[<span class="hljs-string">Unit</span>]<br><span class="hljs-string">Description=redis</span> <span class="hljs-bullet">-</span> <span class="hljs-string">server</span><br><span class="hljs-string">After=network.target</span><br><br>[<span class="hljs-string">Service</span>]<br><span class="hljs-string">Type=forking</span><br><span class="hljs-string">ExecStart=/usr/local/bin/redis-server</span> <span class="hljs-string">/usr/local/src/redis-6.2.6/redis.conf</span><br><span class="hljs-string">PrivateTmp=true</span><br><br>[<span class="hljs-string">Install</span>]<br><span class="hljs-string">WantedBy=multi-user.target</span><br></code></pre></div></td></tr></table></figure>
+
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#重新载入</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">daemon-reload</span><br><span class="hljs-comment">#启动Redis</span><br><span class="hljs-string">redis-server</span> <span class="hljs-string">/usr/local/src/redis-6.2.6/redis.conf</span><br><span class="hljs-comment">#设置开启启动</span><br><span class="hljs-string">systemctl</span> <span class="hljs-string">enable</span> <span class="hljs-string">redis</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>5、注意开放防火墙端口</p>
+<p>开放端口 6379</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#放行端口</span><br><span class="hljs-string">firewall-cmd</span> <span class="hljs-string">--zone=public</span> <span class="hljs-string">--add-port=6379/tcp</span> <span class="hljs-string">--permanent</span><br><span class="hljs-comment">#重启防火墙，注意改完其他的要重启一下才能生效</span><br><span class="hljs-string">firewall-cmd</span> <span class="hljs-string">--reload</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>6、持久化配置</p>
+<p>RDB持久化</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#当 900 秒内有至少有 1 个键被改动时，自动进行数据集保存操作</span><br><span class="hljs-string">save</span> <span class="hljs-number">900</span> <span class="hljs-number">1</span><br><span class="hljs-comment">#当 300 秒内有至少有 10 个键被改动时，自动进行数据集保存操作</span><br><span class="hljs-string">save</span> <span class="hljs-number">300</span> <span class="hljs-number">10</span><br><span class="hljs-comment">#当 60 秒内有至少有 10000 个键被改动时，自动进行数据集保存操作</span><br><span class="hljs-string">save</span> <span class="hljs-number">60</span> <span class="hljs-number">10000</span><br>    <br><span class="hljs-comment">#RDB持久化文件名</span><br><span class="hljs-string">dbfilename</span> <span class="hljs-string">dump-&lt;port&gt;.rdb</span><br><span class="hljs-comment">#数据持久化文件存储目录</span><br><span class="hljs-string">dir</span> <span class="hljs-string">/var/lib/redis</span><br><span class="hljs-comment">#bgsave发生错误时是否停止写入，通常为yes</span><br><span class="hljs-string">stop-writes-on-bgsave-error</span> <span class="hljs-literal">yes</span><br><span class="hljs-comment">#rdb文件是否使用压缩格式</span><br><span class="hljs-string">rdbcompression</span> <span class="hljs-literal">yes</span><br><span class="hljs-comment">#是否对rdb文件进行校验和检验，通常为yes</span><br><span class="hljs-string">rdbchecksum</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure>
+
+<p>AOF持久化</p>
+<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-comment">#开启AOF持久化方式</span><br><span class="hljs-string">appendonly</span> <span class="hljs-literal">yes</span><br>    <br><span class="hljs-comment">#AOF持久化文件名</span><br><span class="hljs-string">appendfilename</span> <span class="hljs-string">appendonly-&lt;port&gt;.aof</span><br>    <br><span class="hljs-comment">#每秒把缓冲区的数据同步到磁盘		always， everysec，no</span><br><span class="hljs-string">appendfsync</span> <span class="hljs-string">everysec</span><br><br><span class="hljs-comment">#数据持久化文件存储目录</span><br><span class="hljs-string">dir</span> <span class="hljs-string">/var/lib/redis</span><br><br><span class="hljs-comment">#Redis 2.2 需要自己手动执行 bgrewriteaof 命令； Redis 2.4 则可以通过配置自动触发 AOF 重写。</span><br><span class="hljs-comment">#是否在执行重写时不同步数据到AOF文件</span><br><span class="hljs-literal">no</span><span class="hljs-string">-appendfsync-on-rewrite</span> <span class="hljs-literal">no</span><br>    <br><span class="hljs-comment">#触发AOF文件执行重写的最小尺寸</span><br><span class="hljs-string">auto-aof-rewrite-min-size</span> <span class="hljs-string">64mb</span><br>    <br><span class="hljs-comment">#触发AOF文件执行重写的增长率</span><br><span class="hljs-string">auto-aof-rewrite-percentage</span> <span class="hljs-number">100</span><br>    <br><span class="hljs-comment">#请注意，如果在中间发现AOF文件已损坏，则服务器仍将退出并出现错误。 仅当Redis尝试从AOF文件读取更多数据但找不到足够的字节时，此选项才适用。</span><br><span class="hljs-string">aof-load-truncated</span> <span class="hljs-literal">yes</span><br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
 
             </div>
             <hr>
@@ -284,7 +306,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                      <a class="hover-with-bg" href="/categories/Redis/">Redis</a>
                     
                   </div>
                 
@@ -292,7 +314,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                      <a class="hover-with-bg" href="/tags/Redis/">Redis</a>
                     
                   </div>
                 
@@ -309,9 +331,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/41fdb39a.html">
+                      <a href="/2022/04/28/Java%E5%9F%BA%E7%A1%80/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Zookeeper笔记</span>
+                        <span class="hidden-mobile">Java基础知识笔记</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -319,8 +341,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/55cb472a.html">
-                        <span class="hidden-mobile">JDBC笔记整理</span>
+                      <a href="/2022/04/27/%E7%AE%97%E6%B3%95%E9%A2%98/">
+                        <span class="hidden-mobile">算法题</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -569,7 +591,7 @@
             qrcodes: [{"src":"/img/wechat_pay.png","caption":"微信","title":"微信鼓励码"},{"src":"/img/ali_pay.jpg","caption":"支付宝","title":"支付宝鼓励码"}]
         }).init();
     </script>
-    <!-- hexo injector body_end end --><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body>
+    <!-- hexo injector body_end end --></body>
 </html>
 
 

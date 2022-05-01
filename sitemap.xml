@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://example.com/posts/1c8b7c78.html</loc>
+    <loc>http://example.com/2022/04/29/fluid%E7%BE%8E%E5%8C%96/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -11,16 +11,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/599b822a.html</loc>
-    
-    <lastmod>2022-05-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>http://example.com/posts/ae19463e.html</loc>
+    <loc>http://example.com/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -38,7 +29,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/d2e535d8.html</loc>
+    <loc>http://example.com/2022/04/28/epoll/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -47,7 +38,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/636d6803.html</loc>
+    <loc>http://example.com/2022/04/28/git/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -56,7 +47,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/55ad0fd.html</loc>
+    <loc>http://example.com/2022/04/28/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -65,7 +56,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/5679297c.html</loc>
+    <loc>http://example.com/2022/04/28/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -74,7 +65,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/f4c4f07f.html</loc>
+    <loc>http://example.com/2022/04/27/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -83,7 +74,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/8434e219.html</loc>
+    <loc>http://example.com/2022/04/27/Redis%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -92,7 +83,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/ac1ae772.html</loc>
+    <loc>http://example.com/2022/04/26/Spring/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -101,7 +92,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/55cb472a.html</loc>
+    <loc>http://example.com/2022/04/26/Nginx%E5%AD%A6%E4%B9%A0/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -110,7 +101,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/dda0de9c.html</loc>
+    <loc>http://example.com/2022/04/28/Java%E5%9F%BA%E7%A1%80/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -119,7 +110,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/99720b1c.html</loc>
+    <loc>http://example.com/2022/04/28/JDBC%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -128,7 +119,7 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/75e7341b.html</loc>
+    <loc>http://example.com/2022/04/28/JavaWeb/</loc>
     
     <lastmod>2022-05-01</lastmod>
     
@@ -137,7 +128,16 @@
   </url>
   
   <url>
-    <loc>http://example.com/posts/41fdb39a.html</loc>
+    <loc>http://example.com/2022/04/30/%E4%BD%BF%E7%94%A8jsDelivr%E5%8A%A0%E9%80%9FGitHub%20Pages%E5%8D%9A%E5%AE%A2/</loc>
+    
+    <lastmod>2022-05-01</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>http://example.com/2022/04/29/Zookeeper%E7%AC%94%E8%AE%B0/</loc>
     
     <lastmod>2022-04-29</lastmod>
     
