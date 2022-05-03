@@ -6,7 +6,7 @@
 .reward-qrcode {
     display: inline-block;
     margin: 1.5rem !important;
-    width: 10rem;
+    width: 12rem;
     height: 10rem;
     -webkit-animation: show_qrcodes .3s .1s ease both;
     -moz-animation: show_qrcodes .3s .1s ease both;
