@@ -1,0 +1,697 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.jpg">
+  <link rel="icon" href="/img/favicon.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="John Doe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="select,poll,epoll模型，初步汇总个人理解和笔记，后续继续更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="select,poll,epoll模型">
+<meta property="og:url" content="http://example.com/2022/04/28/selectpollepoll/index.html">
+<meta property="og:site_name" content="橙子味小白的博客">
+<meta property="og:description" content="select,poll,epoll模型，初步汇总个人理解和笔记，后续继续更新">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/passage_photo/epoll.jpg">
+<meta property="article:published_time" content="2022-04-28T23:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-03T12:23:35.000Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/passage_photo/epoll.jpg">
+  
+  
+  <title>select,poll,epoll模型 - 橙子味小白的博客</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/an-old-hope.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+  
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/baixxq/blog-static-source/css/mycss.min.css">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/bynotes/texiao/source/css/shubiao.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>橙子味小白的博客</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                主页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="select,poll,epoll模型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-04-28 23:17" pubdate>
+        2022年4月28日
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      8.6k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      72 分钟
+    </span>
+  
+
+  
+  
+    
+      <!-- 不蒜子统计文章PV -->
+      <span id="busuanzi_container_page_pv" style="display: none">
+        <i class="iconfont icon-eye" aria-hidden="true"></i>
+        <span id="busuanzi_value_page_pv"></span> 次
+      </span>
+    
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">select,poll,epoll模型</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：2022年5月3日
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h2 id="一-、概念说明"><a href="#一-、概念说明" class="headerlink" title="一 、概念说明"></a>一 、概念说明</h2><h3 id="1-用户空间与内核空间"><a href="#1-用户空间与内核空间" class="headerlink" title="1.用户空间与内核空间"></a>1.用户空间与内核空间</h3><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<h3 id="2-进程切换"><a href="#2-进程切换" class="headerlink" title="2.进程切换"></a>2.进程切换</h3><p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。</p>
+<p>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ul>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。</li>
+</ul>
+<p>总而言之就是很耗资源。</p>
+<h3 id="3-文件描述符fd"><a href="#3-文件描述符fd" class="headerlink" title="3.文件描述符fd"></a>3.文件描述符fd</h3><p>文件描述符（File descriptor）是计算机科学中的一个术语，是一个用于表述指向文件的引用的抽象化概念。</p>
+<p>文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<h3 id="4-缓存-I-x2F-O"><a href="#4-缓存-I-x2F-O" class="headerlink" title="4.缓存 I&#x2F;O"></a>4.缓存 I&#x2F;O</h3><p>缓存 I&#x2F;O 又被称作标准 I&#x2F;O，大多数文件系统的默认 I&#x2F;O 操作都是缓存 I&#x2F;O。在 Linux 的缓存 I&#x2F;O 机制中，操作系统会将 I&#x2F;O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</p>
+<p><strong>缓存 I&#x2F;O 的缺点：</strong><br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 id="二、-IO模式"><a href="#二、-IO模式" class="headerlink" title="二、 IO模式"></a>二、 IO模式</h2><p>刚才说了，对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ul>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ul>
+<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞 I&#x2F;O（blocking IO）</li>
+<li>非阻塞 I&#x2F;O（nonblocking IO）</li>
+<li>I&#x2F;O 多路复用（ IO multiplexing）</li>
+<li>信号驱动 I&#x2F;O（ signal driven IO）</li>
+<li>异步 I&#x2F;O（asynchronous IO）</li>
+</ul>
+<p>注：由于signal driven IO在实际中并不常用，所以我这只提及剩下的四种IO Model。</p>
+<h3 id="1-阻塞-I-x2F-O（blocking-IO）"><a href="#1-阻塞-I-x2F-O（blocking-IO）" class="headerlink" title="1.阻塞 I&#x2F;O（blocking IO）"></a>1.阻塞 I&#x2F;O（blocking IO）</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032231449.png" srcset="/img/loading.gif" lazyload alt="clipboard.png"></p>
+<p>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。</p>
+<blockquote>
+<p>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
+</blockquote>
+<h3 id="2-非阻塞-I-x2F-O（nonblocking-IO）"><a href="#2-非阻塞-I-x2F-O（nonblocking-IO）" class="headerlink" title="2.非阻塞 I&#x2F;O（nonblocking IO）"></a>2.非阻塞 I&#x2F;O（nonblocking IO）</h3><p>linux下，可以通过设置socket使其变为non-blocking。当对一个non-blocking socket执行读操作时，流程是这个样子：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032232143.png" srcset="/img/loading.gif" lazyload alt="clipboard.png"></p>
+<p>当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
+<blockquote>
+<p>所以，nonblocking IO的特点是用户进程需要<strong>不断的主动询问</strong>kernel数据好了没有。</p>
+</blockquote>
+<h3 id="3-I-x2F-O-多路复用（-IO-multiplexing）"><a href="#3-I-x2F-O-多路复用（-IO-multiplexing）" class="headerlink" title="3.I&#x2F;O 多路复用（ IO multiplexing）"></a>3.I&#x2F;O 多路复用（ IO multiplexing）</h3><p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select&#x2F;epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032232084.png" srcset="/img/loading.gif" lazyload alt="clipboard.png"></p>
+<p><code>当用户进程调用了select，那么整个进程会被block</code>，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。</p>
+<blockquote>
+<p>所以，I&#x2F;O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。</p>
+</blockquote>
+<p>这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。</p>
+<p>所以，如果处理的连接数不是很高的话，使用select&#x2F;epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。select&#x2F;epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）</p>
+<p>在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block。</p>
+<h3 id="4-异步-I-x2F-O（asynchronous-IO）"><a href="#4-异步-I-x2F-O（asynchronous-IO）" class="headerlink" title="4.异步 I&#x2F;O（asynchronous IO）"></a>4.异步 I&#x2F;O（asynchronous IO）</h3><p>inux下的asynchronous IO其实用得很少。先看一下它的流程：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032233020.png" srcset="/img/loading.gif" lazyload alt="clipboard.png"></p>
+<p>用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h3><p><strong>blocking和non-blocking的区别</strong></p>
+<p>调用blocking IO会一直block住对应的进程直到操作完成，而non-blocking IO在kernel还准备数据的情况下会立刻返回。</p>
+<p><strong>synchronous IO和asynchronous IO的区别</strong></p>
+<p>在说明synchronous IO和asynchronous IO的区别之前，需要先给出两者的定义。POSIX的定义是这样子的：</p>
+<ul>
+<li>A synchronous I&#x2F;O operation causes the requesting process to be blocked until that I&#x2F;O operation completes;</li>
+<li>An asynchronous I&#x2F;O operation does not cause the requesting process to be blocked;</li>
+</ul>
+<p>两者的区别就在于synchronous IO做”IO operation”的时候会将process阻塞。按照这个定义，之前所述的blocking IO，non-blocking IO，IO multiplexing都属于synchronous IO。</p>
+<p>有人会说，non-blocking IO并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的”IO operation”是指真实的IO操作，就是例子中的recvfrom这个system call。non-blocking IO在执行recvfrom这个system call的时候，如果kernel的数据没有准备好，这时候不会block进程。但是，当kernel中数据准备好的时候，recvfrom会将数据从kernel拷贝到用户内存中，这个时候进程是被block了，在这段时间内，进程是被block的。</p>
+<p>而asynchronous IO则不一样，当进程发起IO 操作之后，就直接返回再也不理睬了，直到kernel发送一个信号，告诉进程说IO完成。在这整个过程中，进程完全没有被block。</p>
+<p><strong>各个IO Model的比较如图所示：</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032234886.png" srcset="/img/loading.gif" lazyload alt="clipboard.png"></p>
+<p>通过上面的图片，可以发现non-blocking IO和asynchronous IO的区别还是很明显的。在non-blocking IO中，虽然进程大部分时间都不会被block，但是它仍然要求进程去主动的check，并且当数据准备完成以后，也需要进程主动的再次调用recvfrom来将数据拷贝到用户内存。而asynchronous IO则完全不同。它就像是用户进程将整个IO操作交给了他人（kernel）完成，然后他人做完后发信号通知。在此期间，用户进程不需要去检查IO操作的状态，也不需要主动的去拷贝数据。</p>
+<h2 id="三、-I-x2F-O-多路复用之select、poll、epoll详解"><a href="#三、-I-x2F-O-多路复用之select、poll、epoll详解" class="headerlink" title="三、 I&#x2F;O 多路复用之select、poll、epoll详解"></a>三、 I&#x2F;O 多路复用之select、poll、epoll详解</h2><p>select，poll，epoll都是IO多路复用的机制。I&#x2F;O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I&#x2F;O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I&#x2F;O则无需自己负责进行读写，异步I&#x2F;O的实现会负责把数据从内核拷贝到用户空间。</p>
+<h3 id="1-select调用"><a href="#1-select调用" class="headerlink" title="1.select调用"></a>1.select调用</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>首先创建<code>socket</code>服务端，<code>fd[i]</code> 集合用来监听socket编号，有就把相应的编号加入，编号是随机的。然后循环遍历，并记录下最大值<code>max</code>，然后开始了<code>while(1)</code>循环</p>
+<p>循环首先把<code>rset</code>初始化0值，（这里我们可以看到它的第一个弊端，每次要初始化0值）。</p>
+<p>把<code>fd[i]</code>相应的给<code>rest</code>,<code>rest</code>是一个<code>bitmap</code>类型，默认1024位（这里我们可以看到它第二个弊端，连接数是有限的），所以假如<code>fd[i]</code>分别是：1、2、3、5、7来了数据，那么，<code>rest</code>对应的1、2、3、5、7位就置位1（1不是第一个，前边还有第0位），其他全为0，<code>rest</code>对应二进制就是<code>0 ... 000010101110</code>。</p>
+<p>然后就是select阻塞等待数据，<code>select</code>执行流程我们看下图，首先我们程序是运行在用户态的，如果直接在用户态来判断，那么每次都需要从用户态到内核态的切换，因为涉及到内核我们需要请内核帮我们完成。select在判断的时候直接将<code>rset</code>全量拷贝到内核，让内核帮我们判断（这里我们可以看到它第三个弊端，全量拷贝设计到内核态用户态的转变）。这里max+1起的作用是让内核知道需要监听的边界在哪里。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032156224.png" srcset="/img/loading.gif" lazyload alt="image-20220503215549375"></p>
+<p>然后当有数据来的时候，内核会将rest对应的位置1。但是用户不知道那些位被置位了，所以只能循环判断（第四个缺点，O(N)次遍历）。</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">  <span class="hljs-comment">//这里创建socket服务端</span><br> sockfd = socket(AF_INET, SOCK_STREAM, <span class="hljs-number">0</span>);<br> <span class="hljs-built_in">memset</span>(&amp;addr, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> (addr));<br> addr.sin_family = AF_INET;<br> addr.sin_port = htons(<span class="hljs-number">2000</span>);<br> addr.sin_addr.s_addr = INADDR_ANY;<br> bind(sockfd,(<span class="hljs-keyword">struct</span> sockaddr*)&amp;addr ,<span class="hljs-keyword">sizeof</span>(addr));<br> listen (sockfd, <span class="hljs-number">5</span>); <br><br> <span class="hljs-comment">//fd[i] 监听socket编号，有就把相应的编号加入，编号是随机的</span><br> <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++) <br> &#123;<br>   <span class="hljs-built_in">memset</span>(&amp;client, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> (client));<br>   addrlen = <span class="hljs-keyword">sizeof</span>(client);<br>   fds[i] = accept(sockfd,(<span class="hljs-keyword">struct</span> sockaddr*)&amp;client, &amp;addrlen);<br>   <span class="hljs-keyword">if</span>(fds[i] &gt; max)<br>       <span class="hljs-comment">//记录下最大的值</span><br>   	max = fds[i];<br> &#125;<br><br> <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>FD_ZERO(&amp;rset);<br> 	<span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i&lt; <span class="hljs-number">5</span>; i++ ) &#123;<br> 		FD_SET(fds[i],&amp;rset);<br> 	&#125;<br><br>  	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;round again&quot;</span>);<br>     <span class="hljs-comment">//select参数分别是：最大值+1；读文件描述集合；写文件描述集合；异常文件描述集合；超时时间</span><br>select(max+<span class="hljs-number">1</span>, &amp;rset, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-literal">NULL</span>);<br><br><span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++) &#123;<br>	<span class="hljs-keyword">if</span> (FD_ISSET(fds[i], &amp;rset))&#123;<br>		<span class="hljs-built_in">memset</span>(buffer,<span class="hljs-number">0</span>,MAXBUF);<br>		read(fds[i], buffer, MAXBUF);<br>		<span class="hljs-built_in">puts</span>(buffer);<br>	&#125;<br>&#125;	<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>这里<code>fd_set</code>相当于上文<code>rset</code></p>
+<p>fd_set数据结构定义如下，可以看出fd_set是一个整型<strong>数组</strong>，用于保存socket文件描述符</p>
+<ol>
+<li>用户线程调用select，将fd_set从用户空间拷贝到内核空间 </li>
+<li>内核在内核空间对fd_set遍历一遍，检查是否有就绪的socket描述符，如果没有的话，就会进入休眠，直到有就绪的socket描述符</li>
+<li>内核返回select的结果给用户线程，即就绪的文件描述符数量  </li>
+<li>用户拿到就绪文件描述符数量后，再次对fd_set进行遍历，找出就绪的文件描述符</li>
+<li>用户线程对就绪的文件描述符进行读写操作</li>
+<li></li>
+</ol>
+<p>我这里找了一个视频方便理解：</p>
+<p><video poster="" src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032244010.mp4" style="max-height :100%; max-width: 100%; display: block; margin-left: auto; margin-right: auto;" controls="controls" loop="loop" preload="meta">Your browser does not support the video tag.</video></p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a><strong>缺点</strong></h4><p>每次调用select，都需要将fd_set从用户空间拷贝到内核空间，当fd很多时，这个开销很大</p>
+<p>最大连接数（支持的最大文件描述符数量）有限制，一般为1024</p>
+<p>每次有活跃的socket描述符时，都需要遍历一次fd_set，造成大量的时间开销，时间复杂度是O(n)</p>
+<p>将fd_set从用户空间拷贝到内核空间，内核空间也需要对fd_set遍历一遍</p>
+<h3 id="2-Poll调用"><a href="#2-Poll调用" class="headerlink" title="2.Poll调用"></a>2.Poll调用</h3><p>它定义了一种结构体<code>pollfd</code></p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">pollfd</span> &#123;</span><br>      <span class="hljs-type">int</span> fd;<br>      <span class="hljs-type">short</span> events; 	<span class="hljs-comment">//在意的事件，读或者写</span><br>      <span class="hljs-type">short</span> revents; <span class="hljs-comment">// 初始0 类似那个bitmap置为</span><br>&#125;;<br></code></pre></div></td></tr></table></figure>
+
+<p>流程如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">  <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++) <br>  &#123;<br>    <span class="hljs-built_in">memset</span>(&amp;client, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> (client));<br>    addrlen = <span class="hljs-keyword">sizeof</span>(client);<br>    pollfds[i].fd = accept(sockfd,(<span class="hljs-keyword">struct</span> sockaddr*)&amp;client, &amp;addrlen);<br>    pollfds[i].events = POLLIN;<br>  &#125;<br><span class="hljs-comment">//上边还是把socket直接存入了结构体数组的fd中</span><br>  sleep(<span class="hljs-number">1</span>);<br>  <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br>  	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;round again&quot;</span>);<br>      <span class="hljs-comment">//和select一样，阻塞，有数据时，内核置位revents</span><br>	poll(pollfds, <span class="hljs-number">5</span>, <span class="hljs-number">50000</span>);<br> <br>	<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++) &#123;<br>		<span class="hljs-keyword">if</span> (pollfds[i].revents &amp; POLLIN)&#123;<br>             <span class="hljs-comment">//恢复成0，可重用</span><br>			pollfds[i].revents = <span class="hljs-number">0</span>;<br>			<span class="hljs-built_in">memset</span>(buffer,<span class="hljs-number">0</span>,MAXBUF);<br>			read(pollfds[i].fd, buffer, MAXBUF);<br>			<span class="hljs-built_in">puts</span>(buffer);<br>		&#125;<br>	&#125;<br>  &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032156224.png" srcset="/img/loading.gif" lazyload alt="image-20220503215549375"></p>
+<p>可以看出，它采用了结构体数组来存放，远远不止1024个数，另外每次将<code>revents</code>又恢复成0，可以多次重复使用。</p>
+<p>但是还有上边两个问题，全量拷贝设计到内核态用户态的转变，O(N)次遍历。</p>
+<h3 id="3-epoll"><a href="#3-epoll" class="headerlink" title="3.epoll"></a>3.epoll</h3><p>epoll用户和内核共用一块空间，避免拷贝开销</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">events</span>[5];</span><br> <span class="hljs-type">int</span> epfd = epoll_create(<span class="hljs-number">10</span>);<span class="hljs-comment">//这个epfd可以比喻成一块干净的黑板，来一个数据写一个。</span><br> ...<br> ...<br> <span class="hljs-keyword">for</span> (i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++) <br> &#123;<br>   <span class="hljs-type">static</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">epoll_event</span> <span class="hljs-title">ev</span>;</span><br>   <span class="hljs-built_in">memset</span>(&amp;client, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span> (client));<br>   addrlen = <span class="hljs-keyword">sizeof</span>(client);<br>   ev.data.fd = accept(sockfd,(<span class="hljs-keyword">struct</span> sockaddr*)&amp;client, &amp;addrlen);<br>   ev.events = EPOLLIN;<br>     <span class="hljs-comment">//和poll结构体类似，但是没有revents置为，直接写道黑板epfd上</span><br>   epoll_ctl(epfd, EPOLL_CTL_ADD, ev.data.fd, &amp;ev); <br> &#125;<br> <span class="hljs-comment">//加入上边5此循环，此时黑板上有5条记录，</span><br> <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>)&#123;<br> 	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;round again&quot;</span>);<br>     <span class="hljs-comment">//给内核判断，有数据的时候，内核把那个记录往前放，最后直接返回记录条数，后边用户可以根据记录条数从前往后遍历。</span><br> 	nfds = epoll_wait(epfd, events, <span class="hljs-number">5</span>, <span class="hljs-number">10000</span>);<br><br><span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;nfds;i++) &#123;<br>		<span class="hljs-built_in">memset</span>(buffer,<span class="hljs-number">0</span>,MAXBUF);<br>		read(events[i].data.fd, buffer, MAXBUF);<br>		<span class="hljs-built_in">puts</span>(buffer);<br>&#125;<br> &#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+<p>流程</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032353881.png" srcset="/img/loading.gif" lazyload alt="image-20220503235351245"></p>
+<p>epoll是非阻塞的，</p>
+<p>当有数据的时候，会把相应文件描述符<code>置位</code>，但是epoll没有revent标志位，所以并不是真的置位。这时候会把有数据的文件描述符放到队首。</p>
+<p>epoll会返回有数据的文件描述符的个数</p>
+<p>根据返回的个数，读取前N个文件描述符即可</p>
+<p>Redis 、Nginx、Java在Linux环境下，都是采用的<code>epoll</code>模型</p>
+<p>（1）select，poll实现需要自己不断轮询所有fd集合，直到设备就绪，期间可能要睡眠和唤醒多次交替。而epoll其实也需要调用epoll_wait不断轮询就绪链表，期间也可能多次睡眠和唤醒交替，但是它是设备就绪时，调用回调函数，把就绪fd放入就绪链表中，并唤醒在epoll_wait中进入睡眠的进程。虽然都要睡眠和交替，但是select和poll在“醒着”的时候要遍历整个fd集合，而epoll在“醒着”的时候只要判断一下就绪链表是否为空就行了，这节省了大量的CPU时间。这就是回调机制带来的性能提升。</p>
+<p>（2）select，poll每次调用都要把fd集合从用户态往内核态拷贝一次，并且要把current往设备等待队列中挂一次，而epoll只要一次拷贝，而且把current往等待队列上挂也只挂一次（在epoll_wait的开始，注意这里的等待队列并不是设备等待队列，只是一个epoll内部定义的等待队列）。这也能节省不少的开销。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86/">计算机知识</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9F%A5%E8%AF%86/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/04/28/git/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">git工具的详细教程</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/28/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">
+                        <span class="hidden-mobile">Java垃圾回收</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="waline"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#waline', function() {
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/@waline/client@1/dist/Waline.min.js', function() {
+        var options = Object.assign(
+          {"serverURL":"blog-comment-source.vercel.app","path":"window.location.pathname","placeholder":"支持匿名评论鸭","meta":["nick","mail"],"requiredMeta":[],"lang":"zh-CN","emoji":["https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo"],"dark":"html[data-user-color-scheme=\"dark\"]","avatar":"retro","avatarCDN":"https://seccdn.libravatar.org/avatar/","avatarForce":false,"wordLimit":0,"pageSize":10,"highlight":true},
+          {
+            el: '#waline',
+            path: window.location.pathname
+          }
+        )
+        new Waline(options);
+        Fluid.utils.waitElementVisible('#waline .vcontent', () => {
+          Fluid.plugins.initFancyBox('#waline .vcontent img:not(.vemoji)');
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <div style="font-size: 0.85rem"> <span id="timeDate">载入天数...</span> <span id="times">载入时分秒...</span> <script src="/js/duration.js"></script> </div> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- LeanCloud 统计PV -->
+        <span id="leancloud-site-pv-container" style="display: none">
+            总访问量 
+            <span id="leancloud-site-pv"></span>
+             次
+          </span>
+      
+      
+        <!-- LeanCloud 统计UV -->
+        <span id="leancloud-site-uv-container" style="display: none">
+            总访客数 
+            <span id="leancloud-site-uv"></span>
+             人
+          </span>
+      
+
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+  <script defer src="/js/leancloud.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+  
+<script src="/js/DynamicLine.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/Cherry.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/EmoryHuang/BlogBeautify@1.1/DynamicRibbon.min.js"></script>
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<!-- hexo injector body_end start -->
+    <link defer rel="stylesheet" href="/css/reward-button.css"/>
+    <script src="/js/reward-button.js"></script>
+    <script>
+        new RewardButton({
+            btnIcon: "iconfont icon-love",
+            btnText: "鼓励一下吧",
+            comment: "感谢您的鼓励☆(≧∀≦*)ﾉ",
+            qrcodes: [{"src":"/img/wechat_pay.png","caption":"微信","title":"微信"},{"src":"/img/ali_pay.jpg","caption":"支付宝","title":"支付宝"}]
+        }).init();
+    </script>
+    <!-- hexo injector body_end end --></body>
+</html>
+
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/love.js"></script>
+
+<!-- 爆炸烟花 -->
+<canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
+<script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
+<script type="text/javascript" src="/js/fireworks.js"></script>
+
+
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="\js\FunnyTitle.js"></script>
+
+
+<script src="https://cdn.jsdelivr.net/gh/stevenjoezhang/live2d-widget@latest/autoload.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6/css/all.min.css">
