@@ -16,23 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="使用Hexo博客框架和GitHub结合搭建博客是一种很不错的选择，但是如何能让博客被Google到呢？">
+    <meta name="description" content="jsDelivr提供免费公共CDN加速服务，通过使用jsDelivr可以直接加速Github项目上的静态资源。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="让谷歌收录GitHub Pages博客">
-<meta property="og:url" content="http://example.com/2022/05/01/%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95GitHub%20Pages%E5%8D%9A%E5%AE%A2/index.html">
+<meta property="og:title" content="使用jsDelivr加速GitHub Pages博客">
+<meta property="og:url" content="http://example.com/2022/04/27/%E4%BD%BF%E7%94%A8jsDelivr%E5%8A%A0%E9%80%9FGitHub%20Pages%E5%8D%9A%E5%AE%A2/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
-<meta property="og:description" content="使用Hexo博客框架和GitHub结合搭建博客是一种很不错的选择，但是如何能让博客被Google到呢？">
+<meta property="og:description" content="jsDelivr提供免费公共CDN加速服务，通过使用jsDelivr可以直接加速Github项目上的静态资源。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/img/passage_photo/google.png">
-<meta property="article:published_time" content="2022-05-01T17:42:20.000Z">
-<meta property="article:modified_time" content="2022-05-01T18:12:31.000Z">
+<meta property="og:image" content="http://example.com/img/passage_photo/jsdelivr.png">
+<meta property="article:published_time" content="2022-04-27T22:21:45.000Z">
+<meta property="article:modified_time" content="2022-04-28T10:32:21.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="Hexo博客">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="http://example.com/img/passage_photo/google.png">
+<meta name="twitter:image" content="http://example.com/img/passage_photo/jsdelivr.png">
   
   
-  <title>让谷歌收录GitHub Pages博客 - 橙子味小白的博客</title>
+  <title>使用jsDelivr加速GitHub Pages博客 - 橙子味小白的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="让谷歌收录GitHub Pages博客">
+            <span class="h2" id="subtitle" title="使用jsDelivr加速GitHub Pages博客">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-01 17:42" pubdate>
-        2022年5月1日
+      <time datetime="2022-04-27 22:21" pubdate>
+        2022年4月27日
       </time>
     </span>
   
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.3k 字
     </span>
   
 
@@ -250,45 +250,48 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">让谷歌收录GitHub Pages博客</h1>
+            <h1 style="display: none">使用jsDelivr加速GitHub Pages博客</h1>
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月1日
+                  本文最后更新于：2022年4月28日
                 
               </p>
             
             <div class="markdown-body">
-              <h3 id="一、查看是否被收录"><a href="#一、查看是否被收录" class="headerlink" title="一、查看是否被收录"></a>一、查看是否被收录</h3><p>首先查看你的博客地址是否已经被Google收录，在Google的搜索栏中搜索：<code>site:https://xxxx.github.io</code>，其中 <code>https://xxxx.github.io</code> 为你的博客地址，如果结果是提示您尝试使用Google Search Console，则意味着没有被收录。</p>
-<p>如果搜索出你想要的结果，那么不用继续往下看了。</p>
-<h3 id="二、搜索资源提交"><a href="#二、搜索资源提交" class="headerlink" title="二、搜索资源提交"></a>二、搜索资源提交</h3><p>进入Google Web Master，点击： <a target="_blank" rel="noopener" href="https://search.google.com/search-console/about">Google Search Console</a>（若未登录谷歌账号，需要先登录谷歌账号）</p>
-<p>点击<code>网址前缀</code>添加（网域方式验证方式单一），提交你的博客网址，然后跳转到如下界面进行验证。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205011905825.png" srcset="/img/loading.gif" lazyload alt="image-20220501190506708"></p>
-<p>验证方式有一下几种，根据实际情况，按要求验证即可。</p>
-<p>我这里选了DNS解析验证，加入一条TXT类型的记录即可</p>
-<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205011908405.png" srcset="/img/loading.gif" lazyload alt="image-20220501190806916"></p>
-<h3 id="三、添加站点地图"><a href="#三、添加站点地图" class="headerlink" title="三、添加站点地图"></a>三、添加站点地图</h3><p>站点地图(Site Map)是用来注明网站结构的文件，我们希望搜索引擎的爬虫了解我们的网站结构,以便于高效爬取内容，快速建立索引。</p>
-<p>首先为 Hexo 安装 <code>hexo-generator-sitemap</code> 插件，在Hexo博客目录下运行：</p>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">npm install hexo-generator-sitemap --save<br></code></pre></div></td></tr></table></figure>
-
-<h4 id="重新编译"><a href="#重新编译" class="headerlink" title="重新编译"></a>重新编译</h4><p>配置 Hexo 的 <code>_config.yml</code> 文件，添加如下字段:</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">sitemap:</span><br>    <span class="hljs-attr">path:</span> <span class="hljs-string">sitemap.xml</span><br></code></pre></div></td></tr></table></figure>
-
-<p>然后重新生成博客文件，运行</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-string">hexo</span> <span class="hljs-string">clean</span><br><span class="hljs-string">hexo</span> <span class="hljs-string">g</span><br><span class="hljs-string">hexo</span> <span class="hljs-string">d</span><br></code></pre></div></td></tr></table></figure>
-
-<p>此时应该可以在 <code>public</code> 目录下看到 <code>sitemap.xml</code>文件了。</p>
-<h4 id="将中文网页名称转换为固定字符串"><a href="#将中文网页名称转换为固定字符串" class="headerlink" title="将中文网页名称转换为固定字符串"></a>将中文网页名称转换为固定字符串</h4><p>hexo默认生成的页面是你的 title 名，即 title 是中文那么网站访问的路径也是中文，这样是很不利于搜索引擎收录的，让我们使用插件来解决这个问题，安装缩短链接插件：</p>
-<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">npm install hexo-abbrlink --save<br></code></pre></div></td></tr></table></figure>
-
-<p>hexo 的 <code>_config.yml</code> 添加如下配置：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-attr">permalink:</span> <span class="hljs-string">posts/:abbrlink.html</span><br><span class="hljs-attr">abbrlink:</span><br>  <span class="hljs-attr">alg:</span> <span class="hljs-string">crc32</span>  <span class="hljs-comment"># 算法：crc16(default) and crc32</span><br>  <span class="hljs-attr">rep:</span> <span class="hljs-string">hex</span>    <span class="hljs-comment"># 进制：dec(default) and hex</span><br><span class="hljs-attr">permalink_defaults:</span><br><span class="hljs-attr">pretty_urls:</span><br>  <span class="hljs-attr">trailing_index:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Set to false to remove trailing &#x27;index.html&#x27; from permalinks</span><br>  <span class="hljs-attr">trailing_html:</span> <span class="hljs-literal">true</span> <span class="hljs-comment"># Set to false to remove trailing &#x27;.html&#x27; from permalinks</span><br></code></pre></div></td></tr></table></figure>
-
-<p>安装完毕后此时再 clean ，<code>hexo g</code> 会发现生成的网页名称不再是中文，而是固定的字符串，访问路径也统一变成了<code>posts/xxx.html</code>，这种简单的访问路径比较利于搜索引擎收录。</p>
-<h4 id="添加-x2F-测试站点地图"><a href="#添加-x2F-测试站点地图" class="headerlink" title="添加&#x2F;测试站点地图"></a>添加&#x2F;测试站点地图</h4><p>回到之前提交搜索资源的页面，在左边侧边栏找到  <code>站点地图</code> ,添加新的站点地图，将https:&#x2F;&#x2F;你的博客仓库名&#x2F;sitemap.xml提交并刷新，就可以看到博客的网站结构了。</p>
-<p>例如：我的是仓库是 baixxq.github.io ，那就是 <code>https://baixxq.github.io/sitemap.xml</code> ，下图我这里用了域名解析。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205011915258.png" srcset="/img/loading.gif" lazyload alt="image-20220501191549821"></p>
-<p>OK，大功告成，静待谷歌收录。</p>
+              <p>最近发现部署在Github上的个人博客网站访问加载的时间越来越久了，本身Github就已经很慢了，这个加载的速度令人难以接受，特别是对于有图片等比较大的文件需要加载的时候。于是开始考虑有没有什么方法能加速一下。优化独立博客的加载速度有一些不同的思路，对应不同的方案：</p>
+<ul>
+<li>优化博客代码，精简需要加载的资源；</li>
+<li>将博客部署到国内访问快的服务器上；</li>
+<li>部署到国内的代码托管平台，比如 Gitee 和 Coding 等；</li>
+<li>采用 CDN 加速</li>
+</ul>
+<p>因为还是期望只在 GitHub 上管理博客，所以采用了CDN。</p>
+<h3 id="CDN加速的原理"><a href="#CDN加速的原理" class="headerlink" title="CDN加速的原理"></a>CDN加速的原理</h3><p>CDN的全称是Content Delivery Network，即内容分发网络。CDN是构建在网络之上的内容分发网络，依靠部署在各地的边缘服务器，通过中心平台的负载均衡、内容分发、调度等功能模块，使用户就近获取所需内容，降低网络拥塞，提高用户访问响应速度和命中率。CDN的关键技术主要有内容存储和分发技术。</p>
+<p>  国内提供CDN加速的大厂有很多，<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://cn.aliyun.com/product/cdn">阿里云</a>、<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://cloud.tencent.com/product/cdn">腾讯云</a>、百度云、<a target="_blank" rel="noopener" href="https://links.jianshu.com/go?to=https://portal.qiniu.com/signup?code=3liwfwr7z4eoi">七牛云</a>等等，听说腾讯云太不稳定，其他的又需要付费，而且需要域名备案，域名备案有需要有一台ESC…最终选择白嫖的 jsDelivr 。</p>
+<p>jsDelivr 是国外的一家优秀的公共CDN 服务提供商，也是首个「打通中国大陆（网宿公司运营）与海外的免费CDN 服务」。 jsDelivr 有一个十分好用的功能——它可以加速Github 仓库的文件。 我们可以借此搭建一个免费、全球访问速度超快的图床。</p>
+<p>PicGo 工具一键上传，操作简单高效，GitHub 和 jsDelivr 都是大厂，不用担心跑路问题，不用担心速度和容量问题，而且完全免费，可以说是目前免费图床的最佳解决方案！</p>
+<p>简单说明以上三个工具的使用情形：</p>
+<ul>
+<li>GitHub 图库：用于存放我们需要使用的文章配图文件的仓库；</li>
+<li>jsDelivr ：用于 CDN 加速，在 Markdown 文本编辑器中直接引用 jsDelivr 的图片外链，即可快速访问图片资源；</li>
+<li>PicGo：用于 Markdown 写作端生成对应的 jsDelivr 图片外链，配合 Typora 编辑器时可直接拖拽图片自动生成外链使用。（<strong>故推荐 Typora 客户端 + PicGo 客户端搭配使用，食用效果更佳！</strong>）</li>
+</ul>
+<h3 id="使用-jsDelivr-免费加速-GitHub-Pages-博客的静态资源"><a href="#使用-jsDelivr-免费加速-GitHub-Pages-博客的静态资源" class="headerlink" title="使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源"></a>使用 jsDelivr 免费加速 GitHub Pages 博客的静态资源</h3><h4 id="1-在Github上创建个人仓库"><a href="#1-在Github上创建个人仓库" class="headerlink" title="1.在Github上创建个人仓库"></a>1.在Github上创建个人仓库</h4><p>在Github上创建个人仓库，权限必须是public，因为要给别人访问鸭，我这里命名为<code>blog-static</code></p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302239481.png" srcset="/img/loading.gif" lazyload alt="image-20220430223948475"></p>
+<p>生成一个有 repo 权限的 GitHub Token</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302242556.png" srcset="/img/loading.gif" lazyload alt="image-20220430224204706"></p>
+<h4 id="2-PicGo图床配置"><a href="#2-PicGo图床配置" class="headerlink" title="2.PicGo图床配置"></a>2.PicGo图床配置</h4><p>GitHub项目请戳 <a target="_blank" rel="noopener" href="https://github.com/Molunerfinn/PicGo">这里</a>，图床工具的下载链接可以在 <code>README </code>中获取。</p>
+<p>配置参数如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302247127.png" srcset="/img/loading.gif" lazyload alt="image-20220430224702084"></p>
+<p>自定义域名规则：</p>
+<p>这里以我创建的 GitHub 仓库   <code>blog-static-source</code>为例，配置为 <code>https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名</code></p>
+<p>访问规则：</p>
+<p>比如仓库中<code>img</code>下有一个<code>main.jpg</code> 访问方式 <code>https://cdn.jsdelivr.net/gh/你的用户名/你的仓库名/img/main.jpg</code></p>
+<h4 id="3-Typora配置"><a href="#3-Typora配置" class="headerlink" title="3.Typora配置"></a>3.Typora配置</h4><p>Typora配置好<code>PicGo</code>图床后，方便图片在线存储</p>
+<p>点击软件工具栏，文件 –&gt; 偏好设置 –&gt; 图像 –&gt; 配置 picgo</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202204302256597.png" srcset="/img/loading.gif" lazyload alt="image-20220430225559038"></p>
+<p>点击验证图片上传选项，就可以看到仓库里有图片了。</p>
 
             </div>
             <hr>
@@ -325,12 +328,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">面试高频问题</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/30/%E4%BD%BF%E7%94%A8jsDelivr%E5%8A%A0%E9%80%9FGitHub%20Pages%E5%8D%9A%E5%AE%A2/">
-                        <span class="hidden-mobile">使用jsDelivr加速GitHub Pages博客</span>
+                      <a href="/2022/04/27/fluid%E7%BE%8E%E5%8C%96/">
+                        <span class="hidden-mobile">Fluid美化</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

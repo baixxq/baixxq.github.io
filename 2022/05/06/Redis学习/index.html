@@ -19,13 +19,13 @@
     <meta name="description" content="Redis是一个开源的key-value存储系统，支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis学习笔记">
-<meta property="og:url" content="http://example.com/2022/04/27/Redis%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:url" content="http://example.com/2022/05/06/Redis%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
 <meta property="og:description" content="Redis是一个开源的key-value存储系统，支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/img/passage_photo/redis.png">
-<meta property="article:published_time" content="2022-04-27T23:17:28.000Z">
-<meta property="article:modified_time" content="2022-05-01T10:32:21.000Z">
+<meta property="article:published_time" content="2022-05-06T01:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-07T10:32:21.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary_large_image">
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-27 23:17" pubdate>
-        2022年4月27日
+      <time datetime="2022-05-06 01:17" pubdate>
+        2022年5月6日
       </time>
     </span>
   
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      11k 字
+      16k 字
     </span>
   
 
@@ -213,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      90 分钟
+      132 分钟
     </span>
   
 
@@ -254,7 +254,7 @@
             
               <p class="note note-info">
                 
-                  本文最后更新于：2022年5月1日
+                  本文最后更新于：2022年5月7日
                 
               </p>
             
@@ -299,7 +299,8 @@
 
 
 
-<p>二、</p>
+
+
 <p>谈到<code>Redis</code>，就不得不提到，它是一个非关系型数据库，那么它用来解决什么问题呢，以及为什么引入<code>Redis</code>，引入之后会带来哪些问题呢？</p>
 <p><strong>Redis解决的问题：</strong></p>
 <p>在Java后端了学习中，我们学了Java、Tomcat、HTML等，这都是实现功能模块的东西，而Mybatis、Spring、SpringMVC帮我们解决了扩展性的问题，但对于高并发情况下的处理，MySQL显然不能够解决这一问题，我们就引入了NoSQL、Nginx、MQ等中间键，来帮助我们解决性能问题。</p>
@@ -335,7 +336,12 @@
 <li>缓存击穿问题</li>
 <li>缓存的并发竞争问题</li>
 </ul>
-<h2 id="二、常用五大数据类型"><a href="#二、常用五大数据类型" class="headerlink" title="二、常用五大数据类型"></a>二、常用五大数据类型</h2><h3 id="1-string"><a href="#1-string" class="headerlink" title="1.string"></a>1.string</h3><h4 id="1-1简介"><a href="#1-1简介" class="headerlink" title="1.1简介"></a>1.1简介</h4><p>String是Redis最基本的类型，你可以理解成与Memcached一模一样的类型，一个key对应一个value。</p>
+<h2 id="二、常用五大数据类型"><a href="#二、常用五大数据类型" class="headerlink" title="二、常用五大数据类型"></a>二、常用五大数据类型</h2><p>Redis键(key)</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//查看当前库所有key  (匹配：keys *1)</span><br>keys *<br><span class="hljs-comment">//判断某个key是否存在</span><br>exists key<br><span class="hljs-comment">//查看你的key是什么类型</span><br>type key   <br><span class="hljs-comment">//删除指定的key数据</span><br>del key    <br><span class="hljs-comment">//根据value选择非阻塞删除,仅将keys从keyspace元数据中删除，真正的删除会在后续异步操作。</span><br>unlink key  <br><span class="hljs-comment">//10秒钟：为给定的key设置过期时间</span><br>expire key <span class="hljs-number">10</span>  <br><span class="hljs-comment">//查看还有多少秒过期，-1表示永不过期，-2表示已过期</span><br>ttl key <br><span class="hljs-comment">//命令切换数据库 </span><br>select<br><span class="hljs-comment">//查看当前数据库的key的数量</span><br>dbsize<br><span class="hljs-comment">//清空当前库</span><br>flushdb<br><span class="hljs-comment">//通杀全部库</span><br>flushall<br></code></pre></div></td></tr></table></figure>
+
+
+
+<h3 id="1-string"><a href="#1-string" class="headerlink" title="1.string"></a>1.string</h3><h4 id="1-1简介"><a href="#1-1简介" class="headerlink" title="1.1简介"></a>1.1简介</h4><p>String是Redis最基本的类型，你可以理解成与Memcached一模一样的类型，一个key对应一个value。</p>
 <p>String类型是二进制安全的。意味着Redis的string可以包含任何数据。比如jpg图片或者序列化的对象。</p>
 <p>String类型是Redis最基本的数据类型，一个Redis中字符串value最多可以是512M</p>
 <h4 id="1-2常用命令"><a href="#1-2常用命令" class="headerlink" title="1.2常用命令"></a>1.2常用命令</h4><figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-built_in">set</span>   &lt;key&gt;&lt;value&gt;	<span class="hljs-comment">//添加键值对</span><br>get   &lt;key&gt;		<span class="hljs-comment">//查询对应键值</span><br>append  &lt;key&gt;&lt;value&gt;		<span class="hljs-comment">//将给定的&lt;value&gt; 追加到原值的末尾</span><br><span class="hljs-built_in">strlen</span>  &lt;key&gt;		<span class="hljs-comment">//获得值的长度</span><br>setnx  &lt;key&gt;&lt;value&gt;		<span class="hljs-comment">//只有在 key 不存在时    设置 key 的值</span><br>incr  &lt;key&gt;		<span class="hljs-comment">//将 key 中储存的数字值增1，只能对数字值操作，如果为空，新增值为1</span><br>decr  &lt;key&gt;	<span class="hljs-comment">//将 key 中储存的数字值减1，只能对数字值操作，如果为空，新增值为-1</span><br>incrby / decrby  &lt;key&gt;&lt;步长&gt;	<span class="hljs-comment">//将 key 中储存的数字值增减。自定义步长。</span><br>mset  &lt;key1&gt;&lt;value1&gt;&lt;key2&gt;&lt;value2&gt;  .....  <span class="hljs-comment">//同时设置一个或多个 key-value对  </span><br>mget  &lt;key1&gt;&lt;key2&gt;&lt;key3&gt; .....		<span class="hljs-comment">//同时获取一个或多个 value  </span><br>    <br><span class="hljs-comment">//同时设置一个或多个 key-value 对，当且仅当所有给定 key 都不存在。原子性，有一个失败则都失败</span><br>msetnx &lt;key1&gt;&lt;value1&gt;&lt;key2&gt;&lt;value2&gt;  ..... <br>    <br><span class="hljs-comment">//获得值的范围，类似java中的substring，前包，后包</span><br>getrange  &lt;key&gt;&lt;起始位置&gt;&lt;结束位置&gt;	<br><span class="hljs-comment">//用 &lt;value&gt;  覆写&lt;key&gt;所储存的字符串值，从&lt;起始位置&gt;开始(索引从0开始)。</span><br>setrange  &lt;key&gt;&lt;起始位置&gt;&lt;value&gt;<br><br>setex  &lt;key&gt;&lt;过期时间&gt;&lt;value&gt; <span class="hljs-comment">//设置键值的同时，设置过期时间，单位秒。</span><br>getset &lt;key&gt;&lt;value&gt;  <span class="hljs-comment">//以新换旧，设置了新值同时获得旧值。</span><br></code></pre></div></td></tr></table></figure>
@@ -406,6 +412,223 @@
 
 
 
+<h2 id="四、Redis的发布和订阅"><a href="#四、Redis的发布和订阅" class="headerlink" title="四、Redis的发布和订阅"></a>四、Redis的发布和订阅</h2><h3 id="1-什么是发布和订阅"><a href="#1-什么是发布和订阅" class="headerlink" title="1.什么是发布和订阅"></a>1.什么是发布和订阅</h3><p>Redis 发布订阅 (pub&#x2F;sub) 是一种消息通信模式：发送者 (pub) 发送消息，订阅者 (sub) 接收消息。</p>
+<p>Redis 客户端可以订阅任意数量的频道。</p>
+<h3 id="2-Redis的发布和订阅"><a href="#2-Redis的发布和订阅" class="headerlink" title="2.Redis的发布和订阅"></a>2.Redis的发布和订阅</h3><p>1、客户端可以订阅频道如下图</p>
+<p>​                               <img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061625129.png" srcset="/img/loading.gif" lazyload alt="image-20220506162014469"></p>
+<p>2、当给这个频道发布消息后，消息就会发送给订阅的客户端</p>
+<p> <img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061626267.png" srcset="/img/loading.gif" lazyload alt="image-20220506162027993"></p>
+<h3 id="3-发布订阅命令行实现"><a href="#3-发布订阅命令行实现" class="headerlink" title="3.发布订阅命令行实现"></a>3.发布订阅命令行实现</h3><p>1、 打开一个客户端订阅channel1</p>
+<p>SUBSCRIBE channel1</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061626002.png" srcset="/img/loading.gif" lazyload alt="image-20220506162059326"></p>
+<p>2、打开另一个客户端，给channel1发布消息hello</p>
+<p>publish channel1 hello</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061626497.png" srcset="/img/loading.gif" lazyload alt="image-20220506162310677"></p>
+<p>返回的1是订阅者数量</p>
+<p>3、打开第一个客户端可以看到发送的消息</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061626570.png" srcset="/img/loading.gif" lazyload alt="image-20220506162323534"></p>
+<p>注：发布的消息没有持久化，如果在订阅的客户端收不到hello，只能收到订阅后发布的消息</p>
+<h2 id="五、Redis新数据类型"><a href="#五、Redis新数据类型" class="headerlink" title="五、Redis新数据类型"></a>五、Redis新数据类型</h2><h3 id="1-Bitmaps"><a href="#1-Bitmaps" class="headerlink" title="1.Bitmaps"></a>1.Bitmaps</h3><p>现代计算机用二进制（位） 作为信息的基础单位， 1个字节等于8位， 例如“abc”字符串是由3个字节组成， 但实际在计算机存储时将其用二进制表示， “abc”分别对应的ASCII码分别是97、 98、 99， 对应的二进制分别是01100001、 01100010和01100011，如下图</p>
+<p>​                               <img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162757854.png" srcset="/img/loading.gif" lazyload alt="image-20220506162757854"></p>
+<p>合理地使用操作位能够有效地提高内存使用率和开发效率。</p>
+<p>   Redis提供了Bitmaps这个“数据类型”可以实现对位的操作：</p>
+<p>（1）  Bitmaps本身不是一种数据类型， 实际上它就是字符串（key-value） ， 但是它可以对字符串的位进行操作。</p>
+<p>（2）  Bitmaps单独提供了一套命令， 所以在Redis中使用Bitmaps和使用字符串的方法不太相同。 可以把Bitmaps想象成一个以位为单位的数组， 数组的每个单元只能存储0和1， 数组的下标在Bitmaps中叫做偏移量。</p>
+<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162748704.png" srcset="/img/loading.gif" lazyload alt="image-20220506162748704"></p>
+<p><strong>命令</strong></p>
+<p>1、setbit</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//设置Bitmaps中某个偏移量的值（0或1）</span><br>setbit&lt;key&gt;&lt;offset&gt;&lt;value&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p>每个独立用户是否访问过网站存放在Bitmaps中， 将访问的用户记做1， 没有访问的用户记做0， 用偏移量作为用户的id。</p>
+<p>设置键的第offset个位的值（从0算起） ， 假设现在有20个用户，userid&#x3D;1， 6， 11， 15， 19的用户对网站进行了访问， 那么当前Bitmaps初始化结果如图</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061634518.png" srcset="/img/loading.gif" lazyload alt="image-20220506163430304"></p>
+<p>unique:users:20201106代表2020-11-06这天的独立访问用户的Bitmaps</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061634523.png" srcset="/img/loading.gif" lazyload alt="image-20220506163450678"></p>
+<p>很多应用的用户id以一个指定数字（例如10000） 开头， 直接将用户id和Bitmaps的偏移量对应势必会造成一定的浪费， 通常的做法是每次做setbit操作时将用户id减去这个指定数字。</p>
+<p>在第一次初始化Bitmaps时， 假如偏移量非常大， 那么整个初始化过程执行会比较慢， 可能会造成Redis的阻塞。</p>
+<p>2、getbit</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//获取Bitmaps中某个偏移量的值</span><br>getbit&lt;key&gt;&lt;offset&gt;<br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p>获取id&#x3D;8的用户是否在2020-11-06这天访问过， 返回0说明没有访问过：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061635476.png" srcset="/img/loading.gif" lazyload alt="image-20220506163545662"></p>
+<p>注：因为100根本不存在，所以也是返回0</p>
+<p>3、bitcount</p>
+<p>统计<strong>字符串</strong>被设置为1的bit数。一般情况下，给定的整个字符串都会被进行计数，通过指定额外的 start 或 end 参数，可以让计数只在特定的位上进行。start 和 end 参数的设置，都可以使用负数值：比如 -1 表示最后一个位，而 -2 表示倒数第二个位，start、end 是指bit组的字节的下标数，二者皆包含。</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//统计字符串从start字节到end字节比特值为1的数量</span><br>bitcount&lt;key&gt;[start end] <br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p>计算2022-11-06这天的独立访问用户数量</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071043829.png" srcset="/img/loading.gif" lazyload alt="image-20220507104258856"></p>
+<p>start和end代表起始和结束字节数， 下面操作计算用户id在第1个字节到第3个字节之间的独立访问用户数， 对应的用户id是11， 15， 19。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071044233.png" srcset="/img/loading.gif" lazyload alt="image-20220507104418367"></p>
+<p> 注意：redis的setbit设置或清除的是bit位置，而bitcount计算的是byte位置</p>
+<p>4、bitop</p>
+<p>(1)格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">bitop <span class="hljs-title function_">and</span><span class="hljs-params">(or/not/xor)</span> &lt;destkey&gt; [key…]<br></code></pre></div></td></tr></table></figure>
+
+<p>bitop是一个复合操作， 它可以做多个Bitmaps的and（交集） 、 or（并集） 、 not（非） 、 xor（异或） 操作并将结果保存在destkey中。</p>
+<p>(2)实例</p>
+<p>2020-11-04 日访问网站的userid&#x3D;1,2,5,9。</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">setbit unique:users:<span class="hljs-number">20201104</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span><br>setbit unique:users:<span class="hljs-number">20201104</span> <span class="hljs-number">2</span> <span class="hljs-number">1</span><br>setbit unique:users:<span class="hljs-number">20201104</span> <span class="hljs-number">5</span> <span class="hljs-number">1</span><br>setbit unique:users:<span class="hljs-number">20201104</span> <span class="hljs-number">9</span> <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>2020-11-03 日访问网站的userid&#x3D;0,1,4,9。</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">setbit unique:users:<span class="hljs-number">20201103</span> <span class="hljs-number">0</span> <span class="hljs-number">1</span><br>setbit unique:users:<span class="hljs-number">20201103</span> <span class="hljs-number">1</span> <span class="hljs-number">1</span><br>setbit unique:users:<span class="hljs-number">20201103</span> <span class="hljs-number">4</span> <span class="hljs-number">1</span><br>setbit unique:users:<span class="hljs-number">20201103</span> <span class="hljs-number">9</span> <span class="hljs-number">1</span><br></code></pre></div></td></tr></table></figure>
+
+<p>计算出两天都访问过网站的用户数量</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">bitop and unique:users:and:<span class="hljs-number">20201104</span>_03 unique:users:<span class="hljs-number">20201103</span> unique:users:<span class="hljs-number">20201104</span><br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071046867.png" srcset="/img/loading.gif" lazyload alt="image-20220507104612046"></p>
+<p>计算出任意一天都访问过网站的用户数量（例如月活跃就是类似这种） ， 可以使用or求并集</p>
+<p><strong>Bitmaps与set对比</strong></p>
+<p>假设网站有1亿用户， 每天独立访问的用户有5千万， 如果每天用集合类型和Bitmaps分别存储活跃用户可以得到表set和Bitmaps存储一天活跃用户对比：</p>
+<table>
+<thead>
+<tr>
+<th>数据  类型</th>
+<th>每个用户id占用空间</th>
+<th>需要存储的用户量</th>
+<th>全部内存量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>集合  类型</td>
+<td>64位</td>
+<td>50000000</td>
+<td>64位*50000000 &#x3D; 400MB</td>
+</tr>
+<tr>
+<td>Bitmaps</td>
+<td>1位</td>
+<td>100000000</td>
+<td>1位*100000000 &#x3D; 12.5MB</td>
+</tr>
+</tbody></table>
+<p>很明显， 这种情况下使用Bitmaps能节省很多的内存空间， 尤其是随着时间推移节省的内存还是非常可观的。set和Bitmaps存储独立用户空间对比：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>一天</th>
+<th>一个月</th>
+<th>一年</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>集合类型</td>
+<td>400MB</td>
+<td>12GB</td>
+<td>144GB</td>
+</tr>
+<tr>
+<td>Bitmaps</td>
+<td>12.5MB</td>
+<td>375MB</td>
+<td>4.5GB</td>
+</tr>
+</tbody></table>
+<p> 但Bitmaps并不是万金油， 假如该网站每天的独立访问用户很少， 例如只有10万（大量的僵尸用户）， 那么两者的对比如下表所示， 很显然， 这时候使用Bitmaps就不太合适了， 因为基本上大部分位都是0。</p>
+<p>set和Bitmaps存储一天活跃用户对比（独立用户比较少）</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>每个userid占用空间</th>
+<th>需要存储的用户量</th>
+<th>全部内存量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>集合类型</td>
+<td>64位</td>
+<td>100000</td>
+<td>64位*100000 &#x3D; 800KB</td>
+</tr>
+<tr>
+<td>Bitmaps</td>
+<td>1位</td>
+<td>100000000</td>
+<td>1位*100000000 &#x3D; 12.5MB</td>
+</tr>
+</tbody></table>
+<h3 id="2-HyperLogLog"><a href="#2-HyperLogLog" class="headerlink" title="2. HyperLogLog"></a>2. HyperLogLog</h3><p>在工作当中，我们经常会遇到与统计相关的功能需求，比如统计网站PV（PageView页面访问量）,可以使用Redis的incr、incrby轻松实现。</p>
+<p>但像UV（UniqueVisitor，独立访客）、独立IP数、搜索记录数等需要去重和计数的问题如何解决？这种求集合中不重复元素个数的问题称为基数问题。</p>
+<p>解决基数问题有很多种方案：</p>
+<p>（1）数据存储在MySQL表中，使用distinct count计算不重复个数</p>
+<p>（2）使用Redis提供的hash、set、bitmaps等数据结构来处理</p>
+<p>以上的方案结果精确，但随着数据不断增加，导致占用空间越来越大，对于非常大的数据集是不切实际的。</p>
+<p>能否能够降低一定的精度来平衡存储空间？Redis推出了HyperLogLog</p>
+<p>Redis HyperLogLog 是用来做基数统计的算法，HyperLogLog 的优点是，在输入元素的数量或者体积非常非常大时，计算基数所需的空间总是固定的、并且是很小的。</p>
+<p>在 Redis 里面，每个 HyperLogLog 键只需要花费 12 KB 内存，就可以计算接近 2^64 个不同元素的基数。这和计算基数时，元素越多耗费内存就越多的集合形成鲜明对比。</p>
+<p>但是，因为 HyperLogLog 只会根据输入元素来计算基数，而不会储存输入元素本身，所以 HyperLogLog 不能像集合那样，返回输入的各个元素。</p>
+<p>什么是基数?</p>
+<p>比如数据集 {1, 3, 5, 7, 5, 7, 8}， 那么这个数据集的基数集为 {1, 3, 5 ,7, 8}, 基数(不重复元素)为5。 基数估计就是在误差可接受的范围内，快速计算基数。</p>
+<p> <strong>命令</strong></p>
+<p>1、pfadd </p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">pfadd &lt;key&gt;&lt; element&gt; [element ...]  <span class="hljs-comment">//添加指定元素到 HyperLogLog 中</span><br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071512315.png" srcset="/img/loading.gif" lazyload alt="image-20220507151208496"></p>
+<p>将所有元素添加到指定HyperLogLog数据结构中。如果执行命令后HLL估计的近似基数发生变化，则返回1，否则返回0。</p>
+<p>2、pfcount</p>
+<p>（1）格式</p>
+<p>计算HLL的近似基数，可以计算多个HLL，比如用HLL存储每天的UV，计算一周的UV可以使用7天的UV合并计算即可</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">pfcount&lt;key&gt; [key ...] <br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071513689.png" srcset="/img/loading.gif" lazyload alt="image-20220507151335525"></p>
+<p>3、pfmerge</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">pfmerge&lt;destkey&gt;&lt;sourcekey&gt; [sourcekey ...]<br></code></pre></div></td></tr></table></figure>
+
+<p> 将一个或多个HLL合并后的结果存储在另一个HLL中，比如每月活跃用户可以使用每天的活跃用户来合并计算可得</p>
+<p>（2）实例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071514329.png" srcset="/img/loading.gif" lazyload alt="image-20220507151409187"></p>
+<h3 id="3-Geospatial"><a href="#3-Geospatial" class="headerlink" title="3.Geospatial"></a>3.Geospatial</h3><p>Redis 3.2 中增加了对GEO类型的支持。GEO，Geographic，地理信息的缩写。该类型，就是元素的2维坐标，在地图上就是经纬度。redis基于该类型，提供了经纬度设置，查询，范围查询，距离查询，经纬度Hash等常见操作。</p>
+<p><strong>命令</strong></p>
+<p>1、geoadd</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">geoadd&lt;key&gt;&lt; longitude&gt;&lt;latitude&gt;&lt;member&gt; [longitude latitude member...]<br></code></pre></div></td></tr></table></figure>
+
+<p>  添加地理位置（经度，纬度，名称）</p>
+<p>（2）实例</p>
+<figure class="highlight apache"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs apache"><span class="hljs-attribute">geoadd</span> china:city <span class="hljs-number">121</span>.<span class="hljs-number">47</span> <span class="hljs-number">31</span>.<span class="hljs-number">23</span> shanghai<br><span class="hljs-attribute">geoadd</span> china:city <span class="hljs-number">106</span>.<span class="hljs-number">50</span> <span class="hljs-number">29</span>.<span class="hljs-number">53</span> chongqing <span class="hljs-number">114</span>.<span class="hljs-number">05</span> <span class="hljs-number">22</span>.<span class="hljs-number">52</span> shenzhen <span class="hljs-number">116</span>.<span class="hljs-number">38</span> <span class="hljs-number">39</span>.<span class="hljs-number">90</span> beijing<br></code></pre></div></td></tr></table></figure>
+
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071516104.png" srcset="/img/loading.gif" lazyload alt="image-20220507151608201"></p>
+<p>两极无法直接添加，一般会下载城市数据，直接通过 Java 程序一次性导入。</p>
+<p>有效的经度从 -180 度到 180 度。有效的纬度从 -85.05112878 度到 85.05112878 度。</p>
+<p>当坐标位置超出指定范围时，该命令将会返回一个错误。</p>
+<p>已经添加的数据，是无法再次往里面添加的。</p>
+<p>2、geopos </p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c">geopos &lt;key&gt;&lt;member&gt; [member...]  <span class="hljs-comment">//获得指定地区的坐标值</span><br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071517489.png" srcset="/img/loading.gif" lazyload alt="image-20220507151704806"></p>
+<p>3、geodist</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//获取两个位置之间的直线距离</span><br>geodist&lt;key&gt;&lt;member1&gt;&lt;member2&gt; [m|km|ft|mi ] <br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p>获取两个位置之间的直线距离</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071517481.png" srcset="/img/loading.gif" lazyload alt="image-20220507151729506"></p>
+<p>单位：</p>
+<p>m 表示单位为米[默认值]。</p>
+<p>km 表示单位为千米。</p>
+<p>mi 表示单位为英里。</p>
+<p>ft 表示单位为英尺。</p>
+<p>如果用户没有显式地指定单位参数， 那么 GEODIST 默认使用米作为单位</p>
+<p>4、georadius</p>
+<p>（1）格式</p>
+<figure class="highlight c"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs c"><span class="hljs-comment">//以给定的经纬度为中心，找出某一半径内的元素</span><br>georadius&lt;key&gt;&lt; longitude&gt;&lt;latitude&gt;radius m|km|ft|mi    <span class="hljs-comment">//经度 纬度 距离 单位</span><br></code></pre></div></td></tr></table></figure>
+
+<p>（2）实例</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205071518166.png" srcset="/img/loading.gif" lazyload alt="image-20220507151822282"></p>
 
             </div>
             <hr>
@@ -442,18 +665,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/04/28/Java%E5%9F%BA%E7%A1%80/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Java基础知识笔记</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/04/27/%E7%AE%97%E6%B3%95%E9%A2%98/">
-                        <span class="hidden-mobile">算法题</span>
+                      <a href="/2022/04/29/Zookeeper%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">Zookeeper笔记</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
