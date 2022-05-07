@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://lovebai.fun/2022/05/06/Redis%E5%AD%A6%E4%B9%A0/</loc>
+    <loc>https://lovebai.fun/article/62764/</loc>
     
     <lastmod>2022-05-07</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/26/Spring/</loc>
+    <loc>https://lovebai.fun/article/8434e219/</loc>
     
     <lastmod>2022-05-07</lastmod>
     
@@ -20,43 +20,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/26/Nginx%E5%AD%A6%E4%B9%A0/</loc>
-    
-    <lastmod>2022-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovebai.fun/2022/04/28/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/</loc>
-    
-    <lastmod>2022-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovebai.fun/2022/04/28/%E6%95%B0%E6%8D%AE%E5%BA%93/</loc>
-    
-    <lastmod>2022-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovebai.fun/2022/04/27/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
-    
-    <lastmod>2022-05-07</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovebai.fun/2022/04/27/%E9%9D%A2%E8%AF%95%E9%AB%98%E9%A2%91%E7%9F%A5%E8%AF%86%E7%82%B9/</loc>
+    <loc>https://lovebai.fun/article/ae19463e/</loc>
     
     <lastmod>2022-05-07</lastmod>
     
@@ -74,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/28/JDBC%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://lovebai.fun/article/ac1ae772/</loc>
     
     <lastmod>2022-05-07</lastmod>
     
@@ -83,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/28/JavaWeb/</loc>
+    <loc>https://lovebai.fun/article/dda0de9c/</loc>
     
     <lastmod>2022-05-07</lastmod>
     
@@ -92,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/28/Java%E5%9F%BA%E7%A1%80/</loc>
+    <loc>https://lovebai.fun/article/55ad0fd/</loc>
     
     <lastmod>2022-05-07</lastmod>
     
@@ -101,7 +65,52 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/28/git/</loc>
+    <loc>https://lovebai.fun/article/5679297c/</loc>
+    
+    <lastmod>2022-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovebai.fun/article/f4c4f07f/</loc>
+    
+    <lastmod>2022-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovebai.fun/article/75e7341b/</loc>
+    
+    <lastmod>2022-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovebai.fun/article/55cb472a/</loc>
+    
+    <lastmod>2022-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovebai.fun/article/99720b1c/</loc>
+    
+    <lastmod>2022-05-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovebai.fun/article/636d6803/</loc>
     
     <lastmod>2022-05-03</lastmod>
     
@@ -110,7 +119,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/28/selectpollepoll/</loc>
+    <loc>https://lovebai.fun/article/61661/</loc>
     
     <lastmod>2022-05-03</lastmod>
     
@@ -119,16 +128,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/05/01/%E8%B0%B7%E6%AD%8C%E6%94%B6%E5%BD%95GitHub%20Pages%E5%8D%9A%E5%AE%A2/</loc>
-    
-    <lastmod>2022-05-01</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovebai.fun/2022/04/29/Zookeeper%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://lovebai.fun/article/41fdb39a/</loc>
     
     <lastmod>2022-04-29</lastmod>
     
@@ -137,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/27/fluid%E7%BE%8E%E5%8C%96/</loc>
+    <loc>https://lovebai.fun/article/1c8b7c78/</loc>
     
     <lastmod>2022-04-28</lastmod>
     
@@ -146,7 +146,7 @@
   </url>
   
   <url>
-    <loc>https://lovebai.fun/2022/04/27/%E4%BD%BF%E7%94%A8jsDelivr%E5%8A%A0%E9%80%9FGitHub%20Pages%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>https://lovebai.fun/article/599b822a/</loc>
     
     <lastmod>2022-04-28</lastmod>
     
