@@ -16,23 +16,23 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="笔记未整理，仅供自己使用">
+    <meta name="description" content="Dubbo-admin是一个前后端分离的项目，前端使用vue，后端使用springboot，安装Dubbo-admin其实就是部署该项目。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring学习">
-<meta property="og:url" content="https://lovebai.fun/article/28212/index.html">
+<meta property="og:title" content="Dubbo-admin安装">
+<meta property="og:url" content="https://lovebai.fun/article/48128/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
-<meta property="og:description" content="笔记未整理，仅供自己使用">
+<meta property="og:description" content="Dubbo-admin是一个前后端分离的项目，前端使用vue，后端使用springboot，安装Dubbo-admin其实就是部署该项目。">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/imgs/10.png">
-<meta property="article:published_time" content="2022-04-26T23:17:28.000Z">
-<meta property="article:modified_time" content="2022-05-08T12:55:35.426Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/imgs/18.jpg">
+<meta property="article:published_time" content="2022-05-08T15:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-08T20:45:21.000Z">
 <meta property="article:author" content="John Doe">
-<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Dubbo">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/imgs/10.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/imgs/18.jpg">
   
   
-  <title>Spring学习 - 橙子味小白的博客</title>
+  <title>Dubbo-admin安装 - 橙子味小白的博客</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
@@ -183,7 +183,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.4)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="Spring学习">
+            <span class="h2" id="subtitle" title="Dubbo-admin安装">
               
             </span>
 
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-04-26 23:17" pubdate>
-        2022年4月26日
+      <time datetime="2022-05-08 15:17" pubdate>
+        2022年5月8日
       </time>
     </span>
   
@@ -204,7 +204,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.4k 字
+      1.6k 字
     </span>
   
 
@@ -213,7 +213,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      29 分钟
+      14 分钟
     </span>
   
 
@@ -250,7 +250,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">Spring学习</h1>
+            <h1 style="display: none">Dubbo-admin安装</h1>
             
               <p class="note note-info">
                 
@@ -259,59 +259,77 @@
               </p>
             
             <div class="markdown-body">
-              <h3 id="一、Spring"><a href="#一、Spring" class="headerlink" title="一、Spring"></a>一、Spring</h3><h4 id="1-Spring概念"><a href="#1-Spring概念" class="headerlink" title="1.Spring概念"></a>1.Spring概念</h4><p>Spring是分层的Java SE&#x2F;EE 应用 &#x3D;&#x3D;full-stack&#x3D;&#x3D; 轻量级开源框架，以&#x3D;&#x3D;IoC（Inverse Of Control：反转控制）&#x3D;&#x3D;和&#x3D;&#x3D;AOP（Aspect Oriented Programming：面向切面编程）&#x3D;&#x3D;为内核，提供了展现层Spring MVC 和持久层Spring JDBC 以及业务层事务管理等众多的企业级应用技术，还能整合开源世界众多著名的第三方框架和类库，逐渐成为使用最多的Java EE 企业应用开源框架。</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm"><span class="hljs-number">1</span>.Spring是轻量级的开源的<span class="hljs-keyword">JavaEE框架</span><br><span class="hljs-keyword"></span><span class="hljs-number">2</span>.Spring解决企业应用开发的复杂性<br><span class="hljs-number">3</span>.Spring有两大核心部分，IOC和Aop<br>	IOC：控制反转，把创建对象的过程交给Spring进行管理<br>	Aop：面向贴面，不修改源代码进行功能增强<br><span class="hljs-number">4</span>.Spring特点<br>    （<span class="hljs-number">1</span>）方便解耦，简化开发<br>    （<span class="hljs-number">2</span>） Aop 编程支持<br>    （<span class="hljs-number">3</span>）方便程序测试<br>    （<span class="hljs-number">4</span>）方便和其他框架进行整合<br>    （<span class="hljs-number">5</span>）方便进行事务操作<br>    （<span class="hljs-number">6</span>）降低 API 开发难度<br></code></pre></div></td></tr></table></figure>
+              <h2 id="一、dubbo-admin安装"><a href="#一、dubbo-admin安装" class="headerlink" title="一、dubbo-admin安装"></a>一、dubbo-admin安装</h2><p><strong>1、环境准备</strong></p>
+<p>dubbo-admin 是一个前后端分离的项目。前端使用vue，后端使用springboot，安装 dubbo-admin 其实就是部署该项目。我们将dubbo-admin安装到开发环境上。要保证开发环境有jdk，maven，nodejs</p>
+<p>安装node**(如果当前机器已经安装请忽略)**</p>
+<p>因为前端工程是用vue开发的，所以需要安装node.js，node.js中自带了npm，后面我们会通过npm启动</p>
+<p>下载地址</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">https:<span class="hljs-regexp">//</span>nodejs.org<span class="hljs-regexp">/en/</span><br></code></pre></div></td></tr></table></figure>
 
-<h5 id="1-Spring的发展历程"><a href="#1-Spring的发展历程" class="headerlink" title="(1) Spring的发展历程"></a>(1) Spring的发展历程</h5><figure class="highlight yaml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs yaml"><span class="hljs-number">1997</span><span class="hljs-string">年IBM提出了EJB的思想</span><br><span class="hljs-number">1998</span><span class="hljs-string">年，SUN制定开发标准规范EJB1.0</span><br><span class="hljs-number">1999</span><span class="hljs-string">年，EJB1.1发布</span><br><span class="hljs-number">2001</span><span class="hljs-string">年，EJB2.0发布</span><br><span class="hljs-number">2003</span><span class="hljs-string">年，EJB2.1发布</span><br><span class="hljs-number">2006</span><span class="hljs-string">年，EJB3.0发布</span><br><span class="hljs-string">Rod</span> <span class="hljs-string">Johnson（spring之父）</span><br><span class="hljs-string">Expert</span> <span class="hljs-string">One-to-One</span> <span class="hljs-string">J2EE</span> <span class="hljs-string">Design</span> <span class="hljs-string">and</span> <span class="hljs-string">Development(2002)</span><br><span class="hljs-string">阐述了J2EE使用EJB开发设计的优点及解决方案</span><br><span class="hljs-string">Expert</span> <span class="hljs-string">One-to-One</span> <span class="hljs-string">J2EE</span> <span class="hljs-string">Development</span> <span class="hljs-string">without</span> <span class="hljs-string">EJB(2004)</span><br><span class="hljs-string">阐述了J2EE开发不使用EJB的解决方式（Spring雏形）</span><br><span class="hljs-number">2017</span><span class="hljs-string">年9月份发布了spring的最新版本spring</span> <span class="hljs-number">5.0</span><span class="hljs-string">通用版（GA）</span><br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082038218.png" srcset="/img/loading.gif" lazyload alt="1578298201398"></p>
+<p><strong>2、下载 Dubbo-Admin</strong></p>
+<p>进入github，搜索dubbo-admin</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/apache/</span>dubbo-admin<br></code></pre></div></td></tr></table></figure>
 
-<h5 id="2-spring的优势"><a href="#2-spring的优势" class="headerlink" title="(2) spring的优势"></a>(2) spring的优势</h5><p>方便解耦，简化开发</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs">通过Spring提供的IoC容器，可以将对象间的依赖关系交由Spring进行控制，避免硬编码所造成的过度程序耦合。用户也不必再为单例模式类、属性文件解析等这些很底层的需求编写代码，可以更专注于上层的应用。<br></code></pre></div></td></tr></table></figure>
+<p>下载：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082031003.png" srcset="/img/loading.gif" lazyload alt="1578297063167"></p>
+<p><strong>3、把下载的zip包解压到指定文件夹(解压到那个文件夹随意)</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082031511.png" srcset="/img/loading.gif" lazyload alt="1578297477356"></p>
+<p><strong>4、修改配置文件</strong></p>
+<p>解压后我们进入…\dubbo-admin-develop\dubbo-admin-server\src\main\resources目录，找到 <strong>application.properties</strong> 配置文件 进行配置修改</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082032423.png" srcset="/img/loading.gif" lazyload alt="1578297603008"></p>
+<p>修改zookeeper地址</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082032542.png" srcset="/img/loading.gif" lazyload alt="1578297758655"></p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta prompt_"># </span><span class="language-bash">centers <span class="hljs-keyword">in</span> dubbo2.7</span><br>admin.registry.address=zookeeper://192.168.149.135:2181<br>admin.config-center=zookeeper://192.168.149.135:2181<br>admin.metadata-report.address=zookeeper://192.168.149.135:2181<br></code></pre></div></td></tr></table></figure>
 
-<p>AOP编程的支持</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs">通过Spring的AOP功能，方便进行面向切面的编程，许多不容易用传统OOP实现的功能可以通过AOP轻松应付。<br></code></pre></div></td></tr></table></figure>
+<p>admin.registry.address注册中心</p>
+<p>admin.config-center 配置中心</p>
+<p>admin.metadata-report.address元数据中心</p>
+<p><strong>5、打包项目</strong></p>
+<p>在 dubbo-admin-develop 目录执行打包命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">mvn  clean package<br></code></pre></div></td></tr></table></figure>
 
-<p>声明式事务的支持</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs">可以将我们从单调烦闷的事务管理代码中解脱出来，通过声明式方式灵活的进行事务的管理，提高开发效率和质量。<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082032140.png" srcset="/img/loading.gif" lazyload alt="1578300464726"></p>
+<p><strong>6、启动后端</strong></p>
+<p>切换到目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">dubbo-Admin-develop\dubbo-admin-distribution\target&gt;<br></code></pre></div></td></tr></table></figure>
 
-<p>方便程序的测试</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs">可以用非容器依赖的编程方式进行几乎所有的测试工作，测试不再是昂贵的操作，而是随手可做的事情。<br></code></pre></div></td></tr></table></figure>
+<p>执行下面的命令启动 dubbo-admin，dubbo-admin后台由SpringBoot构建。</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">java -jar .\dubbo-admin-0.1.jar<br></code></pre></div></td></tr></table></figure>
 
-<p>方便集成各种优秀框架</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mathematica"><span class="hljs-variable">Spring</span>可以降低各种框架的使用难度，提供了对各种优秀框架（<span class="hljs-variable">Struts</span>、<span class="hljs-variable">Hibernate</span>、<span class="hljs-built_in">Hessian</span>、<span class="hljs-variable">Quartz</span>等）的直接支持。<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082038940.png" srcset="/img/loading.gif" lazyload alt="1578300551892"></p>
+<p><strong>7、前台后端</strong></p>
+<p>dubbo-admin-ui 目录下执行命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell">npm run dev<br></code></pre></div></td></tr></table></figure>
 
-<p>降低JavaEE API的使用难度</p>
-<figure class="highlight mipsasm"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs mipsasm">Spring对<span class="hljs-keyword">JavaEE </span>API（如<span class="hljs-keyword">JDBC、JavaMail、远程调用等）进行了薄薄的封装层，使这些API的使用难度大为降低。</span><br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082033535.png" srcset="/img/loading.gif" lazyload alt="1578300677041"></p>
+<p><strong>8、访问</strong></p>
+<p>浏览器输入。用户名密码都是root</p>
+<figure class="highlight awk"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span>localhost:<span class="hljs-number">8081</span>/<br></code></pre></div></td></tr></table></figure>
 
-<p>Java源码是经典学习范例</p>
-<figure class="highlight"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs">Spring的源代码设计精妙、结构清晰、匠心独用，处处体现着大师对Java设计模式灵活运用以及对Java技术的高深造诣。它的源代码无意是Java技术的最佳实践的范例。<br></code></pre></div></td></tr></table></figure>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082033750.png" srcset="/img/loading.gif" lazyload alt="1578300774258"></p>
+<h2 id="二、dubbo-admin简单使用"><a href="#二、dubbo-admin简单使用" class="headerlink" title="二、dubbo-admin简单使用"></a>二、dubbo-admin简单使用</h2><p>注意Dubbo Admin【服务Mock】【服务统计】将在后续版本发布….</p>
+<p>在上面的步骤中，我们已经进入了Dubbo-Admin的主界面，在【快速入门】章节中，我们定义了服务生产者、和服务消费者，下面我们从Dubbo-Admin管理界面找到这个两个服务</p>
+<p><strong>1、点击服务查询</strong></p>
+<p><strong>2、查询结果</strong></p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082033293.png" srcset="/img/loading.gif" lazyload alt="1578301528363"></p>
+<p>A:输入的查询条件com.itheima.service.UserService</p>
+<p>B:搜索类型，主要分为【按服务名】【按IP地址】【按应用】三种类型查询</p>
+<p>C:搜索结果</p>
+<p><strong>3.1.4 dubo-admin查看详情</strong></p>
+<p>我们查看com.itheima.service.UserService （服务提供者）的具体详细信息，包含【元数据信息】</p>
+<p><strong>1）点击详情</strong></p>
+<p>从【详情】界面查看，主要分为3个区域</p>
+<p>A区域：主要包含服务端 基础信息比如服务名称、应用名称等</p>
+<p>B区域：主要包含了生产者、消费者一些基本信息</p>
+<p><strong>C区域：是元数据信息，注意看上面的图,元数据信息是空的</strong></p>
+<p>我们需要打开我们的生产者配置文件加入下面配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs xml"><span class="hljs-comment">&lt;!-- 元数据配置 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">dubbo:metadata-report</span> <span class="hljs-attr">address</span>=<span class="hljs-string">&quot;zookeeper://192.168.149.135:2181&quot;</span> /&gt;</span><br></code></pre></div></td></tr></table></figure>
 
+<p>重新启动生产者，再次打开Dubbo-Admin</p>
+<p>这样我们的元数据信息就出来了</p>
+<p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205082034758.png" srcset="/img/loading.gif" lazyload alt="1578301892712"></p>
 
-
-<h2 id="二、IOC容器"><a href="#二、IOC容器" class="headerlink" title="二、IOC容器"></a>二、IOC容器</h2><p>Ioc—Inversion of Control，即“控制反转”，不是什么技术，而是一种设计思想，</p>
-<p>传统的Java SE程序，都是程序员去new创建对象，IOC就是有专门一个容器来创建这些对象，即由Ioc容器来控制对象的创建，把程序员去制动创建对象控制对象编程，程序员被动接收容器给的对象。</p>
-<p><strong>Spring所倡导的开发方式</strong>就是如此，<strong>所有的类都会在spring容器中登记，告诉spring你是个什么东西，你需要什么东西，然后spring会在系统运行到适当的时候，把你要的东西主动给你，同时也把你交给其他需要你的东西。所有的类的创建、销毁都由 spring来控制，也就是说控制对象生存周期的不再是引用它的对象，而是spring。对于某个具体的对象而言，以前是它控制其他对象，现在是所有对象都被spring控制，所以这叫控制反转。</strong></p>
-<p><strong>IoC的一个重点是在系统运行中，动态的向某个对象提供它所需要的其他对象。这一点是通过DI（Dependency Injection，依赖注入）来实现的</strong>。比如对象A需要操作数据库，以前我们总是要在A中自己编写代码来获得一个Connection对象，有了 spring我们就只需要告诉spring，A中需要一个Connection，至于这个Connection怎么构造，何时构造，A不需要知道。在系统运行时，spring会在适当的时候制造一个Connection，然后像打针一样，注射到A当中，这样就完成了对各个对象之间关系的控制。A需要依赖 Connection才能正常运行，而这个Connection是由spring注入到A中的，依赖注入的名字就这么来的。那么DI是如何实现的呢？ Java 1.3之后一个重要特征是反射（reflection），它允许程序在运行的时候动态的生成对象、执行对象的方法、改变对象的属性，spring就是通过反射来实现注入的。</p>
-<p>在平时的java应用开发中，我们要实现某一个功能或者说是完成某个业务逻辑时至少需要两个或以上的对象来协作完成，在没有使用Spring的时候，每个对象在需要使用他的合作对象时，自己均要使用像new object() 这样的语法来将合作对象创建出来，这个合作对象是由自己主动创建出来的，创建合作对象的主动权在自己手上，自己需要哪个合作对象，就主动去创建，创建合作对象的主动权和创建时机是由自己把控的，而这样就会使得对象间的耦合度高了，A对象需要使用合作对象B来共同完成一件事，A要使用B，那么A就对B产生了依赖，也就是A和B之间存在一种耦合关系，并且是紧密耦合在一起，而使用了Spring之后就不一样了，创建合作对象B的工作是由Spring来做的，Spring创建好B对象，然后存储到一个容器里面，当A对象需要使用B对象时，Spring就从存放对象的那个容器里面取出A要使用的那个B对象，然后交给A对象使用，至于Spring是如何创建那个对象，以及什么时候创建好对象的，A对象不需要关心这些细节问题(你是什么时候生的，怎么生出来的我可不关心，能帮我干活就行)，A得到Spring给我们的对象之后，两个人一起协作完成要完成的工作即可。</p>
-<p>类耦合，需要重新修改代码， 打包，上线，配置文件耦合，只需要发给服务器，读取新的就行了。配置与资源的耦合</p>
-<p>Spring scope &#x3D; single   &#x2F;&#x2F;单例		对象创建时间，加载容器的时候创建的</p>
-<p>Spring scope &#x3D; propertype &#x2F;&#x2F;原型	对象创建时间，加载容器的时候不创建，获取对象的时候创建</p>
-<p>prototype 的 bean ，Spring 在创建好交给使用者之后则不会再管理后续的生命周期。</p>
-<ul>
-<li><code>singleton</code> : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。</li>
-<li><code>prototype</code> : 每次请求都会创建一个新的 bean 实例。</li>
-<li><code>request</code> : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP request 内有效。</li>
-<li><code>session</code> : 每一次 HTTP 请求都会产生一个新的 bean，该 bean 仅在当前 HTTP session 内有效。</li>
-<li><code>global-session</code>： 全局 session 作用域，仅仅在基于 Portlet 的 web 应用中才有意义，Spring5 已经没有了。Portlet 是能够生成语义代码（例如：HTML）片段的小型 Java Web 插件。它们基于 portlet 容器，可以像 servlet 一样处理 HTTP 请求。但是，与 servlet 不同，每个 portlet 都有不同的会话。</li>
-</ul>
-<p>而对于 Spring Bean 的生命周期来说：</p>
-<ul>
-<li>实例化 Instantiation</li>
-<li>属性赋值 Populate</li>
-<li>初始化 Initialization</li>
-<li>销毁 Destruction</li>
-</ul>
-<p>实例化 -&gt; 属性赋值 -&gt; 初始化 -&gt; 销毁</p>
-<h2 id="三、Aop"><a href="#三、Aop" class="headerlink" title="三、Aop"></a>三、Aop</h2><h2 id="四、JdbcTemplate"><a href="#四、JdbcTemplate" class="headerlink" title="四、JdbcTemplate"></a>四、JdbcTemplate</h2><h2 id="五、事务管理"><a href="#五、事务管理" class="headerlink" title="五、事务管理"></a>五、事务管理</h2><h2 id="六、Spring5新特性"><a href="#六、Spring5新特性" class="headerlink" title="六、Spring5新特性"></a>六、Spring5新特性</h2>
             </div>
             <hr>
             <div>
@@ -320,7 +338,11 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Spring/">Spring</a>
+                      <a class="hover-with-bg" href="/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/">Java后端研发</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/%E5%88%86%E5%B8%83%E5%BC%8F/">分布式</a>
+                    
+                      <a class="hover-with-bg" href="/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/%E5%88%86%E5%B8%83%E5%BC%8F/Dubbo/">Dubbo</a>
                     
                   </div>
                 
@@ -328,7 +350,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/Spring/">Spring</a>
+                      <a class="hover-with-bg" href="/tags/Dubbo/">Dubbo</a>
                     
                   </div>
                 
@@ -345,9 +367,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/article/62764/">
+                      <a href="/article/57879/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">让谷歌收录GitHub Pages博客</span>
+                        <span class="hidden-mobile">Zookeeper安装教程</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -355,8 +377,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/article/1732/">
-                        <span class="hidden-mobile">Nginx学习</span>
+                      <a href="/article/37154/">
+                        <span class="hidden-mobile">Dubbo</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
