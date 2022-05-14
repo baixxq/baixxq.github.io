@@ -19,13 +19,13 @@
     <meta name="description" content="Redis是一个开源的key-value存储系统，支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis学习笔记">
-<meta property="og:url" content="https://lovebai.top/article/30038/index.html">
+<meta property="og:url" content="https://lovebai.fun/article/30038/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
 <meta property="og:description" content="Redis是一个开源的key-value存储系统，支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/imgs/8.jpg">
-<meta property="article:published_time" content="2022-05-06T01:17:28.000Z">
-<meta property="article:modified_time" content="2022-05-07T10:32:21.000Z">
+<meta property="article:published_time" content="2022-05-05T17:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-07T02:32:21.000Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="数据库">
 <meta name="twitter:card" content="summary_large_image">
@@ -74,7 +74,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"lovebai.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"lovebai.fun","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -193,8 +193,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-05-06 01:17" pubdate>
-        2022年5月6日
+      <time datetime="2022-05-05 17:17" pubdate>
+        2022年5月5日
       </time>
     </span>
   
@@ -327,7 +327,7 @@
 <li>基于内存操作，数据存在内存中，速度非常快，</li>
 <li>很好的数据结构简单，全局哈希表+5种常用数据类型</li>
 <li>采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU</li>
-<li>使用多路 I&#x2F;O 复用模型，非阻塞 IO，谈到这里，要知道<code>select</code>，<code>poll</code>，<code>epoll</code>模型的区别，可以参考我的文章  <a target="_blank" rel="noopener" href="https://lovebai.fun/2022/04/28/selectpollepoll/">select,poll,epoll模型</a></li>
+<li>使用多路 I&#x2F;O 复用模型，非阻塞 IO，谈到这里，要知道<code>select</code>，<code>poll</code>，<code>epoll</code>模型的区别，可以参考我的文章  <a href="https://lovebai.fun/2022/04/28/selectpollepoll/">select,poll,epoll模型</a></li>
 </ul>
 <p><strong>知道了Redis的优点之后，我们同时要了解一下引入它带来的问题：</strong></p>
 <ul>
