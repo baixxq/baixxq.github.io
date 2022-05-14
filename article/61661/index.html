@@ -19,7 +19,7 @@
     <meta name="description" content="select,poll,epoll模型，初步汇总个人理解和笔记，后续继续更新">
 <meta property="og:type" content="article">
 <meta property="og:title" content="select,poll,epoll模型">
-<meta property="og:url" content="https://lovebai.top/article/61661/index.html">
+<meta property="og:url" content="https://lovebai.fun/article/61661/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
 <meta property="og:description" content="select,poll,epoll模型，初步汇总个人理解和笔记，后续继续更新">
 <meta property="og:locale" content="en_US">
@@ -74,7 +74,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"lovebai.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"lovebai.fun","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -348,7 +348,7 @@
 <li></li>
 </ol>
 <p>我这里找了一个视频方便理解：</p>
-<p><video poster src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032244010.mp4" style="max-height :100%; max-width: 100%; display: block; margin-left: auto; margin-right: auto;" controls="controls" loop="loop" preload="meta">Your browser does not support the video tag.</video></p>
+<p><video poster="" src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205032244010.mp4" style="max-height :100%; max-width: 100%; display: block; margin-left: auto; margin-right: auto;" controls="controls" loop="loop" preload="meta">Your browser does not support the video tag.</video></p>
 <h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a><strong>缺点</strong></h4><p>每次调用select，都需要将fd_set从用户空间拷贝到内核空间，当fd很多时，这个开销很大</p>
 <p>最大连接数（支持的最大文件描述符数量）有限制，一般为1024</p>
 <p>每次有活跃的socket描述符时，都需要遍历一次fd_set，造成大量的时间开销，时间复杂度是O(n)</p>
