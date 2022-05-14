@@ -429,12 +429,12 @@
 <p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061626570.png" srcset="/img/loading.gif" lazyload alt="image-20220506162323534"></p>
 <p>注：发布的消息没有持久化，如果在订阅的客户端收不到hello，只能收到订阅后发布的消息</p>
 <h2 id="五、Redis新数据类型"><a href="#五、Redis新数据类型" class="headerlink" title="五、Redis新数据类型"></a>五、Redis新数据类型</h2><h3 id="1-Bitmaps"><a href="#1-Bitmaps" class="headerlink" title="1.Bitmaps"></a>1.Bitmaps</h3><p>现代计算机用二进制（位） 作为信息的基础单位， 1个字节等于8位， 例如“abc”字符串是由3个字节组成， 但实际在计算机存储时将其用二进制表示， “abc”分别对应的ASCII码分别是97、 98、 99， 对应的二进制分别是01100001、 01100010和01100011，如下图</p>
-<p>​                               <img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162757854.png" srcset="/img/loading.gif" lazyload alt="image-20220506162757854"></p>
+<p>​                               <img src="/.fun//Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162757854.png" srcset="/img/loading.gif" lazyload alt="image-20220506162757854"></p>
 <p>合理地使用操作位能够有效地提高内存使用率和开发效率。</p>
 <p>   Redis提供了Bitmaps这个“数据类型”可以实现对位的操作：</p>
 <p>（1）  Bitmaps本身不是一种数据类型， 实际上它就是字符串（key-value） ， 但是它可以对字符串的位进行操作。</p>
 <p>（2）  Bitmaps单独提供了一套命令， 所以在Redis中使用Bitmaps和使用字符串的方法不太相同。 可以把Bitmaps想象成一个以位为单位的数组， 数组的每个单元只能存储0和1， 数组的下标在Bitmaps中叫做偏移量。</p>
-<p><img src="C:\Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162748704.png" srcset="/img/loading.gif" lazyload alt="image-20220506162748704"></p>
+<p><img src="/.fun//Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162748704.png" srcset="/img/loading.gif" lazyload alt="image-20220506162748704"></p>
 <p><strong>命令</strong></p>
 <p>1、setbit</p>
 <p>（1）格式</p>
