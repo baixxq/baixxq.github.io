@@ -19,7 +19,7 @@
     <meta name="description" content="Redis是一个开源的key-value存储系统，支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis学习笔记">
-<meta property="og:url" content="https://lovebai.fun/article/30038/index.html">
+<meta property="og:url" content="https://lovebai.top/article/30038/index.html">
 <meta property="og:site_name" content="橙子味小白的博客">
 <meta property="og:description" content="Redis是一个开源的key-value存储系统，支持存储的value类型相对更多，包括string(字符串)、list(链表)、set(集合)、zset(sorted set --有序集合)和hash（哈希类型）">
 <meta property="og:locale" content="en_US">
@@ -74,7 +74,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"lovebai.fun","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"lovebai.top","root":"/","version":"1.8.14","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":10},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"YPaTYhYFhjPewAGennadszRT-MdYXbMMI","app_key":"9Iyq3wxWTRNCT8wdNGHV4RMg","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -327,7 +327,7 @@
 <li>基于内存操作，数据存在内存中，速度非常快，</li>
 <li>很好的数据结构简单，全局哈希表+5种常用数据类型</li>
 <li>采用单线程，避免了不必要的上下文切换和竞争条件，也不存在多进程或者多线程导致的切换而消耗 CPU</li>
-<li>使用多路 I&#x2F;O 复用模型，非阻塞 IO，谈到这里，要知道<code>select</code>，<code>poll</code>，<code>epoll</code>模型的区别，可以参考我的文章  <a href="https://lovebai.fun/2022/04/28/selectpollepoll/">select,poll,epoll模型</a></li>
+<li>使用多路 I&#x2F;O 复用模型，非阻塞 IO，谈到这里，要知道<code>select</code>，<code>poll</code>，<code>epoll</code>模型的区别，可以参考我的文章  <a target="_blank" rel="noopener" href="https://lovebai.fun/2022/04/28/selectpollepoll/">select,poll,epoll模型</a></li>
 </ul>
 <p><strong>知道了Redis的优点之后，我们同时要了解一下引入它带来的问题：</strong></p>
 <ul>
@@ -429,12 +429,12 @@
 <p><img src="https://cdn.jsdelivr.net/gh/baixxq/blog-static-source/img/202205061626570.png" srcset="/img/loading.gif" lazyload alt="image-20220506162323534"></p>
 <p>注：发布的消息没有持久化，如果在订阅的客户端收不到hello，只能收到订阅后发布的消息</p>
 <h2 id="五、Redis新数据类型"><a href="#五、Redis新数据类型" class="headerlink" title="五、Redis新数据类型"></a>五、Redis新数据类型</h2><h3 id="1-Bitmaps"><a href="#1-Bitmaps" class="headerlink" title="1.Bitmaps"></a>1.Bitmaps</h3><p>现代计算机用二进制（位） 作为信息的基础单位， 1个字节等于8位， 例如“abc”字符串是由3个字节组成， 但实际在计算机存储时将其用二进制表示， “abc”分别对应的ASCII码分别是97、 98、 99， 对应的二进制分别是01100001、 01100010和01100011，如下图</p>
-<p>​                               <img src="/.fun//Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162757854.png" srcset="/img/loading.gif" lazyload alt="image-20220506162757854"></p>
+<p>​                               <img src="/.top//Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162757854.png" srcset="/img/loading.gif" lazyload alt="image-20220506162757854"></p>
 <p>合理地使用操作位能够有效地提高内存使用率和开发效率。</p>
 <p>   Redis提供了Bitmaps这个“数据类型”可以实现对位的操作：</p>
 <p>（1）  Bitmaps本身不是一种数据类型， 实际上它就是字符串（key-value） ， 但是它可以对字符串的位进行操作。</p>
 <p>（2）  Bitmaps单独提供了一套命令， 所以在Redis中使用Bitmaps和使用字符串的方法不太相同。 可以把Bitmaps想象成一个以位为单位的数组， 数组的每个单元只能存储0和1， 数组的下标在Bitmaps中叫做偏移量。</p>
-<p><img src="/.fun//Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162748704.png" srcset="/img/loading.gif" lazyload alt="image-20220506162748704"></p>
+<p><img src="/.top//Users\baixxq\AppData\Roaming\Typora\typora-user-images\image-20220506162748704.png" srcset="/img/loading.gif" lazyload alt="image-20220506162748704"></p>
 <p><strong>命令</strong></p>
 <p>1、setbit</p>
 <p>（1）格式</p>
