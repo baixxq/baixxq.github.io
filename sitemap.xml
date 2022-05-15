@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://lovebai.top/article/64676/</loc>
+    
+    <lastmod>2022-05-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://lovebai.top/about/index.html</loc>
     
     <lastmod>2022-05-15</lastmod>
@@ -221,6 +230,13 @@
   </url>
   
   <url>
+    <loc>https://lovebai.top/tags/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
+    <lastmod>2022-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://lovebai.top/tags/Java%E5%9F%BA%E7%A1%80/</loc>
     <lastmod>2022-05-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -291,13 +307,6 @@
   </url>
   
   <url>
-    <loc>https://lovebai.top/tags/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
-    <lastmod>2022-05-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://lovebai.top/tags/%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98/</loc>
     <lastmod>2022-05-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -322,6 +331,13 @@
   
   <url>
     <loc>https://lovebai.top/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/%E5%88%86%E5%B8%83%E5%BC%8F/</loc>
+    <lastmod>2022-05-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://lovebai.top/categories/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
     <lastmod>2022-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -406,13 +422,6 @@
   
   <url>
     <loc>https://lovebai.top/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/JavaWeb/</loc>
-    <lastmod>2022-05-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://lovebai.top/categories/%E7%AE%97%E6%B3%95%E9%A2%98/</loc>
     <lastmod>2022-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
