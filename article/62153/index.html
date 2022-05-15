@@ -224,7 +224,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      6.9k 字
+      7.4k 字
     </span>
   
 
@@ -233,7 +233,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      58 分钟
+      62 分钟
     </span>
   
 
@@ -484,6 +484,21 @@
 <p>作业练习：找一个小伙伴，一起搭建一个远程仓库，来练习Git！</p>
 <p>1、不要把Git想的很难，工作中多练习使用就自然而然的会了！</p>
 <p>2、Git的学习也十分多，看完我的Git教程之后，可以多去思考，总结到自己博客！</p>
+<p>Git一键提交</p>
+<p>使用Git的过程中，有时候需要经常和频繁的提交操作，每次都要add，commit，pull，push，正常开发中我们不是每次都需要关心这中间都修改了什么文件，那就用一个命令一键提交吧。</p>
+<ul>
+<li>新建一个 .sh 文件，比如 git push.sh</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh">now=$(<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%Y-%m-%d&quot;</span>)<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Change Directory to D:/Code&quot;</span><br><span class="hljs-built_in">cd</span> D:/Code<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Starting add-commit-pull-push...&quot;</span><br>git add -A &amp;&amp; git commit -m <span class="hljs-string">&quot;<span class="hljs-variable">$now</span>&quot;</span> &amp;&amp; git pull &amp;&amp; git push<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Finish!&quot;</span><br><span class="hljs-built_in">read</span><br></code></pre></div></td></tr></table></figure>
+
+<ul>
+<li><p>如果连命令窗口也不想要，可以把最后那个 read 删除掉。</p>
+</li>
+<li><p>如果你想每次输入commit文字，那就把 now 这个变量设置成 read 变量</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs sh"><span class="hljs-built_in">read</span> -p  <span class="hljs-string">&quot;please input commit comments:&quot;</span> msg<br>git commit -m <span class="hljs-string">&quot;<span class="hljs-variable">$msg</span>&quot;</span><br></code></pre></div></td></tr></table></figure>
+
 
             </div>
             <hr>
