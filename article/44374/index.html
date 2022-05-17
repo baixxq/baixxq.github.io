@@ -224,7 +224,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      3.3k 字
     </span>
   
 
@@ -233,7 +233,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10 分钟
+      28 分钟
     </span>
   
 
@@ -279,22 +279,22 @@
               </p>
             
             <div class="markdown-body">
-              <h1 id="1-动态规划理论"><a href="#1-动态规划理论" class="headerlink" title="1.动态规划理论"></a>1.动态规划理论</h1><h2 id="什么是动态规划"><a href="#什么是动态规划" class="headerlink" title="什么是动态规划"></a>什么是动态规划</h2><p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
+              <h1 id="一、动态规划理论"><a href="#一、动态规划理论" class="headerlink" title="一、动态规划理论"></a>一、动态规划理论</h1><h2 id="1-动态理论基础"><a href="#1-动态理论基础" class="headerlink" title="1.动态理论基础"></a>1.动态理论基础</h2><h3 id="什么是动态规划"><a href="#什么是动态规划" class="headerlink" title="什么是动态规划"></a>什么是动态规划</h3><p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
 <p>所以动态规划中每一个状态一定是由上一个状态推导出来的，<strong>这一点就区分于贪心</strong>，贪心没有状态推导，而是从局部直接选最优的。</p>
 <p>例如最经典的一个题：有N件物品和一个最多能背重量为W 的背包。第<code>i</code>件物品的重量是<code>weight[i]</code>，得到的价值是<code>value[i]</code>。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
 <p>动态规划中<code>dp[j]</code>是由<code>dp[j-weight[i]]</code>推导出来的，然后取<code>max(dp[j], dp[j - weight[i]] + value[i])</code>。</p>
 <p>但如果是贪心呢，每次拿物品选一个最大的或者最小的就完事了，和上一个状态没有关系。</p>
 <p>所以贪心解决不了动态规划的问题。</p>
-<h2 id="动态规划的解题步骤"><a href="#动态规划的解题步骤" class="headerlink" title="动态规划的解题步骤"></a>动态规划的解题步骤</h2><p>做动规题目的时候，很多同学会陷入一个误区，就是以为把状态转移公式背下来，照葫芦画瓢改改，就开始写代码，甚至把题目AC之后，都不太清楚dp[i]表示的是什么。</p>
+<h3 id="动态规划的解题步骤"><a href="#动态规划的解题步骤" class="headerlink" title="动态规划的解题步骤"></a>动态规划的解题步骤</h3><p>做动规题目的时候，很多同学会陷入一个误区，就是以为把状态转移公式背下来，照葫芦画瓢改改，就开始写代码，甚至把题目AC之后，都不太清楚dp[i]表示的是什么。</p>
 <p><strong>这就是一种朦胧的状态，然后就把题给过了，遇到稍稍难一点的，可能直接就不会了，然后看题解，然后继续照葫芦画瓢陷入这种恶性循环中</strong>。</p>
 <p>状态转移公式（递推公式）是很重要，但动规不仅仅只有递推公式。</p>
 <p><strong>对于动态规划问题，我将拆解为如下五步曲，这五步都搞清楚了，才能说把动态规划真的掌握了！</strong></p>
 <ol>
-<li>确定dp数组（dp table）以及下标的含义</li>
-<li>确定递推公式</li>
-<li>dp数组如何初始化</li>
-<li>确定遍历顺序</li>
-<li>举例推导dp数组</li>
+<li><strong>确定dp数组（dp table）以及下标的含义</strong></li>
+<li><strong>确定递推公式</strong></li>
+<li><strong>dp数组如何初始化</strong></li>
+<li><strong>确定遍历顺序</strong></li>
+<li><strong>举例推导dp数组</strong></li>
 </ol>
 <p>一些同学可能想为什么要先确定递推公式，然后在考虑初始化呢？</p>
 <p><strong>因为一些情况是递推公式决定了dp数组要如何初始化！</strong></p>
@@ -303,11 +303,124 @@
 <p>其实 确定递推公式 仅仅是解题里的一步而已！</p>
 <p>一些同学知道递推公式，但搞不清楚dp数组应该如何初始化，或者正确的遍历顺序，以至于记下来公式，但写的程序怎么改都通过不了。</p>
 <p>后序的讲解的大家就会慢慢感受到这五步的重要性了。</p>
-<h2 id="动态规划应该如何debug"><a href="#动态规划应该如何debug" class="headerlink" title="动态规划应该如何debug"></a>动态规划应该如何debug</h2><p><strong>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果</strong>。</p>
+<h3 id="动态规划应该如何debug"><a href="#动态规划应该如何debug" class="headerlink" title="动态规划应该如何debug"></a>动态规划应该如何debug</h3><p><strong>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果</strong>。</p>
 <p>然后再写代码，如果代码没通过就打印dp数组，看看是不是和自己预先推导的哪里不一样。</p>
 <p>如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。</p>
 <p>如果和自己预先模拟推导的不一样，那么就是代码实现细节有问题。</p>
 <p><strong>这样才是一个完整的思考过程，而不是一旦代码出问题，就毫无头绪的东改改西改改，最后过不了，或者说是稀里糊涂的过了</strong>。</p>
+<h2 id="2-斐波那契数"><a href="#2-斐波那契数" class="headerlink" title="2.斐波那契数"></a>2.斐波那契数</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fibonacci-number/">力扣题目链接</a></p>
+<p>斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) &#x3D; 0，F(1) &#x3D; 1 F(n) &#x3D; F(n - 1) + F(n - 2)，其中 n &gt; 1 给你n ，请计算 F(n) 。</p>
+<p>提示：</p>
+<ul>
+<li>0 &lt;&#x3D; n &lt;&#x3D; 30</li>
+</ul>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>动规五部曲：</p>
+<p>这里我们要用一个一维dp数组来保存递归的结果</p>
+<ol>
+<li><p>确定dp数组以及下标的含义</p>
+<p>dp[i]的定义为：第i个数的斐波那契数值是dp[i]</p>
+</li>
+<li><p>确定递推公式</p>
+<p>题目已经把递推公式直接给我们了：状态转移方程 dp[i] &#x3D; dp[i - 1] + dp[i - 2];</p>
+</li>
+<li><p>dp数组如何初始化</p>
+<p>题目中把如何初始化也直接给我们了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java">dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br></code></pre></div></td></tr></table></figure>
+</li>
+<li><p>确定遍历顺序</p>
+<p>从递归公式dp[i] &#x3D; dp[i - 1] + dp[i - 2];中可以看出，dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</p>
+</li>
+<li><p>举例推导dp数组</p>
+<p>按照这个递推公式dp[i] &#x3D; dp[i - 1] + dp[i - 2]，我们来推导一下，当N为10的时候，dp数组应该是如下的数列：</p>
+<p>0 1 1 2 3 5 8 13 21 34 55</p>
+<p>如果代码写出来，发现结果不对，就把dp数组打印出来看看和我们推导的数列是不是一致的。</p>
+</li>
+</ol>
+<p>所以，本题采用动态规划解法的时间复杂度为：</p>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<p>如果不记录所有值，只维护两个值，</p>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">fib</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">2</span>)<span class="hljs-keyword">return</span> n;<br>        <span class="hljs-comment">//1.确定dp和意义</span><br>        <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>];<br>        <span class="hljs-comment">//3.确定dp初始值</span><br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;<br>        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">//2.确定地推公式，4.确定遍历顺序</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">2</span> ; i &lt;= n; i++)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> dp[<span class="hljs-number">1</span>];<br>            dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">0</span>] + dp[<span class="hljs-number">1</span>];<br>            dp[<span class="hljs-number">0</span>] = temp;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="3-爬楼梯"><a href="#3-爬楼梯" class="headerlink" title="3. 爬楼梯"></a>3. 爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">力扣题目链接</a></p>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入： 2</li>
+<li>输出： 2</li>
+<li>解释： 有两种方法可以爬到楼顶。<ul>
+<li>1 阶 + 1 阶</li>
+<li>2 阶</li>
+</ul>
+</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入： 3</li>
+<li>输出： 3</li>
+<li>解释： 有三种方法可以爬到楼顶。<ul>
+<li>1 阶 + 1 阶 + 1 阶</li>
+<li>1 阶 + 2 阶</li>
+<li>2 阶 + 1 阶</li>
+</ul>
+</li>
+</ul>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><p>确定dp数组以及下标的含义</p>
+<p>dp[i]： 爬到第i层楼梯，有dp[i]种方法</p>
+</li>
+<li><p>确定递推公式</p>
+<p>如果可以推出dp[i]呢？注意题目给了，<strong>一次跳一个或者两个台阶</strong>，所以从dp[i]的定义可以看出，dp[i] 可以有两个方向推出来。</p>
+<p>首先是dp[i - 1]，上i-1层楼梯，有dp[i - 1]种方法，那么再一步跳一个台阶不就是dp[i]了么。</p>
+<p>还有就是dp[i - 2]，上i-2层楼梯，有dp[i - 2]种方法，那么再一步跳两个台阶不就是dp[i]了么。</p>
+<p>那么dp[i]就是 dp[i - 1]与dp[i - 2]之和！</p>
+<p>所以dp[i] &#x3D; dp[i - 1] + dp[i - 2] 。</p>
+<p>在推导dp[i]的时候，一定要时刻想着dp[i]的定义，否则容易跑偏。</p>
+<p>这体现出确定dp数组以及下标的含义的重要性！</p>
+</li>
+<li><p>dp数组如何初始化</p>
+<p>题目既然给了n大于等于1，就无所谓dp[0]是1还是0了。只初始化dp[1] &#x3D; 1，dp[2] &#x3D; 2，然后从i &#x3D; 3开始递推，这样才符合dp[i]的定义。</p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>从递归公式dp[i] &#x3D; dp[i - 1] + dp[i - 2];中可以看出，dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</p>
+</li>
+<li><p>举例推导dp数组</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Solution</span> &#123;<br>    <span class="hljs-keyword">public</span> <span class="hljs-type">int</span> <span class="hljs-title function_">climbStairs</span><span class="hljs-params">(<span class="hljs-type">int</span> n)</span> &#123;<br>        <span class="hljs-keyword">if</span>(n &lt;= <span class="hljs-number">3</span>) <span class="hljs-keyword">return</span> n;<br>          <span class="hljs-comment">//1.确定dp和意义</span><br>        <span class="hljs-type">int</span>[] dp = <span class="hljs-keyword">new</span> <span class="hljs-title class_">int</span>[<span class="hljs-number">2</span>];<br>         <span class="hljs-comment">//3.确定dp初始值</span><br>        dp[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;<br>        dp[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span>;<br>        <span class="hljs-comment">//2.确定地推公式，4.确定遍历顺序</span><br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">3</span> ; i &lt;= n ; i++)&#123;<br>            <span class="hljs-type">int</span> <span class="hljs-variable">temp</span> <span class="hljs-operator">=</span> dp[<span class="hljs-number">1</span>];<br>            dp[<span class="hljs-number">1</span>] = dp[<span class="hljs-number">1</span>] + dp[<span class="hljs-number">0</span>];<br>            dp[<span class="hljs-number">0</span>] = temp;<br>        &#125;<br>        <span class="hljs-keyword">return</span> dp[<span class="hljs-number">1</span>];<br>    &#125;<br>&#125;<br></code></pre></div></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-使用最小花费爬楼梯"><a href="#4-使用最小花费爬楼梯" class="headerlink" title="4.使用最小花费爬楼梯"></a>4.使用最小花费爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
+<p>数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值 cost[i]（下标从 0 开始）。</p>
+<p>每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。</p>
+<p>请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。</p>
+<p>示例 1：</p>
+<p>输入：cost &#x3D; [10, 15, 20] 输出：15 解释：最低花费是从 cost[1] 开始，然后走两步即可到阶梯顶，一共花费 15 。  示例 2：</p>
+<p>输入：cost &#x3D; [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] 输出：6 解释：最低花费方式是从 cost[0] 开始，逐个经过那些 1 ，跳过 cost[3] ，一共花费 6 。</p>
+<p>提示：</p>
+<ul>
+<li>cost 的长度范围是 [2, 1000]。</li>
+<li>cost[i] 将会是一个整型数据，范围为 [0, 999]</li>
+</ul>
 
             </div>
             <hr>
