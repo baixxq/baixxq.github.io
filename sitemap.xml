@@ -271,33 +271,6 @@
     <priority>0.6</priority>
   </url>
   
-  <url>
-    <loc>https://baixxq.com/static_prefix/jquery/README.html</loc>
-    
-    <lastmod>1985-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://baixxq.com/static_prefix/jquery/package.json</loc>
-    
-    <lastmod>1985-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://baixxq.com/static_prefix/jquery/bower.json</loc>
-    
-    <lastmod>1985-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
 
   <url>
     <loc>https://baixxq.com/</loc>
