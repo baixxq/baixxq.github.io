@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://baixxq.com/static_prefix/jquery/package.json</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://baixxq.com/static_prefix/github-markdown-css/package.json</loc>
     
     <lastmod>2022-05-19</lastmod>
@@ -20,6 +29,33 @@
   </url>
   
   <url>
+    <loc>https://baixxq.com/static_prefix/jquery/README.html</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://baixxq.com/static_prefix/jquery/bower.json</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://baixxq.com/static_prefix/bootstrap/package.json</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://baixxq.com/static_prefix/anchor-js/README.html</loc>
     
     <lastmod>2022-05-19</lastmod>
@@ -30,6 +66,15 @@
   
   <url>
     <loc>https://baixxq.com/static_prefix/anchor-js/package.json</loc>
+    
+    <lastmod>2022-05-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://baixxq.com/static_prefix/bootstrap/README.html</loc>
     
     <lastmod>2022-05-19</lastmod>
     
