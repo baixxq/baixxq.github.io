@@ -2,9 +2,9 @@
   font-family: "iconfont"; /* Project id 3423695 */
   /* Color fonts */
   src: 
-       url('iconfont.woff2?t=1653358266246') format('woff2'),
-       url('iconfont.woff?t=1653358266246') format('woff'),
-       url('iconfont.ttf?t=1653358266246') format('truetype');
+       url('iconfont.woff2?t=1653398982052') format('woff2'),
+       url('iconfont.woff?t=1653398982052') format('woff'),
+       url('iconfont.ttf?t=1653398982052') format('truetype');
 }
 
 .iconfont {
@@ -15,8 +15,24 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-tushuguan:before {
-  content: "\e67c";
+.icon-weixin:before {
+  content: "\e620";
+}
+
+.icon-youxiang:before {
+  content: "\e64c";
+}
+
+.icon-QQ:before {
+  content: "\e667";
+}
+
+.icon-github:before {
+  content: "\ea0b";
+}
+
+.icon-gitee:before {
+  content: "\e60c";
 }
 
 .icon-biaoqian:before {
@@ -75,10 +91,6 @@
   content: "\e878";
 }
 
-.icon-a-zhengshuwenpingxueli:before {
-  content: "\e879";
-}
-
 .icon-a-huabanhuahua:before {
   content: "\e87b";
 }
@@ -109,14 +121,6 @@
 
 .icon-a-56:before {
   content: "\e7d9";
-}
-
-.icon-a-xinfengpixel_huaban1:before {
-  content: "\e609";
-}
-
-.icon-jiezhi:before {
-  content: "\e6ce";
 }
 
 .icon-caomeitiantianquan:before {
@@ -153,10 +157,6 @@
 
 .icon-shuji:before {
   content: "\100cb";
-}
-
-.icon-licaitouzi:before {
-  content: "\100cc";
 }
 
 .icon-youxi:before {
