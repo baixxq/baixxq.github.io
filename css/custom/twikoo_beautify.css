@@ -146,8 +146,8 @@
   }
 }
 /* 设备名称常态隐藏，悬停评论时显示 */
-.tk-extras {
-  opacity: 0;
+/* .tk-extras {
+  opacity: 1;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
   filter: alpha(opacity=0);
 }
@@ -162,7 +162,7 @@
   -o-animation-fill-mode: forwards;
   -ms-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
-}
+} */
 @-moz-keyframes tk-extras-fadeIn {
   from {
     opacity: 0;
