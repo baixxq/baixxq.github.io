@@ -1,0 +1,365 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>select,poll,epoll模型 | 橙子的博客</title><meta name="keywords" content="操作系统"><meta name="author" content="baixxq"><meta name="copyright" content="baixxq"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="select,poll,epoll模型，初步汇总个人理解和笔记，后续继续更新">
+<meta property="og:type" content="article">
+<meta property="og:title" content="select,poll,epoll模型">
+<meta property="og:url" content="https://www.lovebai.top/article/61661/index.html">
+<meta property="og:site_name" content="橙子的博客">
+<meta property="og:description" content="select,poll,epoll模型，初步汇总个人理解和笔记，后续继续更新">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.lovebai.top/imgs/15.png">
+<meta property="article:published_time" content="2022-04-28T15:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-03T04:23:35.000Z">
+<meta property="article:author" content="baixxq">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.lovebai.top/imgs/15.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.lovebai.top/article/61661/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"距离上次更新时间已经过去","messageNext":"天了，文章内容可能已经过期了"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: '/pluginsSrc/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: '/pluginsSrc/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'select,poll,epoll模型',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-03 12:23:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-a-huabanhuahua"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shuji"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-shijianzhou"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tuijian"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-a-fenxitongjitiaocha"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://guide.lovebai.top/"><i class="fa-fw iconfont icon-dingwei"></i><span> 引导</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxi"></i><span> 媒体</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books"><i class="fa-fw iconfont icon-tuijian"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies"><i class="fa-fw iconfont icon-dingwei"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxishoubing"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/2048/"><i class="fa-fw iconfont icon-youxi"></i><span> 2048</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/tetris/"><i class="fa-fw iconfont icon-a-zhuozikezhuo"></i><span> 玩方块</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/duxinshu/"><i class="fa-fw iconfont icon-a-xihuanxiaizuiaiaiqing"></i><span> 读心术</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/saolei/"><i class="fa-fw iconfont icon-anquan"></i><span> 扫雷</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/se2/"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 找不同</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/hexagon/"><i class="fa-fw iconfont icon-a-huangsedewuxingshoucangzuiai"></i><span> 六边形</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/sister/"><i class="fa-fw iconfont icon-caomeitiantianquan"></i><span> 找妹妹</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/catchcat/"><i class="fa-fw iconfont icon-a-baozhuanghechanpinhuowuanzhuangbao"></i><span> 抓小猫</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-kapian"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-xunzhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-zhuanjia"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/imgs/15.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">橙子的博客</a></span><div id="he-plugin-simple"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-a-huabanhuahua"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shuji"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-shijianzhou"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tuijian"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-a-fenxitongjitiaocha"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://guide.lovebai.top/"><i class="fa-fw iconfont icon-dingwei"></i><span> 引导</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxi"></i><span> 媒体</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books"><i class="fa-fw iconfont icon-tuijian"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies"><i class="fa-fw iconfont icon-dingwei"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxishoubing"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/2048/"><i class="fa-fw iconfont icon-youxi"></i><span> 2048</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/tetris/"><i class="fa-fw iconfont icon-a-zhuozikezhuo"></i><span> 玩方块</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/duxinshu/"><i class="fa-fw iconfont icon-a-xihuanxiaizuiaiaiqing"></i><span> 读心术</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/saolei/"><i class="fa-fw iconfont icon-anquan"></i><span> 扫雷</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/se2/"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 找不同</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/hexagon/"><i class="fa-fw iconfont icon-a-huangsedewuxingshoucangzuiai"></i><span> 六边形</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/sister/"><i class="fa-fw iconfont icon-caomeitiantianquan"></i><span> 找妹妹</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/catchcat/"><i class="fa-fw iconfont icon-a-baozhuanghechanpinhuowuanzhuangbao"></i><span> 抓小猫</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-kapian"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-xunzhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-zhuanjia"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">select,poll,epoll模型</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-28T15:17:28.000Z" title="发表于 2022-04-28 23:17:28">2022-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-03T04:23:35.000Z" title="更新于 2022-05-03 12:23:35">2022-05-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/">计算机相关</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9B%B8%E5%85%B3/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>15分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="select,poll,epoll模型"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一-、概念说明"><a href="#一-、概念说明" class="headerlink" title="一 、概念说明"></a>一 、概念说明</h2><h3 id="1-用户空间与内核空间"><a href="#1-用户空间与内核空间" class="headerlink" title="1.用户空间与内核空间"></a>1.用户空间与内核空间</h3><p>现在操作系统都是采用虚拟存储器，那么对32位操作系统而言，它的寻址空间（虚拟存储空间）为4G（2的32次方）。操作系统的核心是内核，独立于普通的应用程序，可以访问受保护的内存空间，也有访问底层硬件设备的所有权限。为了保证用户进程不能直接操作内核（kernel），保证内核的安全，操心系统将虚拟空间划分为两部分，一部分为内核空间，一部分为用户空间。针对linux操作系统而言，将最高的1G字节（从虚拟地址0xC0000000到0xFFFFFFFF），供内核使用，称为内核空间，而将较低的3G字节（从虚拟地址0x00000000到0xBFFFFFFF），供各个进程使用，称为用户空间。</p>
+<h3 id="2-进程切换"><a href="#2-进程切换" class="headerlink" title="2.进程切换"></a>2.进程切换</h3><p>为了控制进程的执行，内核必须有能力挂起正在CPU上运行的进程，并恢复以前挂起的某个进程的执行。这种行为被称为进程切换。因此可以说，任何进程都是在操作系统内核的支持下运行的，是与内核紧密相关的。</p>
+<p>从一个进程的运行转到另一个进程上运行，这个过程中经过下面这些变化：</p>
+<ul>
+<li>保存处理机上下文，包括程序计数器和其他寄存器。更新PCB信息。</li>
+<li>把进程的PCB移入相应的队列，如就绪、在某事件阻塞等队列。</li>
+<li>选择另一个进程执行，并更新其PCB。</li>
+<li>更新内存管理的数据结构。</li>
+<li>恢复处理机上下文。</li>
+</ul>
+<p>总而言之就是很耗资源。</p>
+<h3 id="3-文件描述符fd"><a href="#3-文件描述符fd" class="headerlink" title="3.文件描述符fd"></a>3.文件描述符fd</h3><p>文件描述符（File descriptor）是计算机科学中的一个术语，是一个用于表述指向文件的引用的抽象化概念。</p>
+<p>文件描述符在形式上是一个非负整数。实际上，它是一个索引值，指向内核为每一个进程所维护的该进程打开文件的记录表。当程序打开一个现有文件或者创建一个新文件时，内核向进程返回一个文件描述符。在程序设计中，一些涉及底层的程序编写往往会围绕着文件描述符展开。但是文件描述符这一概念往往只适用于UNIX、Linux这样的操作系统。</p>
+<h3 id="4-缓存-I-x2F-O"><a href="#4-缓存-I-x2F-O" class="headerlink" title="4.缓存 I&#x2F;O"></a>4.缓存 I&#x2F;O</h3><p>缓存 I&#x2F;O 又被称作标准 I&#x2F;O，大多数文件系统的默认 I&#x2F;O 操作都是缓存 I&#x2F;O。在 Linux 的缓存 I&#x2F;O 机制中，操作系统会将 I&#x2F;O 的数据缓存在文件系统的页缓存（ page cache ）中，也就是说，数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。</p>
+<p><strong>缓存 I&#x2F;O 的缺点：</strong><br>数据在传输过程中需要在应用程序地址空间和内核进行多次数据拷贝操作，这些数据拷贝操作所带来的 CPU 以及内存开销是非常大的。</p>
+<h2 id="二、-IO模式"><a href="#二、-IO模式" class="headerlink" title="二、 IO模式"></a>二、 IO模式</h2><p>刚才说了，对于一次IO访问（以read举例），数据会先被拷贝到操作系统内核的缓冲区中，然后才会从操作系统内核的缓冲区拷贝到应用程序的地址空间。所以说，当一个read操作发生时，它会经历两个阶段：</p>
+<ul>
+<li>等待数据准备 (Waiting for the data to be ready)</li>
+<li>将数据从内核拷贝到进程中 (Copying the data from the kernel to the process)</li>
+</ul>
+<p>正式因为这两个阶段，linux系统产生了下面五种网络模式的方案。</p>
+<ul>
+<li>阻塞 I&#x2F;O（blocking IO）</li>
+<li>非阻塞 I&#x2F;O（nonblocking IO）</li>
+<li>I&#x2F;O 多路复用（ IO multiplexing）</li>
+<li>信号驱动 I&#x2F;O（ signal driven IO）</li>
+<li>异步 I&#x2F;O（asynchronous IO）</li>
+</ul>
+<p>注：由于signal driven IO在实际中并不常用，所以我这只提及剩下的四种IO Model。</p>
+<h3 id="1-阻塞-I-x2F-O（blocking-IO）"><a href="#1-阻塞-I-x2F-O（blocking-IO）" class="headerlink" title="1.阻塞 I&#x2F;O（blocking IO）"></a>1.阻塞 I&#x2F;O（blocking IO）</h3><p>在linux中，默认情况下所有的socket都是blocking，一个典型的读操作流程大概是这样：</p>
+<p><img src="/img/article/selectpollepoll/202205032231449.png" alt="clipboard.png"></p>
+<p>当用户进程调用了recvfrom这个系统调用，kernel就开始了IO的第一个阶段：准备数据（对于网络IO来说，很多时候数据在一开始还没有到达。比如，还没有收到一个完整的UDP包。这个时候kernel就要等待足够的数据到来）。这个过程需要等待，也就是说数据被拷贝到操作系统内核的缓冲区中是需要一个过程的。而在用户进程这边，整个进程会被阻塞（当然，是进程自己选择的阻塞）。当kernel一直等到数据准备好了，它就会将数据从kernel中拷贝到用户内存，然后kernel返回结果，用户进程才解除block的状态，重新运行起来。</p>
+<blockquote>
+<p>所以，blocking IO的特点就是在IO执行的两个阶段都被block了。</p>
+</blockquote>
+<h3 id="2-非阻塞-I-x2F-O（nonblocking-IO）"><a href="#2-非阻塞-I-x2F-O（nonblocking-IO）" class="headerlink" title="2.非阻塞 I&#x2F;O（nonblocking IO）"></a>2.非阻塞 I&#x2F;O（nonblocking IO）</h3><p>linux下，可以通过设置socket使其变为non-blocking。当对一个non-blocking socket执行读操作时，流程是这个样子：</p>
+<p><img src="/img/article/selectpollepoll/202205032232143.png" alt="clipboard.png"></p>
+<p>当用户进程发出read操作时，如果kernel中的数据还没有准备好，那么它并不会block用户进程，而是立刻返回一个error。从用户进程角度讲 ，它发起一个read操作后，并不需要等待，而是马上就得到了一个结果。用户进程判断结果是一个error时，它就知道数据还没有准备好，于是它可以再次发送read操作。一旦kernel中的数据准备好了，并且又再次收到了用户进程的system call，那么它马上就将数据拷贝到了用户内存，然后返回。</p>
+<blockquote>
+<p>所以，nonblocking IO的特点是用户进程需要<strong>不断的主动询问</strong>kernel数据好了没有。</p>
+</blockquote>
+<h3 id="3-I-x2F-O-多路复用（-IO-multiplexing）"><a href="#3-I-x2F-O-多路复用（-IO-multiplexing）" class="headerlink" title="3.I&#x2F;O 多路复用（ IO multiplexing）"></a>3.I&#x2F;O 多路复用（ IO multiplexing）</h3><p>IO multiplexing就是我们说的select，poll，epoll，有些地方也称这种IO方式为event driven IO。select&#x2F;epoll的好处就在于单个process就可以同时处理多个网络连接的IO。它的基本原理就是select，poll，epoll这个function会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程。</p>
+<p><img src="/img/article/selectpollepoll/202205032232084.png" alt="clipboard.png"></p>
+<p><code>当用户进程调用了select，那么整个进程会被block</code>，而同时，kernel会“监视”所有select负责的socket，当任何一个socket中的数据准备好了，select就会返回。这个时候用户进程再调用read操作，将数据从kernel拷贝到用户进程。</p>
+<blockquote>
+<p>所以，I&#x2F;O 多路复用的特点是通过一种机制一个进程能同时等待多个文件描述符，而这些文件描述符（套接字描述符）其中的任意一个进入读就绪状态，select()函数就可以返回。</p>
+</blockquote>
+<p>这个图和blocking IO的图其实并没有太大的不同，事实上，还更差一些。因为这里需要使用两个system call (select 和 recvfrom)，而blocking IO只调用了一个system call (recvfrom)。但是，用select的优势在于它可以同时处理多个connection。</p>
+<p>所以，如果处理的连接数不是很高的话，使用select&#x2F;epoll的web server不一定比使用multi-threading + blocking IO的web server性能更好，可能延迟还更大。select&#x2F;epoll的优势并不是对于单个连接能处理得更快，而是在于能处理更多的连接。）</p>
+<p>在IO multiplexing Model中，实际中，对于每一个socket，一般都设置成为non-blocking，但是，如上图所示，整个用户的process其实是一直被block的。只不过process是被select这个函数block，而不是被socket IO给block。</p>
+<h3 id="4-异步-I-x2F-O（asynchronous-IO）"><a href="#4-异步-I-x2F-O（asynchronous-IO）" class="headerlink" title="4.异步 I&#x2F;O（asynchronous IO）"></a>4.异步 I&#x2F;O（asynchronous IO）</h3><p>inux下的asynchronous IO其实用得很少。先看一下它的流程：</p>
+<p><img src="/img/article/selectpollepoll/202205032233020.png" alt="clipboard.png"></p>
+<p>用户进程发起read操作之后，立刻就可以开始去做其它的事。而另一方面，从kernel的角度，当它受到一个asynchronous read之后，首先它会立刻返回，所以不会对用户进程产生任何block。然后，kernel会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都完成之后，kernel会给用户进程发送一个signal，告诉它read操作完成了。</p>
+<h3 id="5-总结"><a href="#5-总结" class="headerlink" title="5.总结"></a>5.总结</h3><p><strong>blocking和non-blocking的区别</strong></p>
+<p>调用blocking IO会一直block住对应的进程直到操作完成，而non-blocking IO在kernel还准备数据的情况下会立刻返回。</p>
+<p><strong>synchronous IO和asynchronous IO的区别</strong></p>
+<p>在说明synchronous IO和asynchronous IO的区别之前，需要先给出两者的定义。POSIX的定义是这样子的：</p>
+<ul>
+<li>A synchronous I&#x2F;O operation causes the requesting process to be blocked until that I&#x2F;O operation completes;</li>
+<li>An asynchronous I&#x2F;O operation does not cause the requesting process to be blocked;</li>
+</ul>
+<p>两者的区别就在于synchronous IO做”IO operation”的时候会将process阻塞。按照这个定义，之前所述的blocking IO，non-blocking IO，IO multiplexing都属于synchronous IO。</p>
+<p>有人会说，non-blocking IO并没有被block啊。这里有个非常“狡猾”的地方，定义中所指的”IO operation”是指真实的IO操作，就是例子中的recvfrom这个system call。non-blocking IO在执行recvfrom这个system call的时候，如果kernel的数据没有准备好，这时候不会block进程。但是，当kernel中数据准备好的时候，recvfrom会将数据从kernel拷贝到用户内存中，这个时候进程是被block了，在这段时间内，进程是被block的。</p>
+<p>而asynchronous IO则不一样，当进程发起IO 操作之后，就直接返回再也不理睬了，直到kernel发送一个信号，告诉进程说IO完成。在这整个过程中，进程完全没有被block。</p>
+<p><strong>各个IO Model的比较如图所示：</strong></p>
+<p><img src="/img/article/selectpollepoll/202205032234886.png" alt="clipboard.png"></p>
+<p>通过上面的图片，可以发现non-blocking IO和asynchronous IO的区别还是很明显的。在non-blocking IO中，虽然进程大部分时间都不会被block，但是它仍然要求进程去主动的check，并且当数据准备完成以后，也需要进程主动的再次调用recvfrom来将数据拷贝到用户内存。而asynchronous IO则完全不同。它就像是用户进程将整个IO操作交给了他人（kernel）完成，然后他人做完后发信号通知。在此期间，用户进程不需要去检查IO操作的状态，也不需要主动的去拷贝数据。</p>
+<h2 id="三、-I-x2F-O-多路复用之select、poll、epoll详解"><a href="#三、-I-x2F-O-多路复用之select、poll、epoll详解" class="headerlink" title="三、 I&#x2F;O 多路复用之select、poll、epoll详解"></a>三、 I&#x2F;O 多路复用之select、poll、epoll详解</h2><p>select，poll，epoll都是IO多路复用的机制。I&#x2F;O多路复用就是通过一种机制，一个进程可以监视多个描述符，一旦某个描述符就绪（一般是读就绪或者写就绪），能够通知程序进行相应的读写操作。但select，poll，epoll本质上都是同步I&#x2F;O，因为他们都需要在读写事件就绪后自己负责进行读写，也就是说这个读写过程是阻塞的，而异步I&#x2F;O则无需自己负责进行读写，异步I&#x2F;O的实现会负责把数据从内核拷贝到用户空间。</p>
+<h3 id="1-select调用"><a href="#1-select调用" class="headerlink" title="1.select调用"></a>1.select调用</h3><h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>首先创建<code>socket</code>服务端，<code>fd[i]</code> 集合用来监听socket编号，有就把相应的编号加入，编号是随机的。然后循环遍历，并记录下最大值<code>max</code>，然后开始了<code>while(1)</code>循环</p>
+<p>循环首先把<code>rset</code>初始化0值，（这里我们可以看到它的第一个弊端，每次要初始化0值）。</p>
+<p>把<code>fd[i]</code>相应的给<code>rest</code>,<code>rest</code>是一个<code>bitmap</code>类型，默认1024位（这里我们可以看到它第二个弊端，连接数是有限的），所以假如<code>fd[i]</code>分别是：1、2、3、5、7来了数据，那么，<code>rest</code>对应的1、2、3、5、7位就置位1（1不是第一个，前边还有第0位），其他全为0，<code>rest</code>对应二进制就是<code>0 ... 000010101110</code>。</p>
+<p>然后就是select阻塞等待数据，<code>select</code>执行流程我们看下图，首先我们程序是运行在用户态的，如果直接在用户态来判断，那么每次都需要从用户态到内核态的切换，因为涉及到内核我们需要请内核帮我们完成。select在判断的时候直接将<code>rset</code>全量拷贝到内核，让内核帮我们判断（这里我们可以看到它第三个弊端，全量拷贝设计到内核态用户态的转变）。这里max+1起的作用是让内核知道需要监听的边界在哪里。</p>
+<p><img src="/img/article/selectpollepoll/202205032156224.png" alt="image-20220503215549375"></p>
+<p>然后当有数据来的时候，内核会将rest对应的位置1。但是用户不知道那些位被置位了，所以只能循环判断（第四个缺点，O(N)次遍历）。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">//这里创建socket服务端</span></span><br><span class="line"> sockfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"> <span class="built_in">memset</span>(&amp;addr, <span class="number">0</span>, <span class="keyword">sizeof</span> (addr));</span><br><span class="line"> addr.sin_family = AF_INET;</span><br><span class="line"> addr.sin_port = htons(<span class="number">2000</span>);</span><br><span class="line"> addr.sin_addr.s_addr = INADDR_ANY;</span><br><span class="line"> bind(sockfd,(<span class="keyword">struct</span> sockaddr*)&amp;addr ,<span class="keyword">sizeof</span>(addr));</span><br><span class="line"> listen (sockfd, <span class="number">5</span>); </span><br><span class="line"></span><br><span class="line"> <span class="comment">//fd[i] 监听socket编号，有就把相应的编号加入，编号是随机的</span></span><br><span class="line"> <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) </span><br><span class="line"> &#123;</span><br><span class="line">   <span class="built_in">memset</span>(&amp;client, <span class="number">0</span>, <span class="keyword">sizeof</span> (client));</span><br><span class="line">   addrlen = <span class="keyword">sizeof</span>(client);</span><br><span class="line">   fds[i] = accept(sockfd,(<span class="keyword">struct</span> sockaddr*)&amp;client, &amp;addrlen);</span><br><span class="line">   <span class="keyword">if</span>(fds[i] &gt; max)</span><br><span class="line">       <span class="comment">//记录下最大的值</span></span><br><span class="line">   	max = fds[i];</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line"> <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">FD_ZERO(&amp;rset);</span><br><span class="line"> 	<span class="keyword">for</span> (i = <span class="number">0</span>; i&lt; <span class="number">5</span>; i++ ) &#123;</span><br><span class="line"> 		FD_SET(fds[i],&amp;rset);</span><br><span class="line"> 	&#125;</span><br><span class="line"></span><br><span class="line">  	<span class="built_in">puts</span>(<span class="string">&quot;round again&quot;</span>);</span><br><span class="line">     <span class="comment">//select参数分别是：最大值+1；读文件描述集合；写文件描述集合；异常文件描述集合；超时时间</span></span><br><span class="line">select(max+<span class="number">1</span>, &amp;rset, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">	<span class="keyword">if</span> (FD_ISSET(fds[i], &amp;rset))&#123;</span><br><span class="line">		<span class="built_in">memset</span>(buffer,<span class="number">0</span>,MAXBUF);</span><br><span class="line">		read(fds[i], buffer, MAXBUF);</span><br><span class="line">		<span class="built_in">puts</span>(buffer);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;	</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h4><p>这里<code>fd_set</code>相当于上文<code>rset</code></p>
+<p>fd_set数据结构定义如下，可以看出fd_set是一个整型<strong>数组</strong>，用于保存socket文件描述符</p>
+<ol>
+<li>用户线程调用select，将fd_set从用户空间拷贝到内核空间 </li>
+<li>内核在内核空间对fd_set遍历一遍，检查是否有就绪的socket描述符，如果没有的话，就会进入休眠，直到有就绪的socket描述符</li>
+<li>内核返回select的结果给用户线程，即就绪的文件描述符数量  </li>
+<li>用户拿到就绪文件描述符数量后，再次对fd_set进行遍历，找出就绪的文件描述符</li>
+<li>用户线程对就绪的文件描述符进行读写操作</li>
+<li></li>
+</ol>
+<p>我这里找了一个视频方便理解：</p>
+<p><video poster="" src="/img/article/selectpollepoll/202205032244010.mp4" style="max-height :100%; max-width: 100%; display: block; margin-left: auto; margin-right: auto;" controls="controls" loop="loop" preload="meta">Your browser does not support the video tag.</video></p>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a><strong>缺点</strong></h4><p>每次调用select，都需要将fd_set从用户空间拷贝到内核空间，当fd很多时，这个开销很大</p>
+<p>最大连接数（支持的最大文件描述符数量）有限制，一般为1024</p>
+<p>每次有活跃的socket描述符时，都需要遍历一次fd_set，造成大量的时间开销，时间复杂度是O(n)</p>
+<p>将fd_set从用户空间拷贝到内核空间，内核空间也需要对fd_set遍历一遍</p>
+<h3 id="2-Poll调用"><a href="#2-Poll调用" class="headerlink" title="2.Poll调用"></a>2.Poll调用</h3><p>它定义了一种结构体<code>pollfd</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">pollfd</span> &#123;</span></span><br><span class="line">      <span class="type">int</span> fd;</span><br><span class="line">      <span class="type">short</span> events; 	<span class="comment">//在意的事件，读或者写</span></span><br><span class="line">      <span class="type">short</span> revents; <span class="comment">// 初始0 类似那个bitmap置为</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>流程如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) </span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;client, <span class="number">0</span>, <span class="keyword">sizeof</span> (client));</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(client);</span><br><span class="line">    pollfds[i].fd = accept(sockfd,(<span class="keyword">struct</span> sockaddr*)&amp;client, &amp;addrlen);</span><br><span class="line">    pollfds[i].events = POLLIN;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="comment">//上边还是把socket直接存入了结构体数组的fd中</span></span><br><span class="line">  sleep(<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">  	<span class="built_in">puts</span>(<span class="string">&quot;round again&quot;</span>);</span><br><span class="line">      <span class="comment">//和select一样，阻塞，有数据时，内核置位revents</span></span><br><span class="line">	poll(pollfds, <span class="number">5</span>, <span class="number">50000</span>);</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) &#123;</span><br><span class="line">		<span class="keyword">if</span> (pollfds[i].revents &amp; POLLIN)&#123;</span><br><span class="line">             <span class="comment">//恢复成0，可重用</span></span><br><span class="line">			pollfds[i].revents = <span class="number">0</span>;</span><br><span class="line">			<span class="built_in">memset</span>(buffer,<span class="number">0</span>,MAXBUF);</span><br><span class="line">			read(pollfds[i].fd, buffer, MAXBUF);</span><br><span class="line">			<span class="built_in">puts</span>(buffer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/img/article/selectpollepoll/202205032156224-165254522145112.png" alt="image-20220503215549375"></p>
+<p>可以看出，它采用了结构体数组来存放，远远不止1024个数，另外每次将<code>revents</code>又恢复成0，可以多次重复使用。</p>
+<p>但是还有上边两个问题，全量拷贝设计到内核态用户态的转变，O(N)次遍历。</p>
+<h3 id="3-epoll"><a href="#3-epoll" class="headerlink" title="3.epoll"></a>3.epoll</h3><p>epoll用户和内核共用一块空间，避免拷贝开销</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">events</span>[5];</span></span><br><span class="line"> <span class="type">int</span> epfd = epoll_create(<span class="number">10</span>);<span class="comment">//这个epfd可以比喻成一块干净的黑板，来一个数据写一个。</span></span><br><span class="line"> ...</span><br><span class="line"> ...</span><br><span class="line"> <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++) </span><br><span class="line"> &#123;</span><br><span class="line">   <span class="type">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">epoll_event</span> <span class="title">ev</span>;</span></span><br><span class="line">   <span class="built_in">memset</span>(&amp;client, <span class="number">0</span>, <span class="keyword">sizeof</span> (client));</span><br><span class="line">   addrlen = <span class="keyword">sizeof</span>(client);</span><br><span class="line">   ev.data.fd = accept(sockfd,(<span class="keyword">struct</span> sockaddr*)&amp;client, &amp;addrlen);</span><br><span class="line">   ev.events = EPOLLIN;</span><br><span class="line">     <span class="comment">//和poll结构体类似，但是没有revents置为，直接写道黑板epfd上</span></span><br><span class="line">   epoll_ctl(epfd, EPOLL_CTL_ADD, ev.data.fd, &amp;ev); </span><br><span class="line"> &#125;</span><br><span class="line"> <span class="comment">//加入上边5此循环，此时黑板上有5条记录，</span></span><br><span class="line"> <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line"> 	<span class="built_in">puts</span>(<span class="string">&quot;round again&quot;</span>);</span><br><span class="line">     <span class="comment">//给内核判断，有数据的时候，内核把那个记录往前放，最后直接返回记录条数，后边用户可以根据记录条数从前往后遍历。</span></span><br><span class="line"> 	nfds = epoll_wait(epfd, events, <span class="number">5</span>, <span class="number">10000</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;nfds;i++) &#123;</span><br><span class="line">		<span class="built_in">memset</span>(buffer,<span class="number">0</span>,MAXBUF);</span><br><span class="line">		read(events[i].data.fd, buffer, MAXBUF);</span><br><span class="line">		<span class="built_in">puts</span>(buffer);</span><br><span class="line">&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>流程</p>
+<p><img src="/img/article/selectpollepoll/202205032353881.png" alt="image-20220503235351245"></p>
+<p>epoll是非阻塞的，</p>
+<p>当有数据的时候，会把相应文件描述符<code>置位</code>，但是epoll没有revent标志位，所以并不是真的置位。这时候会把有数据的文件描述符放到队首。</p>
+<p>epoll会返回有数据的文件描述符的个数</p>
+<p>根据返回的个数，读取前N个文件描述符即可</p>
+<p>Redis 、Nginx、Java在Linux环境下，都是采用的<code>epoll</code>模型</p>
+<p>（1）select，poll实现需要自己不断轮询所有fd集合，直到设备就绪，期间可能要睡眠和唤醒多次交替。而epoll其实也需要调用epoll_wait不断轮询就绪链表，期间也可能多次睡眠和唤醒交替，但是它是设备就绪时，调用回调函数，把就绪fd放入就绪链表中，并唤醒在epoll_wait中进入睡眠的进程。虽然都要睡眠和交替，但是select和poll在“醒着”的时候要遍历整个fd集合，而epoll在“醒着”的时候只要判断一下就绪链表是否为空就行了，这节省了大量的CPU时间。这就是回调机制带来的性能提升。</p>
+<p>（2）select，poll每次调用都要把fd集合从用户态往内核态拷贝一次，并且要把current往设备等待队列中挂一次，而epoll只要一次拷贝，而且把current往等待队列上挂也只挂一次（在epoll_wait的开始，注意这里的等待队列并不是设备等待队列，只是一个epoll内部定义的等待队列）。这也能节省不少的开销。</p>
+</article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>select,poll,epoll模型</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="https://www.lovebai.top/article/61661/">https://www.lovebai.top/article/61661/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>baixxq</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2022-04-28</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-05-03</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a></div><div class="post_share"><div class="social-share" data-image="/imgs/15.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="/pluginsSrc/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat_pay.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat_pay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/ali_pay.png" target="_blank"><img class="post-qr-code-img" src="/img/ali_pay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/3614/"><img class="prev-cover" src="/imgs/14.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Zookeeper笔记</div></div></a></div><div class="next-post pull-right"><a href="/article/62153/"><img class="next-cover" src="/imgs/2.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">git工具的详细教程</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">baixxq</div><div class="author-info__description">欢迎来到橙子味小白的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" href="https://www.lovebai.top/"><i class="fab fa-github"></i><span>欢迎光临</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/baixxq" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:baixxq@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://tool.gljlw.com/qqq/?qq=719617466" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站作为自己使用和测试，不对外开放。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80-%E3%80%81%E6%A6%82%E5%BF%B5%E8%AF%B4%E6%98%8E"><span class="toc-text">一 、概念说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%94%A8%E6%88%B7%E7%A9%BA%E9%97%B4%E4%B8%8E%E5%86%85%E6%A0%B8%E7%A9%BA%E9%97%B4"><span class="toc-text">1.用户空间与内核空间</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%BF%9B%E7%A8%8B%E5%88%87%E6%8D%A2"><span class="toc-text">2.进程切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6fd"><span class="toc-text">3.文件描述符fd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%BC%93%E5%AD%98-I-x2F-O"><span class="toc-text">4.缓存 I&#x2F;O</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-IO%E6%A8%A1%E5%BC%8F"><span class="toc-text">二、 IO模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%98%BB%E5%A1%9E-I-x2F-O%EF%BC%88blocking-IO%EF%BC%89"><span class="toc-text">1.阻塞 I&#x2F;O（blocking IO）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%9D%9E%E9%98%BB%E5%A1%9E-I-x2F-O%EF%BC%88nonblocking-IO%EF%BC%89"><span class="toc-text">2.非阻塞 I&#x2F;O（nonblocking IO）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-I-x2F-O-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%EF%BC%88-IO-multiplexing%EF%BC%89"><span class="toc-text">3.I&#x2F;O 多路复用（ IO multiplexing）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%BC%82%E6%AD%A5-I-x2F-O%EF%BC%88asynchronous-IO%EF%BC%89"><span class="toc-text">4.异步 I&#x2F;O（asynchronous IO）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E6%80%BB%E7%BB%93"><span class="toc-text">5.总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81-I-x2F-O-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E4%B9%8Bselect%E3%80%81poll%E3%80%81epoll%E8%AF%A6%E8%A7%A3"><span class="toc-text">三、 I&#x2F;O 多路复用之select、poll、epoll详解</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-select%E8%B0%83%E7%94%A8"><span class="toc-text">1.select调用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8E%9F%E7%90%86"><span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E7%82%B9"><span class="toc-text">缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Poll%E8%B0%83%E7%94%A8"><span class="toc-text">2.Poll调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-epoll"><span class="toc-text">3.epoll</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/47200/" title="恋爱小语录"><img src="/imgs/27.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="恋爱小语录"/></a><div class="content"><a class="title" href="/article/47200/" title="恋爱小语录">恋爱小语录</a><time datetime="2023-04-12T15:56:44.000Z" title="发表于 2023-04-12 23:56:44">2023-04-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/4983/" title="如何搭建博客"><img src="/imgs/26.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何搭建博客"/></a><div class="content"><a class="title" href="/article/4983/" title="如何搭建博客">如何搭建博客</a><time datetime="2023-04-11T15:56:44.000Z" title="发表于 2023-04-11 23:56:44">2023-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/45037/" title="力扣"><img src="/imgs/25.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="力扣"/></a><div class="content"><a class="title" href="/article/45037/" title="力扣">力扣</a><time datetime="2022-08-20T12:03:44.000Z" title="发表于 2022-08-20 20:03:44">2022-08-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/45037/" title="剑指Offer"><img src="/imgs/24.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="剑指Offer"/></a><div class="content"><a class="title" href="/article/45037/" title="剑指Offer">剑指Offer</a><time datetime="2022-08-09T12:03:44.000Z" title="发表于 2022-08-09 20:03:44">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/16233/" title="Java中Arrays和List的sort方法"><img src="/imgs/23.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java中Arrays和List的sort方法"/></a><div class="content"><a class="title" href="/article/16233/" title="Java中Arrays和List的sort方法">Java中Arrays和List的sort方法</a><time datetime="2022-05-28T12:03:44.000Z" title="发表于 2022-05-28 20:03:44">2022-05-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="footer_custom_text"><p><a style="margin-inline:5px"target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px"target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px"target="_blank" href="https://cloud.tencent.com/"><img src="https://img.shields.io/badge/CDN-Tencent-orange?style=flat&logo=ReactOS" title="本站使用 腾讯CND 为静态资源提供CDN加速"></a><a style="margin-inline:5px"target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站国外访问由 GitHub 托管" alt="GitHub"></a><a style="margin-inline:5px"target="_blank" href="https://cloud.tencent.com/"><img src="https://img.shields.io/badge/Source-Tencent-d12166?style=flat&logo=GTK" title="本站国内访问由 腾讯COS 托管" ></a></p><p><a style="margin-inline:5px"target="_blank" href="https://beian.miit.gov.cn/"><img src="https://img.shields.io/badge/京ICP备-2022015151号-yellow?style=flat&logo=AdGuard" title="本站已在工信部备案，备案编号 京ICP备2022015151号"></a><a style="margin-inline:5px"target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002019&token=8c90a668-7dcb-40ac-8f03-d95d72c9b74d/"><img src="https://img.shields.io/badge/京公安网备-11010802039604号-brightgreen?style=flat&logo=AdGuard" title="本站已在公安部备案，备案编号 京公安网备 11010802039604号"></a><a style="margin-inline:5px"target="_blank"href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" alt="img" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.lovebai.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.lovebai.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.17/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async src="/js/weather.js"></script><script src="/js/sun_moon.js" async></script><script async src="//at.alicdn.com/t/font_2264842_3izu8i5eoc2.js"></script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><script async src="/js/grayscale.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/11984/" alt=""><img width="48" height="48" src="/imgs/20.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-22</span><a class="blog-slider__title" href="article/11984/" alt="">力扣热题100</a><div class="blog-slider__text">力扣热题100，二刷整理</div><a class="blog-slider__button" href="article/11984/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/45037/" alt=""><img width="48" height="48" src="/imgs/24.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-09</span><a class="blog-slider__title" href="article/45037/" alt="">剑指Offer</a><div class="blog-slider__text">剑指Offer整本，之前刷过精简版，现在刷一下整体</div><a class="blog-slider__button" href="article/45037/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/64676/" alt=""><img width="48" height="48" src="/imgs/21.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-15</span><a class="blog-slider__title" href="article/64676/" alt="">牛客面试必刷TOP101</a><div class="blog-slider__text">牛客面试必刷TOP101，这个感觉都比较简单，有空就随便做一两道玩玩</div><a class="blog-slider__button" href="article/64676/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/44374/" alt=""><img width="48" height="48" src="/imgs/19.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-22</span><a class="blog-slider__title" href="article/44374/" alt="">代码随想录整理</a><div class="blog-slider__text">之前刷过一遍，现在每天整理一下</div><a class="blog-slider__button" href="article/44374/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '500ms');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '180');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

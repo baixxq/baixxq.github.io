@@ -1,0 +1,564 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>代码随想录整理 | 橙子的博客</title><meta name="keywords" content="算法题"><meta name="author" content="baixxq"><meta name="copyright" content="baixxq"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="之前刷过一遍，现在每天整理一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码随想录整理">
+<meta property="og:url" content="https://www.lovebai.top/article/44374/index.html">
+<meta property="og:site_name" content="橙子的博客">
+<meta property="og:description" content="之前刷过一遍，现在每天整理一下">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.lovebai.top/imgs/19.png">
+<meta property="article:published_time" content="2022-05-22T02:03:44.000Z">
+<meta property="article:modified_time" content="2022-05-30T08:03:44.000Z">
+<meta property="article:author" content="baixxq">
+<meta property="article:tag" content="算法题">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.lovebai.top/imgs/19.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.lovebai.top/article/44374/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"距离上次更新时间已经过去","messageNext":"天了，文章内容可能已经过期了"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: '/pluginsSrc/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: '/pluginsSrc/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '代码随想录整理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-30 16:03:44'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-a-huabanhuahua"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shuji"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-shijianzhou"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tuijian"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-a-fenxitongjitiaocha"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://guide.lovebai.top/"><i class="fa-fw iconfont icon-dingwei"></i><span> 引导</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxi"></i><span> 媒体</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books"><i class="fa-fw iconfont icon-tuijian"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies"><i class="fa-fw iconfont icon-dingwei"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxishoubing"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/2048/"><i class="fa-fw iconfont icon-youxi"></i><span> 2048</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/tetris/"><i class="fa-fw iconfont icon-a-zhuozikezhuo"></i><span> 玩方块</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/duxinshu/"><i class="fa-fw iconfont icon-a-xihuanxiaizuiaiaiqing"></i><span> 读心术</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/saolei/"><i class="fa-fw iconfont icon-anquan"></i><span> 扫雷</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/se2/"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 找不同</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/hexagon/"><i class="fa-fw iconfont icon-a-huangsedewuxingshoucangzuiai"></i><span> 六边形</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/sister/"><i class="fa-fw iconfont icon-caomeitiantianquan"></i><span> 找妹妹</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/catchcat/"><i class="fa-fw iconfont icon-a-baozhuanghechanpinhuowuanzhuangbao"></i><span> 抓小猫</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-kapian"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-xunzhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-zhuanjia"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/imgs/19.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">橙子的博客</a></span><div id="he-plugin-simple"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-a-huabanhuahua"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shuji"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-shijianzhou"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tuijian"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-a-fenxitongjitiaocha"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://guide.lovebai.top/"><i class="fa-fw iconfont icon-dingwei"></i><span> 引导</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxi"></i><span> 媒体</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books"><i class="fa-fw iconfont icon-tuijian"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies"><i class="fa-fw iconfont icon-dingwei"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxishoubing"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/2048/"><i class="fa-fw iconfont icon-youxi"></i><span> 2048</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/tetris/"><i class="fa-fw iconfont icon-a-zhuozikezhuo"></i><span> 玩方块</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/duxinshu/"><i class="fa-fw iconfont icon-a-xihuanxiaizuiaiaiqing"></i><span> 读心术</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/saolei/"><i class="fa-fw iconfont icon-anquan"></i><span> 扫雷</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/se2/"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 找不同</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/hexagon/"><i class="fa-fw iconfont icon-a-huangsedewuxingshoucangzuiai"></i><span> 六边形</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/sister/"><i class="fa-fw iconfont icon-caomeitiantianquan"></i><span> 找妹妹</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/catchcat/"><i class="fa-fw iconfont icon-a-baozhuanghechanpinhuowuanzhuangbao"></i><span> 抓小猫</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-kapian"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-xunzhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-zhuanjia"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">代码随想录整理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-22T02:03:44.000Z" title="发表于 2022-05-22 10:03:44">2022-05-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-30T08:03:44.000Z" title="更新于 2022-05-30 16:03:44">2022-05-30</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">4.3k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="代码随想录整理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、动态规划理论"><a href="#一、动态规划理论" class="headerlink" title="一、动态规划理论"></a>一、动态规划理论</h1><h2 id="1-动态理论基础"><a href="#1-动态理论基础" class="headerlink" title="1.动态理论基础"></a>1.动态理论基础</h2><h3 id="什么是动态规划"><a href="#什么是动态规划" class="headerlink" title="什么是动态规划"></a>什么是动态规划</h3><p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
+<p>所以动态规划中每一个状态一定是由上一个状态推导出来的，<strong>这一点就区分于贪心</strong>，贪心没有状态推导，而是从局部直接选最优的。</p>
+<p>例如最经典的一个题：有N件物品和一个最多能背重量为W 的背包。第<code>i</code>件物品的重量是<code>weight[i]</code>，得到的价值是<code>value[i]</code>。<strong>每件物品只能用一次</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
+<p>动态规划中<code>dp[j]</code>是由<code>dp[j-weight[i]]</code>推导出来的，然后取<code>max(dp[j], dp[j - weight[i]] + value[i])</code>。</p>
+<p>但如果是贪心呢，每次拿物品选一个最大的或者最小的就完事了，和上一个状态没有关系。</p>
+<p>所以贪心解决不了动态规划的问题。</p>
+<h3 id="动态规划的解题步骤"><a href="#动态规划的解题步骤" class="headerlink" title="动态规划的解题步骤"></a>动态规划的解题步骤</h3><p><strong>对于动态规划问题，我将拆解为如下五步曲，这五步都搞清楚了，才能说把动态规划真的掌握了！</strong></p>
+<ol>
+<li><strong>确定dp数组（dp table）以及下标的含义</strong></li>
+<li><strong>确定递推公式</strong></li>
+<li><strong>dp数组如何初始化</strong></li>
+<li><strong>确定遍历顺序</strong></li>
+<li><strong>举例推导dp数组</strong></li>
+</ol>
+<h3 id="动态规划应该如何debug"><a href="#动态规划应该如何debug" class="headerlink" title="动态规划应该如何debug"></a>动态规划应该如何debug</h3><p><strong>做动规的题目，写代码之前一定要把状态转移在dp数组的上具体情况模拟一遍，心中有数，确定最后推出的是想要的结果</strong>。</p>
+<p>然后再写代码，如果代码没通过就打印dp数组，看看是不是和自己预先推导的哪里不一样。</p>
+<p>如果打印出来和自己预先模拟推导是一样的，那么就是自己的递归公式、初始化或者遍历顺序有问题了。</p>
+<p>如果和自己预先模拟推导的不一样，那么就是代码实现细节有问题。</p>
+<p><strong>这样才是一个完整的思考过程，而不是一旦代码出问题，就毫无头绪的东改改西改改，最后过不了，或者说是稀里糊涂的过了</strong>。</p>
+<h2 id="2-斐波那契数"><a href="#2-斐波那契数" class="headerlink" title="2.斐波那契数"></a>2.斐波那契数</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/fibonacci-number/">力扣题目链接</a></p>
+<p>斐波那契数，通常用 F(n) 表示，形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。也就是： F(0) &#x3D; 0，F(1) &#x3D; 1 F(n) &#x3D; F(n - 1) + F(n - 2)，其中 n &gt; 1 给你n ，请计算 F(n) 。</p>
+<p>提示：</p>
+<ul>
+<li>0 &lt;&#x3D; n &lt;&#x3D; 30</li>
+</ul>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><p>确定dp数组以及下标的含义</p>
+<p>dp[i]的定义为：第i个数的斐波那契数值是dp[i]</p>
+</li>
+<li><p>确定递推公式</p>
+<p>题目已经把递推公式直接给我们了：状态转移方程 dp[i] &#x3D; dp[i - 1] + dp[i - 2];</p>
+</li>
+<li><p>dp数组如何初始化</p>
+<p>题目中把如何初始化也直接给我们了，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>确定遍历顺序</p>
+<p>从递归公式dp[i] &#x3D; dp[i - 1] + dp[i - 2];中可以看出，dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</p>
+</li>
+<li><p>举例推导dp数组</p>
+<p>按照这个递推公式dp[i] &#x3D; dp[i - 1] + dp[i - 2]，我们来推导一下，当N为10的时候，dp数组应该是如下的数列：</p>
+<p>0 1 1 2 3 5 8 13 21 34 55</p>
+<p>如果代码写出来，发现结果不对，就把dp数组打印出来看看和我们推导的数列是不是一致的。</p>
+</li>
+</ol>
+<p>所以，本题采用动态规划解法的时间复杂度为：</p>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ul>
+<p>如果不记录所有值，只维护两个值，</p>
+<ul>
+<li>时间复杂度：O(n)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">fib</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(n&lt;<span class="number">2</span>)<span class="keyword">return</span> n;</span><br><span class="line">        <span class="comment">//1.确定dp和意义</span></span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">        <span class="comment">//3.确定dp初始值</span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//2.确定地推公式，4.确定遍历顺序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span> ; i &lt;= n; i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> dp[<span class="number">1</span>];</span><br><span class="line">            dp[<span class="number">1</span>] = dp[<span class="number">0</span>] + dp[<span class="number">1</span>];</span><br><span class="line">            dp[<span class="number">0</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h2 id="3-爬楼梯"><a href="#3-爬楼梯" class="headerlink" title="3. 爬楼梯"></a>3. 爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">力扣题目链接</a></p>
+<p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。</p>
+<p>每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？</p>
+<p>注意：给定 n 是一个正整数。</p>
+<p>示例 1：</p>
+<ul>
+<li>输入： 2</li>
+<li>输出： 2</li>
+<li>解释： 有两种方法可以爬到楼顶。<ul>
+<li>1 阶 + 1 阶</li>
+<li>2 阶</li>
+</ul>
+</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入： 3</li>
+<li>输出： 3</li>
+<li>解释： 有三种方法可以爬到楼顶。<ul>
+<li>1 阶 + 1 阶 + 1 阶</li>
+<li>1 阶 + 2 阶</li>
+<li>2 阶 + 1 阶</li>
+</ul>
+</li>
+</ul>
+<h3 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h3><ol>
+<li><p>确定dp数组以及下标的含义</p>
+<p>dp[i]： 爬到第i层楼梯，有dp[i]种方法</p>
+</li>
+<li><p>确定递推公式</p>
+<p>如何可以推出dp[i]呢？注意题目给了，<strong>一次跳一个或者两个台阶</strong>，所以从dp[i]的定义可以看出，dp[i] 可以有两个方向推出来。</p>
+<p>首先是dp[i - 1]，上i-1层楼梯，有dp[i - 1]种方法，那么再一步跳一个台阶不就是dp[i]了么，还有就是dp[i - 2]，上i-2层楼梯，有dp[i - 2]种方法，那么再一步跳两个台阶不就是dp[i]了么，那么dp[i]就是 dp[i - 1]与dp[i - 2]之和！所以dp[i] &#x3D; dp[i - 1] + dp[i - 2] 。在推导dp[i]的时候，一定要时刻想着dp[i]的定义，否则容易跑偏。这体现出确定dp数组以及下标的含义的重要性！</p>
+</li>
+<li><p>dp数组如何初始化</p>
+<p>题目既然给了n大于等于1，就无所谓dp[0]是1还是0了。只初始化dp[1] &#x3D; 1，dp[2] &#x3D; 2，然后从i &#x3D; 3开始递推，这样才符合dp[i]的定义。</p>
+</li>
+<li><p>确定遍历顺序</p>
+<p>从递归公式dp[i] &#x3D; dp[i - 1] + dp[i - 2];中可以看出，dp[i]是依赖 dp[i - 1] 和 dp[i - 2]，那么遍历的顺序一定是从前到后遍历的</p>
+</li>
+<li><p>举例推导dp数组</p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">climbStairs</span><span class="params">(<span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(n &lt;= <span class="number">3</span>) <span class="keyword">return</span> n;</span><br><span class="line">          <span class="comment">//1.确定dp和意义</span></span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">         <span class="comment">//3.确定dp初始值</span></span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">        <span class="comment">//2.确定地推公式，4.确定遍历顺序</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">3</span> ; i &lt;= n ; i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> dp[<span class="number">1</span>];</span><br><span class="line">            dp[<span class="number">1</span>] = dp[<span class="number">1</span>] + dp[<span class="number">0</span>];</span><br><span class="line">            dp[<span class="number">0</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-使用最小花费爬楼梯"><a href="#4-使用最小花费爬楼梯" class="headerlink" title="4.使用最小花费爬楼梯"></a>4.使用最小花费爬楼梯</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/min-cost-climbing-stairs/">力扣题目链接</a></p>
+<p>数组的每个下标作为一个阶梯，第 i 个阶梯对应着一个非负数的体力花费值 cost[i]（下标从 0 开始）。</p>
+<p>每当你爬上一个阶梯你都要花费对应的体力值，一旦支付了相应的体力值，你就可以选择向上爬一个阶梯或者爬两个阶梯。</p>
+<p>请你找出达到楼层顶部的最低花费。在开始时，你可以选择从下标为 0 或 1 的元素作为初始阶梯。</p>
+<p>示例 1：</p>
+<p>输入：cost &#x3D; [10, 15, 20] 输出：15 解释：最低花费是从 cost[1] 开始，然后走两步即可到阶梯顶，一共花费 15 。  </p>
+<p>示例 2：</p>
+<p>输入：cost &#x3D; [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] 输出：6 解释：最低花费方式是从 cost[0] 开始，逐个经过那些 1 ，跳过 cost[3] ，一共花费 6 。</p>
+<p>提示：</p>
+<ul>
+<li>cost 的长度范围是 [2, 1000]。</li>
+<li>cost[i] 将会是一个整型数据，范围为 [0, 999]</li>
+</ul>
+<h3 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>确定dp数组以及下标的含义</li>
+</ol>
+<p>dp[i]的定义：到达第i个台阶所花费的最少体力为dp[i]。（注意这里认为是第一步一定是要花费）</p>
+<p><strong>对于dp数组的定义，大家一定要清晰！</strong></p>
+<ol start="2">
+<li>确定递推公式</li>
+</ol>
+<p>**可以有两个途径得到dp[i]，一个是dp[i-1] 一个是dp[i-2]**。</p>
+<p>那么究竟是选dp[i-1]还是dp[i-2]呢？一定是选最小的，所以dp[i] &#x3D; min(dp[i - 1], dp[i - 2]) + cost[i];</p>
+<p><strong>注意这里为什么是加cost[i]，而不是cost[i-1],cost[i-2]之类的</strong>，因为题目中说了：每当你爬上一个阶梯你都要花费对应的体力值</p>
+<ol start="3">
+<li>dp数组如何初始化</li>
+</ol>
+<p>根据dp数组的定义，dp数组初始化其实是比较难的，因为不可能初始化为第i台阶所花费的最少体力。</p>
+<p>那么看一下递归公式，dp[i]由dp[i-1]，dp[i-2]推出，既然初始化所有的dp[i]是不可能的，那么只初始化dp[0]和dp[1]就够了，其他的最终都是dp[0]dp[1]推出。</p>
+<p>所以初始化代码为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>确定遍历顺序</li>
+</ol>
+<p>最后一步，递归公式有了，初始化有了，如何遍历呢？本题的遍历顺序其实比较简单，简单到很多同学都忽略了思考这一步直接就把代码写出来了。因为是模拟台阶，而且dp[i]又dp[i-1]dp[i-2]推出，所以是从前到后遍历cost数组就可以了。</p>
+<p><strong>但是稍稍有点难度的动态规划，其遍历顺序并不容易确定下来</strong>。</p>
+<p>例如：01背包，都知道两个for循环，一个for遍历物品嵌套一个for遍历背包容量，那么为什么不是一个for遍历背包容量嵌套一个for遍历物品呢？ 以及在使用一维dp数组的时候遍历背包容量为什么要倒序呢？</p>
+<ol start="5">
+<li>举例推导dp数组</li>
+</ol>
+<p>拿示例2：cost &#x3D; [1, 100, 1, 1, 1, 100, 1, 1, 100, 1] ，来模拟一下dp数组的状态变化，如下：</p>
+<p><img src="/img/article/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E6%95%B4%E7%90%86/2021010621363669.png" alt="746.使用最小花费爬楼梯"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minCostClimbingStairs</span><span class="params">(<span class="type">int</span>[] cost)</span> &#123;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = cost[<span class="number">0</span>];</span><br><span class="line">        dp[<span class="number">1</span>] = cost[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span>; i &lt; cost.length; i++) &#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> dp[<span class="number">1</span>];</span><br><span class="line">            dp[<span class="number">1</span>] = Math.min(dp[<span class="number">1</span>], dp[<span class="number">0</span>]) + cost[i];</span><br><span class="line">            dp[<span class="number">0</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//最后一步，如果是由倒数第二步爬，则最后一步的体力花费可以不用算</span></span><br><span class="line">        <span class="keyword">return</span> Math.min(dp[<span class="number">0</span>], dp[<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或者也可以样，定义dp[i]为:第一步是不花费体力，最后一步是花费体力的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">minCostClimbingStairs</span><span class="params">(<span class="type">int</span>[] cost)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[] dp = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">        dp[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">        dp[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">2</span> ; i &lt;= cost.length ; i++)&#123;</span><br><span class="line">            <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> dp[<span class="number">1</span>];</span><br><span class="line">            dp[<span class="number">1</span>] = Math.min(dp[<span class="number">1</span>]+cost[i-<span class="number">1</span>],dp[<span class="number">0</span>]+cost[i-<span class="number">2</span>]);</span><br><span class="line">            dp[<span class="number">0</span>] = temp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="5-不同路径"><a href="#5-不同路径" class="headerlink" title="5.不同路径"></a>5.不同路径</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths/">力扣题目链接(opens new window)</a></p>
+<p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为 “Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为 “Finish” ）。</p>
+<p>问总共有多少条不同的路径？</p>
+<p>示例 1：</p>
+<p><img src="/img/article/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E6%95%B4%E7%90%86/20210110174033215.png" alt="img"></p>
+<ul>
+<li>输入：m &#x3D; 3, n &#x3D; 7</li>
+<li>输出：28</li>
+</ul>
+<p>示例 2：</p>
+<ul>
+<li>输入：m &#x3D; 2, n &#x3D; 3</li>
+<li>输出：3</li>
+</ul>
+<p>解释： 从左上角开始，总共有 3 条路径可以到达右下角。</p>
+<ol>
+<li>向右 -&gt; 向右 -&gt; 向下</li>
+<li>向右 -&gt; 向下 -&gt; 向右</li>
+<li>向下 -&gt; 向右 -&gt; 向右</li>
+</ol>
+<p>示例 3：</p>
+<ul>
+<li>输入：m &#x3D; 7, n &#x3D; 3</li>
+<li>输出：28</li>
+</ul>
+<p>示例 4：</p>
+<ul>
+<li>输入：m &#x3D; 3, n &#x3D; 3</li>
+<li>输出：6</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>1 &lt;&#x3D; m, n &lt;&#x3D; 100</li>
+<li>题目数据保证答案小于等于 2 * 10^9</li>
+</ul>
+<h3 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h3><p>按照动规五部曲来分析：</p>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义</li>
+</ol>
+<p><code>dp[i][j]</code> ：表示从（0 ，0）出发，到(i, j) 有<code>dp[i][j]</code>条不同的路径。</p>
+<ol start="2">
+<li>确定递推公式</li>
+</ol>
+<p>想要求<code>dp[i][j]</code>，只能有两个方向来推导出来，即<code>dp[i - 1][j] </code>和 <code>dp[i][j - 1]</code>。</p>
+<p>此时在回顾一下 <code>dp[i - 1][j]</code> 表示啥，是从(0, 0)的位置到(i - 1, j)有几条路径，<code>dp[i][j - 1]</code>同理。那么很自然，<code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，因为<code>dp[i][j]</code>只有这两个方向过来。</p>
+<ol start="3">
+<li>dp数组的初始化</li>
+</ol>
+<p>如何初始化呢，首先<code>dp[i][0]</code>一定都是1，因为从(0, 0)的位置到(i, 0)的路径只有一条，那么<code>dp[0][j]</code>也同理。</p>
+<p>所以初始化代码为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; m; i++) dp[i][0] = 1;</span><br><span class="line">for (int j = 0; j &lt; n; j++) dp[0][j] = 1;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>确定遍历顺序</li>
+</ol>
+<p>这里要看一下递归公式<code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，<code>dp[i][j]</code>都是从其上方和左方推导而来，那么从左到右一层一层遍历就可以了。</p>
+<p>这样就可以保证推导<code>dp[i][j]</code>的时候，<code>dp[i - 1][j] </code>和<code> dp[i][j - 1]</code>一定是有数值的。</p>
+<ol start="5">
+<li><p>举例推导dp数组</p>
+<p><img src="/img/article/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E6%95%B4%E7%90%86/20201209113631392.png" alt="62.不同路径1"></p>
+</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">uniquePaths</span><span class="params">(<span class="type">int</span> m, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; m ; i++)dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; n ; i++)dp[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span> ; j &lt; n ; j++)&#123;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="6-不同路径-II"><a href="#6-不同路径-II" class="headerlink" title="6.不同路径 II"></a>6.不同路径 II</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/unique-paths-ii/">力扣题目链接</a></p>
+<p>一个机器人位于一个 m x n 网格的左上角 （起始点在下图中标记为“Start” ）。</p>
+<p>机器人每次只能向下或者向右移动一步。机器人试图达到网格的右下角（在下图中标记为“Finish”）。</p>
+<p>现在考虑网格中有障碍物。那么从左上角到右下角将会有多少条不同的路径？</p>
+<p><img src="/img/article/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E6%95%B4%E7%90%86/20210111204901338.png" alt="img"></p>
+<p>网格中的障碍物和空位置分别用 1 和 0 来表示。</p>
+<p>示例 1：</p>
+<p><img src="/img/article/%E4%BB%A3%E7%A0%81%E9%9A%8F%E6%83%B3%E5%BD%95%E6%95%B4%E7%90%86/20210111204939971.png" alt="img"></p>
+<ul>
+<li>输入：obstacleGrid &#x3D; [[0,0,0],[0,1,0],[0,0,0]]</li>
+<li>输出：2 解释：</li>
+<li>3x3 网格的正中间有一个障碍物。</li>
+<li>从左上角到右下角一共有 2 条不同的路径：<ol>
+<li>向右 -&gt; 向右 -&gt; 向下 -&gt; 向下</li>
+<li>向下 -&gt; 向下 -&gt; 向右 -&gt; 向右</li>
+</ol>
+</li>
+</ul>
+<p>提示：</p>
+<ul>
+<li>m &#x3D;&#x3D; obstacleGrid.length</li>
+<li>n &#x3D;&#x3D; obstacleGrid[i].length</li>
+<li>1 &lt;&#x3D; m, n &lt;&#x3D; 100</li>
+<li>obstacleGrid<code>[i][j]</code> 为 0 或 1</li>
+</ul>
+<h3 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h3><ol>
+<li>确定dp数组（dp table）以及下标的含义</li>
+</ol>
+<p><code>dp[i][j]</code> ：表示从（0 ，0）出发，到(i, j) 有<code>dp[i][j]</code>条不同的路径。</p>
+<ol start="2">
+<li>确定递推公式</li>
+</ol>
+<p>想要求<code>dp[i][j]</code>，只能有两个方向来推导出来，即<code>dp[i - 1][j] </code>和 <code>dp[i][j - 1]</code>。</p>
+<p>此时在回顾一下 <code>dp[i - 1][j]</code> 表示啥，是从(0, 0)的位置到(i - 1, j)有几条路径，<code>dp[i][j - 1]</code>同理。那么很自然，<code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，因为<code>dp[i][j]</code>只有这两个方向过来。</p>
+<ol start="3">
+<li>dp数组的初始化</li>
+</ol>
+<p>如何初始化呢，首先<code>dp[i][0]</code>一定都是1，因为从(0, 0)的位置到(i, 0)的路径只有一条，那么<code>dp[0][j]</code>也同理。</p>
+<p>所以初始化代码为：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i &lt; m; i++) dp[i][0] = 1;</span><br><span class="line">for (int j = 0; j &lt; n; j++) dp[0][j] = 1;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>但如果(i, 0) 这条边有了障碍之后，障碍之后（包括障碍）都是走不到的位置了，所以障碍之后的dp[i][0]应该还是初始值0。</p>
+<ol start="4">
+<li>确定遍历顺序</li>
+</ol>
+<p>这里要看一下递归公式<code>dp[i][j] = dp[i - 1][j] + dp[i][j - 1]</code>，<code>dp[i][j]</code>都是从其上方和左方推导而来，那么从左到右一层一层遍历就可以了。</p>
+<p>这样就可以保证推导<code>dp[i][j]</code>的时候，<code>dp[i - 1][j] </code>和<code> dp[i][j - 1]</code>一定是有数值的。</p>
+<ol start="5">
+<li>举例推导dp数组</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">uniquePathsWithObstacles</span><span class="params">(<span class="type">int</span>[][] obstacleGrid)</span> &#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">m</span> <span class="operator">=</span> obstacleGrid.length;</span><br><span class="line">        <span class="type">int</span> <span class="variable">n</span> <span class="operator">=</span> obstacleGrid[<span class="number">0</span>].length;</span><br><span class="line">        <span class="type">int</span>[][] dp = <span class="keyword">new</span> <span class="title class_">int</span>[m][n];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; m; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(obstacleGrid[i][<span class="number">0</span>] == <span class="number">1</span>)<span class="keyword">break</span>;</span><br><span class="line">            dp[i][<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span> ; i &lt; n; i++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(obstacleGrid[<span class="number">0</span>][i] == <span class="number">1</span>)<span class="keyword">break</span>;</span><br><span class="line">            dp[<span class="number">0</span>][i] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span> ; i &lt; m ; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">1</span>; j &lt; n ; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span>(obstacleGrid[i][j] == <span class="number">1</span>)<span class="keyword">continue</span>;</span><br><span class="line">                dp[i][j] = dp[i-<span class="number">1</span>][j] + dp[i][j-<span class="number">1</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dp[m-<span class="number">1</span>][n-<span class="number">1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="7-整数拆分"><a href="#7-整数拆分" class="headerlink" title="7.整数拆分"></a>7.整数拆分</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/integer-break/">力扣题目链接(opens new window)</a></p>
+<p>给定一个正整数 n，将其拆分为至少两个正整数的和，并使这些整数的乘积最大化。 返回你可以获得的最大乘积。</p>
+<p>示例 1:</p>
+<ul>
+<li>输入: 2</li>
+<li>输出: 1</li>
+<li>解释: 2 &#x3D; 1 + 1, 1 × 1 &#x3D; 1。</li>
+</ul>
+<p>示例 2:</p>
+<ul>
+<li>输入: 10</li>
+<li>输出: 36</li>
+<li>解释: 10 &#x3D; 3 + 3 + 4, 3 × 3 × 4 &#x3D; 36。</li>
+<li>说明: 你可以假设 n 不小于 2 且不大于 58</li>
+</ul>
+<h3 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h3><p>动规五部曲，分析如下：</p>
+<ol>
+<li>确定dp数组（dp table）以及下标的含义</li>
+</ol>
+<p>dp[i]：分拆数字i，可以得到的最大乘积为dp[i]。</p>
+<p>dp[i]的定义讲贯彻整个解题过程，下面哪一步想不懂了，就想想dp[i]究竟表示的是啥！</p>
+<ol>
+<li>确定递推公式</li>
+</ol>
+<p>可以想 dp[i]最大乘积是怎么得到的呢？</p>
+<p>其实可以从1遍历j，然后有两种渠道得到dp[i].</p>
+<p>一个是j * (i - j) 直接相乘。</p>
+<p>一个是j * dp[i - j]，相当于是拆分(i - j)，对这个拆分不理解的话，可以回想dp数组的定义。</p>
+</article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>代码随想录整理</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="https://www.lovebai.top/article/44374/">https://www.lovebai.top/article/44374/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>baixxq</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2022-05-22</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-05-30</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></div><div class="post_share"><div class="social-share" data-image="/imgs/19.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="/pluginsSrc/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat_pay.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat_pay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/ali_pay.png" target="_blank"><img class="post-qr-code-img" src="/img/ali_pay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/11984/"><img class="prev-cover" src="/imgs/20.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">力扣热题100</div></div></a></div><div class="next-post pull-right"><a href="/article/46000/"><img class="next-cover" src="/imgs/17.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CentOS上网配置</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/article/45037/" title="力扣"><img class="cover" src="/imgs/25.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-20</div><div class="title">力扣</div></div></a></div><div><a href="/article/59157/" title="算法题"><img class="cover" src="/imgs/18.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-04-27</div><div class="title">算法题</div></div></a></div><div><a href="/article/64676/" title="牛客面试必刷TOP101"><img class="cover" src="/imgs/21.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-15</div><div class="title">牛客面试必刷TOP101</div></div></a></div><div><a href="/article/61237/" title="排序算法"><img class="cover" src="/imgs/articlepaixu.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-16</div><div class="title">排序算法</div></div></a></div><div><a href="/article/16233/" title="Java中Arrays和List的sort方法"><img class="cover" src="/imgs/23.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-28</div><div class="title">Java中Arrays和List的sort方法</div></div></a></div><div><a href="/article/11984/" title="力扣热题100"><img class="cover" src="/imgs/20.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-22</div><div class="title">力扣热题100</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">baixxq</div><div class="author-info__description">欢迎来到橙子味小白的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" href="https://www.lovebai.top/"><i class="fab fa-github"></i><span>欢迎光临</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/baixxq" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:baixxq@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://tool.gljlw.com/qqq/?qq=719617466" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站作为自己使用和测试，不对外开放。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%90%86%E8%AE%BA"><span class="toc-text">一、动态规划理论</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%8A%A8%E6%80%81%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="toc-text">1.动态理论基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92"><span class="toc-text">什么是动态规划</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%9A%84%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-text">动态规划的解题步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95debug"><span class="toc-text">动态规划应该如何debug</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%96%90%E6%B3%A2%E9%82%A3%E5%A5%91%E6%95%B0"><span class="toc-text">2.斐波那契数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E7%88%AC%E6%A5%BC%E6%A2%AF"><span class="toc-text">3. 爬楼梯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BD%BF%E7%94%A8%E6%9C%80%E5%B0%8F%E8%8A%B1%E8%B4%B9%E7%88%AC%E6%A5%BC%E6%A2%AF"><span class="toc-text">4.使用最小花费爬楼梯</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84"><span class="toc-text">5.不同路径</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E4%B8%8D%E5%90%8C%E8%B7%AF%E5%BE%84-II"><span class="toc-text">6.不同路径 II</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E6%95%B4%E6%95%B0%E6%8B%86%E5%88%86"><span class="toc-text">7.整数拆分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-5"><span class="toc-text">思路</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/47200/" title="恋爱小语录"><img src="/imgs/27.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="恋爱小语录"/></a><div class="content"><a class="title" href="/article/47200/" title="恋爱小语录">恋爱小语录</a><time datetime="2023-04-12T15:56:44.000Z" title="发表于 2023-04-12 23:56:44">2023-04-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/4983/" title="如何搭建博客"><img src="/imgs/26.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何搭建博客"/></a><div class="content"><a class="title" href="/article/4983/" title="如何搭建博客">如何搭建博客</a><time datetime="2023-04-11T15:56:44.000Z" title="发表于 2023-04-11 23:56:44">2023-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/45037/" title="力扣"><img src="/imgs/25.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="力扣"/></a><div class="content"><a class="title" href="/article/45037/" title="力扣">力扣</a><time datetime="2022-08-20T12:03:44.000Z" title="发表于 2022-08-20 20:03:44">2022-08-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/45037/" title="剑指Offer"><img src="/imgs/24.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="剑指Offer"/></a><div class="content"><a class="title" href="/article/45037/" title="剑指Offer">剑指Offer</a><time datetime="2022-08-09T12:03:44.000Z" title="发表于 2022-08-09 20:03:44">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/16233/" title="Java中Arrays和List的sort方法"><img src="/imgs/23.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java中Arrays和List的sort方法"/></a><div class="content"><a class="title" href="/article/16233/" title="Java中Arrays和List的sort方法">Java中Arrays和List的sort方法</a><time datetime="2022-05-28T12:03:44.000Z" title="发表于 2022-05-28 20:03:44">2022-05-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="footer_custom_text"><p><a style="margin-inline:5px"target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px"target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px"target="_blank" href="https://cloud.tencent.com/"><img src="https://img.shields.io/badge/CDN-Tencent-orange?style=flat&logo=ReactOS" title="本站使用 腾讯CND 为静态资源提供CDN加速"></a><a style="margin-inline:5px"target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站国外访问由 GitHub 托管" alt="GitHub"></a><a style="margin-inline:5px"target="_blank" href="https://cloud.tencent.com/"><img src="https://img.shields.io/badge/Source-Tencent-d12166?style=flat&logo=GTK" title="本站国内访问由 腾讯COS 托管" ></a></p><p><a style="margin-inline:5px"target="_blank" href="https://beian.miit.gov.cn/"><img src="https://img.shields.io/badge/京ICP备-2022015151号-yellow?style=flat&logo=AdGuard" title="本站已在工信部备案，备案编号 京ICP备2022015151号"></a><a style="margin-inline:5px"target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002019&token=8c90a668-7dcb-40ac-8f03-d95d72c9b74d/"><img src="https://img.shields.io/badge/京公安网备-11010802039604号-brightgreen?style=flat&logo=AdGuard" title="本站已在公安部备案，备案编号 京公安网备 11010802039604号"></a><a style="margin-inline:5px"target="_blank"href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" alt="img" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.lovebai.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.lovebai.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.17/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async src="/js/weather.js"></script><script src="/js/sun_moon.js" async></script><script async src="//at.alicdn.com/t/font_2264842_3izu8i5eoc2.js"></script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><script async src="/js/grayscale.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/11984/" alt=""><img width="48" height="48" src="/imgs/20.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-22</span><a class="blog-slider__title" href="article/11984/" alt="">力扣热题100</a><div class="blog-slider__text">力扣热题100，二刷整理</div><a class="blog-slider__button" href="article/11984/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/45037/" alt=""><img width="48" height="48" src="/imgs/24.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-09</span><a class="blog-slider__title" href="article/45037/" alt="">剑指Offer</a><div class="blog-slider__text">剑指Offer整本，之前刷过精简版，现在刷一下整体</div><a class="blog-slider__button" href="article/45037/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/64676/" alt=""><img width="48" height="48" src="/imgs/21.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-15</span><a class="blog-slider__title" href="article/64676/" alt="">牛客面试必刷TOP101</a><div class="blog-slider__text">牛客面试必刷TOP101，这个感觉都比较简单，有空就随便做一两道玩玩</div><a class="blog-slider__button" href="article/64676/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/44374/" alt=""><img width="48" height="48" src="/imgs/19.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-22</span><a class="blog-slider__title" href="article/44374/" alt="">代码随想录整理</a><div class="blog-slider__text">之前刷过一遍，现在每天整理一下</div><a class="blog-slider__button" href="article/44374/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '500ms');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '180');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>

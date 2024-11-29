@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Java垃圾回收 | 橙子的博客</title><meta name="keywords" content="垃圾回收,JVM"><meta name="author" content="baixxq"><meta name="copyright" content="baixxq"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Java垃圾回收">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java垃圾回收">
+<meta property="og:url" content="https://www.lovebai.top/article/12705/index.html">
+<meta property="og:site_name" content="橙子的博客">
+<meta property="og:description" content="Java垃圾回收">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.lovebai.top/imgs/6.png">
+<meta property="article:published_time" content="2022-04-28T15:17:28.000Z">
+<meta property="article:modified_time" content="2022-05-01T04:23:35.000Z">
+<meta property="article:author" content="baixxq">
+<meta property="article:tag" content="垃圾回收">
+<meta property="article:tag" content="JVM">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.lovebai.top/imgs/6.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://www.lovebai.top/article/12705/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="/pluginsSrc/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="/pluginsSrc/@fancyapps/ui/dist/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"距离上次更新时间已经过去","messageNext":"天了，文章内容可能已经过期了"},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":350},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: '/pluginsSrc/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: '/pluginsSrc/flickr-justified-gallery/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Java垃圾回收',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-01 12:23:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom.css"  media="defer" onload="this.media='all'"><svg aria-hidden="true" style="position:absolute; overflow:hidden; width:0; height:0"><symbol id="icon-sun" viewBox="0 0 1024 1024"><path d="M960 512l-128 128v192h-192l-128 128-128-128H192v-192l-128-128 128-128V192h192l128-128 128 128h192v192z" fill="#FFD878" p-id="8420"></path><path d="M736 512a224 224 0 1 0-448 0 224 224 0 1 0 448 0z" fill="#FFE4A9" p-id="8421"></path><path d="M512 109.248L626.752 224H800v173.248L914.752 512 800 626.752V800h-173.248L512 914.752 397.248 800H224v-173.248L109.248 512 224 397.248V224h173.248L512 109.248M512 64l-128 128H192v192l-128 128 128 128v192h192l128 128 128-128h192v-192l128-128-128-128V192h-192l-128-128z" fill="#4D5152" p-id="8422"></path><path d="M512 320c105.888 0 192 86.112 192 192s-86.112 192-192 192-192-86.112-192-192 86.112-192 192-192m0-32a224 224 0 1 0 0 448 224 224 0 0 0 0-448z" fill="#4D5152" p-id="8423"></path></symbol><symbol id="icon-moon" viewBox="0 0 1024 1024"><path d="M611.370667 167.082667a445.013333 445.013333 0 0 1-38.4 161.834666 477.824 477.824 0 0 1-244.736 244.394667 445.141333 445.141333 0 0 1-161.109334 38.058667 85.077333 85.077333 0 0 0-65.066666 135.722666A462.08 462.08 0 1 0 747.093333 102.058667a85.077333 85.077333 0 0 0-135.722666 65.024z" fill="#FFB531" p-id="11345"></path><path d="M329.728 274.133333l35.157333-35.157333a21.333333 21.333333 0 1 0-30.165333-30.165333l-35.157333 35.157333-35.114667-35.157333a21.333333 21.333333 0 0 0-30.165333 30.165333l35.114666 35.157333-35.114666 35.157334a21.333333 21.333333 0 1 0 30.165333 30.165333l35.114667-35.157333 35.157333 35.157333a21.333333 21.333333 0 1 0 30.165333-30.165333z" fill="#030835" p-id="11346"></path></symbol></svg><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/animate.min.css" media="print" onload="this.media='screen'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-a-huabanhuahua"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shuji"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-shijianzhou"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tuijian"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-a-fenxitongjitiaocha"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://guide.lovebai.top/"><i class="fa-fw iconfont icon-dingwei"></i><span> 引导</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxi"></i><span> 媒体</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books"><i class="fa-fw iconfont icon-tuijian"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies"><i class="fa-fw iconfont icon-dingwei"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxishoubing"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/2048/"><i class="fa-fw iconfont icon-youxi"></i><span> 2048</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/tetris/"><i class="fa-fw iconfont icon-a-zhuozikezhuo"></i><span> 玩方块</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/duxinshu/"><i class="fa-fw iconfont icon-a-xihuanxiaizuiaiaiqing"></i><span> 读心术</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/saolei/"><i class="fa-fw iconfont icon-anquan"></i><span> 扫雷</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/se2/"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 找不同</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/hexagon/"><i class="fa-fw iconfont icon-a-huangsedewuxingshoucangzuiai"></i><span> 六边形</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/sister/"><i class="fa-fw iconfont icon-caomeitiantianquan"></i><span> 找妹妹</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/catchcat/"><i class="fa-fw iconfont icon-a-baozhuanghechanpinhuowuanzhuangbao"></i><span> 抓小猫</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-kapian"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-xunzhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-zhuanjia"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/imgs/6.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">橙子的博客</a></span><div id="he-plugin-simple"></div><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-a-huabanhuahua"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-shuji"></i><span> 找文章</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-shijianzhou"></i><span> 时间轴</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tuijian"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-a-fenxitongjitiaocha"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" target="_blank" rel="noopener" href="https://guide.lovebai.top/"><i class="fa-fw iconfont icon-dingwei"></i><span> 引导</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxi"></i><span> 媒体</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/books"><i class="fa-fw iconfont icon-tuijian"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies"><i class="fa-fw iconfont icon-dingwei"></i><span> 电影</span></a></li><li><a class="site-page child" href="/games"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 游戏</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw iconfont icon-youxishoubing"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/2048/"><i class="fa-fw iconfont icon-youxi"></i><span> 2048</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/tetris/"><i class="fa-fw iconfont icon-a-zhuozikezhuo"></i><span> 玩方块</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/duxinshu/"><i class="fa-fw iconfont icon-a-xihuanxiaizuiaiaiqing"></i><span> 读心术</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/saolei/"><i class="fa-fw iconfont icon-anquan"></i><span> 扫雷</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/se2/"><i class="fa-fw iconfont icon-a-tianqiyuntaiyang"></i><span> 找不同</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/hexagon/"><i class="fa-fw iconfont icon-a-huangsedewuxingshoucangzuiai"></i><span> 六边形</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/sister/"><i class="fa-fw iconfont icon-caomeitiantianquan"></i><span> 找妹妹</span></a></li><li><a class="site-page child" target="_blank" rel="noopener" href="https://game.lovebai.top/catchcat/"><i class="fa-fw iconfont icon-a-baozhuanghechanpinhuowuanzhuangbao"></i><span> 抓小猫</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/comments/"><i class="fa-fw iconfont icon-kapian"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw iconfont icon-xunzhang"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-zhuanjia"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Java垃圾回收</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-28T15:17:28.000Z" title="发表于 2022-04-28 23:17:28">2022-04-28</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-01T04:23:35.000Z" title="更新于 2022-05-01 12:23:35">2022-05-01</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/">Java后端研发</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Java%E5%90%8E%E7%AB%AF%E7%A0%94%E5%8F%91/Java%E5%9F%BA%E7%A1%80/">Java基础</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">6.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>20分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Java垃圾回收"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="JVM-垃圾回收"><a href="#JVM-垃圾回收" class="headerlink" title="JVM 垃圾回收"></a>JVM 垃圾回收</h1><h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><h3 id="本节常见面试题"><a href="#本节常见面试题" class="headerlink" title="本节常见面试题"></a>本节常见面试题</h3><p>问题答案在文中都有提到</p>
+<ul>
+<li>如何判断对象是否死亡（两种方法）。</li>
+<li>简单的介绍一下强引用、软引用、弱引用、虚引用（虚引用与软引用和弱引用的区别、使用软引用能带来的好处）。</li>
+<li>如何判断一个常量是废弃常量</li>
+<li>如何判断一个类是无用的类</li>
+<li>垃圾收集有哪些算法，各自的特点？</li>
+<li>HotSpot 为什么要分为新生代和老年代？</li>
+<li>常见的垃圾回收器有那些？</li>
+<li>介绍一下 CMS,G1 收集器。</li>
+<li>Minor Gc 和 Full GC 有什么不同呢？</li>
+</ul>
+<h3 id="本文导火索"><a href="#本文导火索" class="headerlink" title="本文导火索"></a>本文导火索</h3><p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/29176325.jpg" alt="img"></p>
+<p>当需要排查各种内存溢出问题、当垃圾收集成为系统达到更高并发的瓶颈时，我们就需要对这些“自动化”的技术实施必要的监控和调节。</p>
+<h2 id="1-揭开-JVM-内存分配与回收的神秘面纱"><a href="#1-揭开-JVM-内存分配与回收的神秘面纱" class="headerlink" title="1 揭开 JVM 内存分配与回收的神秘面纱"></a>1 揭开 JVM 内存分配与回收的神秘面纱</h2><p>Java 的自动内存管理主要是针对对象内存的回收和对象内存的分配。同时，Java 自动内存管理最核心的功能是 <strong>堆</strong> 内存中对象的分配与回收。</p>
+<p>Java 堆是垃圾收集器管理的主要区域，因此也被称作<strong>GC 堆（Garbage Collected Heap）</strong>.从垃圾回收的角度，由于现在收集器基本都采用分代垃圾收集算法，所以 Java 堆还可以细分为：新生代和老年代：再细致一点有：Eden 空间、From Survivor、To Survivor 空间等。<strong>进一步划分的目的是更好地回收内存，或者更快地分配内存。</strong></p>
+<p><strong>堆空间的基本结构：</strong></p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/2019-3%E5%A0%86%E7%BB%93%E6%9E%84.png" alt="img"></p>
+<p>上图所示的 eden 区、s0(“From”) 区、s1(“To”) 区都属于新生代，tentired 区属于老年代。大部分情况，对象都会首先在 Eden 区域分配，在一次新生代垃圾回收后，如果对象还存活，则会进入 s1(“To”)，并且对象的年龄还会加 1(Eden 区-&gt;Survivor 区后对象的初始年龄变为 1)，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。经过这次GC后，Eden区和”From”区已经被清空。这个时候，”From”和”To”会交换他们的角色，也就是新的”To”就是上次GC前的“From”，新的”From”就是上次GC前的”To”。不管怎样，都会保证名为To的Survivor区域是空的。Minor GC会一直重复这样的过程，直到“To”区被填满，”To”区被填满之后，会将所有对象移动到年老代中。</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%A0%86%E5%86%85%E5%AD%98.jpg" alt="堆内存常见分配策略 "></p>
+<h3 id="1-1-对象优先在-eden-区分配"><a href="#1-1-对象优先在-eden-区分配" class="headerlink" title="1.1 对象优先在 eden 区分配"></a>1.1 对象优先在 eden 区分配</h3><p>目前主流的垃圾收集器都会采用分代回收算法，因此需要将堆内存分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
+<p>大多数情况下，对象在新生代中 eden 区分配。当 eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.下面我们来进行实际测试以下。</p>
+<p>在测试之前我们先来看看 <strong>Minor GC 和 Full GC 有什么不同呢？</strong></p>
+<ul>
+<li><strong>新生代 GC（Minor GC）</strong>:指发生新生代的的垃圾收集动作，Minor GC 非常频繁，回收速度一般也比较快。</li>
+<li><strong>老年代 GC（Major GC&#x2F;Full GC）</strong>:指发生在老年代的 GC，出现了 Major GC 经常会伴随至少一次的 Minor GC（并非绝对），Major GC 的速度一般会比 Minor GC 的慢 10 倍以上。</li>
+</ul>
+<p><strong>测试：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GCTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] allocation1, allocation2;</span><br><span class="line">        allocation1 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">30900</span>*<span class="number">1024</span>];</span><br><span class="line">        <span class="comment">//allocation2 = new byte[900*1024];</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>通过以下方式运行：</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/25178350.jpg" alt="img"></p>
+<p>添加的参数：<code>-XX:+PrintGCDetails</code></p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/10317146.jpg" alt="img"></p>
+<p>运行结果 (红色字体描述有误，应该是对应于 JDK1.7 的永久代)：</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/28954286.jpg" alt="img"></p>
+<p>从上图我们可以看出 eden 区内存几乎已经被分配完全（即使程序什么也不做，新生代也会使用 2000 多 k 内存）。假如我们再为 allocation2 分配内存会出现什么情况呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">allocation2 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">900</span>*<span class="number">1024</span>];</span><br></pre></td></tr></table></figure>
+
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/28128785.jpg" alt="img"></p>
+<p><strong>简单解释一下为什么会出现这种情况：</strong> 因为给 allocation2 分配内存的时候 eden 区内存几乎已经被分配完了，我们刚刚讲了当 Eden 区没有足够空间进行分配时，虚拟机将发起一次 Minor GC.GC 期间虚拟机又发现 allocation1 无法存入 Survivor 空间，所以只好通过 <strong>分配担保机制</strong> 把新生代的对象提前转移到老年代中去，老年代上的空间足够存放 allocation1，所以不会出现 Full GC。执行 Minor GC 后，后面分配的对象如果能够存在 eden 区的话，还是会在 eden 区分配内存。可以执行如下代码验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">GCTest</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">byte</span>[] allocation1, allocation2,allocation3,allocation4,allocation5;</span><br><span class="line">        allocation1 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">32000</span>*<span class="number">1024</span>];</span><br><span class="line">        allocation2 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1000</span>*<span class="number">1024</span>];</span><br><span class="line">        allocation3 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1000</span>*<span class="number">1024</span>];</span><br><span class="line">        allocation4 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1000</span>*<span class="number">1024</span>];</span><br><span class="line">        allocation5 = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1000</span>*<span class="number">1024</span>];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-2-大对象直接进入老年代"><a href="#1-2-大对象直接进入老年代" class="headerlink" title="1.2 大对象直接进入老年代"></a>1.2 大对象直接进入老年代</h3><p>大对象就是需要大量连续内存空间的对象（比如：字符串、数组）。</p>
+<p><strong>为什么要这样呢？</strong></p>
+<p>为了避免为大对象分配内存时由于分配担保机制带来的复制而降低效率。</p>
+<h3 id="1-3-长期存活的对象将进入老年代"><a href="#1-3-长期存活的对象将进入老年代" class="headerlink" title="1.3 长期存活的对象将进入老年代"></a>1.3 长期存活的对象将进入老年代</h3><p>既然虚拟机采用了分代收集的思想来管理内存，那么内存回收时就必须能识别哪些对象应放在新生代，哪些对象应放在老年代中。为了做到这一点，虚拟机给每个对象一个对象年龄（Age）计数器。</p>
+<p>如果对象在 Eden 出生并经过第一次 Minor GC 后仍然能够存活，并且能被 Survivor 容纳的话，将被移动到 Survivor 空间中，并将对象年龄设为 1.对象在 Survivor 中每熬过一次 MinorGC,年龄就增加 1 岁，当它的年龄增加到一定程度（默认为 15 岁），就会被晋升到老年代中。对象晋升到老年代的年龄阈值，可以通过参数 <code>-XX:MaxTenuringThreshold</code> 来设置。</p>
+<h3 id="1-4-动态对象年龄判定"><a href="#1-4-动态对象年龄判定" class="headerlink" title="1.4 动态对象年龄判定"></a>1.4 动态对象年龄判定</h3><p>为了更好的适应不同程序的内存情况，虚拟机不是永远要求对象年龄必须达到了某个值才能进入老年代，如果 Survivor 空间中相同年龄所有对象大小的总和大于 Survivor 空间的一半，年龄大于或等于该年龄的对象就可以直接进入老年代，无需达到要求的年龄。</p>
+<h2 id="2-对象已经死亡？"><a href="#2-对象已经死亡？" class="headerlink" title="2 对象已经死亡？"></a>2 对象已经死亡？</h2><p>堆中几乎放着所有的对象实例，对堆垃圾回收前的第一步就是要判断那些对象已经死亡（即不能再被任何途径使用的对象）。</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/11034259.jpg" alt="img"></p>
+<h3 id="2-1-引用计数法"><a href="#2-1-引用计数法" class="headerlink" title="2.1 引用计数法"></a>2.1 引用计数法</h3><p>给对象中添加一个引用计数器，每当有一个地方引用它，计数器就加 1；当引用失效，计数器就减 1；任何时候计数器为 0 的对象就是不可能再被使用的。</p>
+<p><strong>这个方法实现简单，效率高，但是目前主流的虚拟机中并没有选择这个算法来管理内存，其最主要的原因是它很难解决对象之间相互循环引用的问题。</strong> 所谓对象之间的相互引用问题，如下面代码所示：除了对象 objA 和 objB 相互引用着对方之外，这两个对象之间再无任何引用。但是他们因为互相引用对方，导致它们的引用计数器都不为 0，于是引用计数算法无法通知 GC 回收器回收他们。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ReferenceCountingGc</span> &#123;</span><br><span class="line">    <span class="type">Object</span> <span class="variable">instance</span> <span class="operator">=</span> <span class="literal">null</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ReferenceCountingGc</span> <span class="variable">objA</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceCountingGc</span>();</span><br><span class="line">        <span class="type">ReferenceCountingGc</span> <span class="variable">objB</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ReferenceCountingGc</span>();</span><br><span class="line">        objA.instance = objB;</span><br><span class="line">        objB.instance = objA;</span><br><span class="line">        objA = <span class="literal">null</span>;</span><br><span class="line">        objB = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="2-2-可达性分析算法"><a href="#2-2-可达性分析算法" class="headerlink" title="2.2 可达性分析算法"></a>2.2 可达性分析算法</h3><p>这个算法的基本思想就是通过一系列的称为 <strong>“GC Roots”</strong> 的对象作为起点，从这些节点开始向下搜索，节点所走过的路径称为引用链，当一个对象到 GC Roots 没有任何引用链相连的话，则证明此对象是不可用的。</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/72762049.jpg" alt="可达性分析算法 "></p>
+<p>​																				<strong>可达性分析算法</strong></p>
+<h3 id="2-3-再谈引用"><a href="#2-3-再谈引用" class="headerlink" title="2.3 再谈引用"></a>2.3 再谈引用</h3><p>无论是通过引用计数法判断对象引用数量，还是通过可达性分析法判断对象的引用链是否可达，判定对象的存活都与“引用”有关。</p>
+<p>JDK1.2 之前，Java 中引用的定义很传统：如果 reference 类型的数据存储的数值代表的是另一块内存的起始地址，就称这块内存代表一个引用。</p>
+<p>JDK1.2 以后，Java 对引用的概念进行了扩充，将引用分为强引用、软引用、弱引用、虚引用四种（引用强度逐渐减弱）</p>
+<p><strong>1．强引用（StrongReference）</strong></p>
+<p>以前我们使用的大部分引用实际上都是强引用，这是使用最普遍的引用。如果一个对象具有强引用，那就类似于<strong>必不可少的生活用品</strong>，垃圾回收器绝不会回收它。当内存空间不足，Java 虚拟机宁愿抛出 OutOfMemoryError 错误，使程序异常终止，也不会靠随意回收具有强引用的对象来解决内存不足问题。</p>
+<p><strong>2．软引用（SoftReference）</strong></p>
+<p>如果一个对象只具有软引用，那就类似于<strong>可有可无的生活用品</strong>。如果内存空间足够，垃圾回收器就不会回收它，如果内存空间不足了，就会回收这些对象的内存。只要垃圾回收器没有回收它，该对象就可以被程序使用。软引用可用来实现内存敏感的高速缓存。</p>
+<p>软引用可以和一个引用队列（ReferenceQueue）联合使用，如果软引用所引用的对象被垃圾回收，JAVA 虚拟机就会把这个软引用加入到与之关联的引用队列中。</p>
+<p><strong>3．弱引用（WeakReference）</strong></p>
+<p>如果一个对象只具有弱引用，那就类似于<strong>可有可无的生活用品</strong>。弱引用与软引用的区别在于：只具有弱引用的对象拥有更短暂的生命周期。在垃圾回收器线程扫描它所管辖的内存区域的过程中，一旦发现了只具有弱引用的对象，不管当前内存空间足够与否，都会回收它的内存。不过，由于垃圾回收器是一个优先级很低的线程， 因此不一定会很快发现那些只具有弱引用的对象。</p>
+<p>弱引用可以和一个引用队列（ReferenceQueue）联合使用，如果弱引用所引用的对象被垃圾回收，Java 虚拟机就会把这个弱引用加入到与之关联的引用队列中。</p>
+<p><strong>4．虚引用（PhantomReference）</strong></p>
+<p>“虚引用”顾名思义，就是形同虚设，与其他几种引用都不同，虚引用并不会决定对象的生命周期。如果一个对象仅持有虚引用，那么它就和没有任何引用一样，在任何时候都可能被垃圾回收。</p>
+<p><strong>虚引用主要用来跟踪对象被垃圾回收的活动</strong>。</p>
+<p><strong>虚引用与软引用和弱引用的一个区别在于：</strong> 虚引用必须和引用队列（ReferenceQueue）联合使用。当垃圾回收器准备回收一个对象时，如果发现它还有虚引用，就会在回收对象的内存之前，把这个虚引用加入到与之关联的引用队列中。程序可以通过判断引用队列中是否已经加入了虚引用，来了解被引用的对象是否将要被垃圾回收。程序如果发现某个虚引用已经被加入到引用队列，那么就可以在所引用的对象的内存被回收之前采取必要的行动。</p>
+<p>特别注意，在程序设计中一般很少使用弱引用与虚引用，使用软引用的情况较多，这是因为<strong>软引用可以加速 JVM 对垃圾内存的回收速度，可以维护系统的运行安全，防止内存溢出（OutOfMemory）等问题的产生</strong>。</p>
+<h3 id="2-4-不可达的对象并非“非死不可”"><a href="#2-4-不可达的对象并非“非死不可”" class="headerlink" title="2.4 不可达的对象并非“非死不可”"></a>2.4 不可达的对象并非“非死不可”</h3><p>即使在可达性分析法中不可达的对象，也并非是“非死不可”的，这时候它们暂时处于“缓刑阶段”，要真正宣告一个对象死亡，至少要经历两次标记过程；可达性分析法中不可达的对象被第一次标记并且进行一次筛选，筛选的条件是此对象是否有必要执行 finalize 方法。当对象没有覆盖 finalize 方法，或 finalize 方法已经被虚拟机调用过时，虚拟机将这两种情况视为没有必要执行。</p>
+<p>被判定为需要执行的对象将会被放在一个队列中进行第二次标记，除非这个对象与引用链上的任何一个对象建立关联，否则就会被真的回收。</p>
+<h3 id="2-5-如何判断一个常量是废弃常量"><a href="#2-5-如何判断一个常量是废弃常量" class="headerlink" title="2.5 如何判断一个常量是废弃常量"></a>2.5 如何判断一个常量是废弃常量</h3><p>运行时常量池主要回收的是废弃的常量。那么，我们如何判断一个常量是废弃常量呢？</p>
+<p>假如在常量池中存在字符串 “abc”，如果当前没有任何 String 对象引用该字符串常量的话，就说明常量 “abc” 就是废弃常量，如果这时发生内存回收的话而且有必要的话，”abc” 就会被系统清理出常量池。</p>
+<p>注意：我们在 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU4NDQ4MzU5OA==&mid=2247484303&idx=1&sn=af0fd436cef755463f59ee4dd0720cbd&chksm=fd9855eecaefdcf8d94ac581cfda4e16c8a730bda60c3b50bc55c124b92f23b6217f7f8e58d5&token=506869459&lang=zh_CN#rd">可能是把 Java 内存区域讲的最清楚的一篇文章 </a>也讲了 JDK1.7 及之后版本的 JVM 已经将运行时常量池从方法区中移了出来，在 Java 堆（Heap）中开辟了一块区域存放运行时常量池。</p>
+<h3 id="2-6-如何判断一个类是无用的类"><a href="#2-6-如何判断一个类是无用的类" class="headerlink" title="2.6 如何判断一个类是无用的类"></a>2.6 如何判断一个类是无用的类</h3><p>方法区主要回收的是无用的类，那么如何判断一个类是无用的类的呢？</p>
+<p>判定一个常量是否是“废弃常量”比较简单，而要判定一个类是否是“无用的类”的条件则相对苛刻许多。类需要同时满足下面 3 个条件才能算是 <strong>“无用的类”</strong> ：</p>
+<ul>
+<li>该类所有的实例都已经被回收，也就是 Java 堆中不存在该类的任何实例。</li>
+<li>加载该类的 ClassLoader 已经被回收。</li>
+<li>该类对应的 java.lang.Class 对象没有在任何地方被引用，无法在任何地方通过反射访问该类的方法。</li>
+</ul>
+<p>虚拟机可以对满足上述 3 个条件的无用类进行回收，这里说的仅仅是“可以”，而并不是和对象一样不使用了就会必然被回收。</p>
+<h2 id="3-垃圾收集算法"><a href="#3-垃圾收集算法" class="headerlink" title="3 垃圾收集算法"></a>3 垃圾收集算法</h2><p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95.jpg" alt="垃圾收集算法分类"></p>
+<p>​																			<strong>垃圾收集算法分类</strong></p>
+<h3 id="3-1-标记-清除算法"><a href="#3-1-标记-清除算法" class="headerlink" title="3.1 标记-清除算法"></a>3.1 标记-清除算法</h3><p>该算法分为“标记”和“清除”阶段：首先标记出所有需要回收的对象，在标记完成后统一回收所有被标记的对象。它是最基础的收集算法，后续的算法都是对其不足进行改进得到。这种垃圾收集算法会带来两个明显的问题：</p>
+<ol>
+<li><strong>效率问题</strong></li>
+<li><strong>空间问题（标记清除后会产生大量不连续的碎片）</strong></li>
+</ol>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/63707281.jpg" alt="公众号"></p>
+<h3 id="3-2-复制算法"><a href="#3-2-复制算法" class="headerlink" title="3.2 复制算法"></a>3.2 复制算法</h3><p>为了解决效率问题，“复制”收集算法出现了。它可以将内存分为大小相同的两块，每次使用其中的一块。当这一块的内存使用完后，就将还存活的对象复制到另一块去，然后再把使用的空间一次清理掉。这样就使每次的内存回收都是对内存区间的一半进行回收。</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/90984624.jpg" alt="公众号"></p>
+<h3 id="3-3-标记-整理算法"><a href="#3-3-标记-整理算法" class="headerlink" title="3.3 标记-整理算法"></a>3.3 标记-整理算法</h3><p>根据老年代的特点提出的一种标记算法，标记过程仍然与“标记-清除”算法一样，但后续步骤不是直接对可回收对象回收，而是让所有存活的对象向一端移动，然后直接清理掉端边界以外的内存。</p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/94057049.jpg" alt="标记-整理算法 "></p>
+<p>​																								<strong>标记-整理算法</strong></p>
+<h3 id="3-4-分代收集算法"><a href="#3-4-分代收集算法" class="headerlink" title="3.4 分代收集算法"></a>3.4 分代收集算法</h3><p>当前虚拟机的垃圾收集都采用分代收集算法，这种算法没有什么新的思想，只是根据对象存活周期的不同将内存分为几块。一般将 java 堆分为新生代和老年代，这样我们就可以根据各个年代的特点选择合适的垃圾收集算法。</p>
+<p><strong>比如在新生代中，每次收集都会有大量对象死去，所以可以选择复制算法，只需要付出少量对象的复制成本就可以完成每次垃圾收集。而老年代的对象存活几率是比较高的，而且没有额外的空间对它进行分配担保，所以我们必须选择“标记-清除”或“标记-整理”算法进行垃圾收集。</strong></p>
+<p><strong>延伸面试问题：</strong> HotSpot 为什么要分为新生代和老年代？</p>
+<p>根据上面的对分代收集算法的介绍回答。</p>
+<h2 id="4-垃圾收集器"><a href="#4-垃圾收集器" class="headerlink" title="4 垃圾收集器"></a>4 垃圾收集器</h2><p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8.jpg" alt="垃圾收集器分类"></p>
+<p>​																		<strong>垃圾收集器分类</strong></p>
+<p><strong>如果说收集算法是内存回收的方法论，那么垃圾收集器就是内存回收的具体实现。</strong></p>
+<p>虽然我们对各个收集器进行比较，但并非要挑选出一个最好的收集器。因为直到现在为止还没有最好的垃圾收集器出现，更加没有万能的垃圾收集器，<strong>我们能做的就是根据具体应用场景选择适合自己的垃圾收集器</strong>。试想一下：如果有一种四海之内、任何场景下都适用的完美收集器存在，那么我们的 HotSpot 虚拟机就不会实现那么多不同的垃圾收集器了。</p>
+<h3 id="4-1-Serial-收集器"><a href="#4-1-Serial-收集器" class="headerlink" title="4.1 Serial 收集器"></a>4.1 Serial 收集器</h3><p>Serial（串行）收集器收集器是最基本、历史最悠久的垃圾收集器了。大家看名字就知道这个收集器是一个单线程收集器了。它的 <strong>“单线程”</strong> 的意义不仅仅意味着它只会使用一条垃圾收集线程去完成垃圾收集工作，更重要的是它在进行垃圾收集工作的时候必须暂停其他所有的工作线程（ <strong>“Stop The World”</strong> ），直到它收集结束。</p>
+<p><u><strong>新生代采用复制算法，老年代采用标记-整理算法。</strong></u></p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/46873026.jpg" alt=" Serial 收集器 "></p>
+<p>​																					<strong>Serial 收集器</strong></p>
+<p>虚拟机的设计者们当然知道 Stop The World 带来的不良用户体验，所以在后续的垃圾收集器设计中停顿时间在不断缩短（仍然还有停顿，寻找最优秀的垃圾收集器的过程仍然在继续）。</p>
+<p>但是 Serial 收集器有没有优于其他垃圾收集器的地方呢？当然有，它<strong>简单而高效（与其他收集器的单线程相比）</strong>。Serial 收集器由于没有线程交互的开销，自然可以获得很高的单线程收集效率。Serial 收集器对于运行在 Client 模式下的虚拟机来说是个不错的选择。</p>
+<h3 id="4-2-ParNew-收集器"><a href="#4-2-ParNew-收集器" class="headerlink" title="4.2 ParNew 收集器"></a>4.2 ParNew 收集器</h3><p><strong>ParNew 收集器其实就是 Serial 收集器的多线程版本，除了使用多线程进行垃圾收集外，其余行为（控制参数、收集算法、回收策略等等）和 Serial 收集器完全一样。</strong></p>
+<p><strong>新生代采用复制算法，老年代采用标记-整理算法。</strong></p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/22018368.jpg" alt="ParNew 收集器 "></p>
+<p>​																					<strong>ParNew 收集器</strong></p>
+<p>它是许多运行在 Server 模式下的虚拟机的首要选择，除了 Serial 收集器外，只有它能与 CMS 收集器（真正意义上的并发收集器，后面会介绍到）配合工作。</p>
+<p><strong>并行和并发概念补充：</strong></p>
+<ul>
+<li><strong>并行（Parallel）</strong> ：指多条垃圾收集线程并行工作，但此时用户线程仍然处于等待状态。</li>
+<li><strong>并发（Concurrent）</strong>：指用户线程与垃圾收集线程同时执行（但不一定是并行，可能会交替执行），用户程序在继续运行，而垃圾收集器运行在另一个 CPU 上。</li>
+</ul>
+<h3 id="4-3-Parallel-Scavenge-收集器"><a href="#4-3-Parallel-Scavenge-收集器" class="headerlink" title="4.3 Parallel Scavenge 收集器"></a>4.3 Parallel Scavenge 收集器</h3><p>Parallel Scavenge 收集器也是使用复制算法的多线程收集器，它看上去几乎和ParNew都一样。 <strong>那么它有什么特别之处呢？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-XX:+UseParallelGC </span><br><span class="line"></span><br><span class="line">    使用 Parallel 收集器+ 老年代串行</span><br><span class="line"></span><br><span class="line">-XX:+UseParallelOldGC</span><br><span class="line"></span><br><span class="line">    使用 Parallel 收集器+ 老年代并行</span><br></pre></td></tr></table></figure>
+
+<p><strong>Parallel Scavenge 收集器关注点是吞吐量（高效率的利用 CPU）。CMS 等垃圾收集器的关注点更多的是用户线程的停顿时间（提高用户体验）。所谓吞吐量就是 CPU 中用于运行用户代码的时间与 CPU 总消耗时间的比值。</strong> Parallel Scavenge 收集器提供了很多参数供用户找到最合适的停顿时间或最大吞吐量，如果对于收集器运作不太了解的话，手工优化存在困难的话可以选择把内存管理优化交给虚拟机去完成也是一个不错的选择。</p>
+<p><strong>新生代采用复制算法，老年代采用标记-整理算法。</strong></p>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/22018368-165254556479017.jpg" alt="Parallel Scavenge 收集器 "></p>
+<p>​																			<strong>Parallel Scavenge 收集器</strong></p>
+<h3 id="4-4-Serial-Old-收集器"><a href="#4-4-Serial-Old-收集器" class="headerlink" title="4.4.Serial Old 收集器"></a>4.4.Serial Old 收集器</h3><p><strong>Serial 收集器的老年代版本</strong>，它同样是一个单线程收集器。它主要有两大用途：一种用途是在 JDK1.5 以及以前的版本中与 Parallel Scavenge 收集器搭配使用，另一种用途是作为 CMS 收集器的后备方案。</p>
+<h3 id="4-5-Parallel-Old-收集器"><a href="#4-5-Parallel-Old-收集器" class="headerlink" title="4.5 Parallel Old 收集器"></a>4.5 Parallel Old 收集器</h3><p><strong>Parallel Scavenge 收集器的老年代版本</strong>。使用多线程和“标记-整理”算法。在注重吞吐量以及 CPU 资源的场合，都可以优先考虑 Parallel Scavenge 收集器和 Parallel Old 收集器。</p>
+<h3 id="4-6-CMS-收集器"><a href="#4-6-CMS-收集器" class="headerlink" title="4.6 CMS 收集器"></a>4.6 CMS 收集器</h3><p><strong>CMS（Concurrent Mark Sweep）收集器是一种以获取最短回收停顿时间为目标的收集器。它非常符合在注重用户体验的应用上使用。</strong></p>
+<p><strong>CMS（Concurrent Mark Sweep）收集器是 HotSpot 虚拟机第一款真正意义上的并发收集器，它第一次实现了让垃圾收集线程与用户线程（基本上）同时工作。</strong></p>
+<p>从名字中的<strong>Mark Sweep</strong>这两个词可以看出，CMS 收集器是一种 <strong>“标记-清除”算法</strong>实现的，它的运作过程相比于前面几种垃圾收集器来说更加复杂一些。整个过程分为四个步骤：</p>
+<ul>
+<li><strong>初始标记：</strong> 暂停所有的其他线程，并记录下直接与 root 相连的对象，速度很快 ；</li>
+<li><strong>并发标记：</strong> 同时开启 GC 和用户线程，用一个闭包结构去记录可达对象。但在这个阶段结束，这个闭包结构并不能保证包含当前所有的可达对象。因为用户线程可能会不断的更新引用域，所以 GC 线程无法保证可达性分析的实时性。所以这个算法里会跟踪记录这些发生引用更新的地方。</li>
+<li><strong>重新标记：</strong> 重新标记阶段就是为了修正并发标记期间因为用户程序继续运行而导致标记产生变动的那一部分对象的标记记录，这个阶段的停顿时间一般会比初始标记阶段的时间稍长，远远比并发标记阶段时间短</li>
+<li><strong>并发清除：</strong> 开启用户线程，同时 GC 线程开始对为标记的区域做清扫。</li>
+</ul>
+<p><img src="/img/article/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/82825079.jpg" alt="CMS 垃圾收集器 "></p>
+<p>​																						<strong>CMS 垃圾收集器</strong></p>
+<p>从它的名字就可以看出它是一款优秀的垃圾收集器，主要优点：<strong>并发收集、低停顿</strong>。但是它有下面三个明显的缺点：</p>
+<ul>
+<li><strong>对 CPU 资源敏感；</strong></li>
+<li><strong>无法处理浮动垃圾；</strong></li>
+<li><strong>它使用的回收算法-“标记-清除”算法会导致收集结束时会有大量空间碎片产生。</strong></li>
+</ul>
+<h3 id="4-7-G1-收集器"><a href="#4-7-G1-收集器" class="headerlink" title="4.7 G1 收集器"></a>4.7 G1 收集器</h3><p><strong>G1 (Garbage-First) 是一款面向服务器的垃圾收集器,主要针对配备多颗处理器及大容量内存的机器. 以极高概率满足 GC 停顿时间要求的同时,还具备高吞吐量性能特征.</strong></p>
+<p>被视为 JDK1.7 中 HotSpot 虚拟机的一个重要进化特征。它具备一下特点：</p>
+<ul>
+<li><strong>并行与并发</strong>：G1 能充分利用 CPU、多核环境下的硬件优势，使用多个 CPU（CPU 或者 CPU 核心）来缩短 Stop-The-World 停顿时间。部分其他收集器原本需要停顿 Java 线程执行的 GC 动作，G1 收集器仍然可以通过并发的方式让 java 程序继续执行。</li>
+<li><strong>分代收集</strong>：虽然 G1 可以不需要其他收集器配合就能独立管理整个 GC 堆，但是还是保留了分代的概念。</li>
+<li><strong>空间整合</strong>：与 CMS 的“标记–清理”算法不同，G1 从整体来看是基于“标记整理”算法实现的收集器；从局部上来看是基于“复制”算法实现的。</li>
+<li><strong>可预测的停顿</strong>：这是 G1 相对于 CMS 的另一个大优势，降低停顿时间是 G1 和 CMS 共同的关注点，但 G1 除了追求低停顿外，还能建立可预测的停顿时间模型，能让使用者明确指定在一个长度为 M 毫秒的时间片段内。</li>
+</ul>
+<p>G1 收集器的运作大致分为以下几个步骤：</p>
+<ul>
+<li><strong>初始标记</strong></li>
+<li><strong>并发标记</strong></li>
+<li><strong>最终标记</strong></li>
+<li><strong>筛选回收</strong></li>
+</ul>
+<p>**G1 收集器在后台维护了一个优先列表，每次根据允许的收集时间，优先选择回收价值最大的 Region(这也就是它的名字 Garbage-First 的由来)**。这种使用 Region 划分内存空间以及有优先级的区域回收方式，保证了 GF 收集器在有限时间内可以尽可能高的收集效率（把内存化整为零）。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>《深入理解 Java 虚拟机：JVM 高级特性与最佳实践（第二版》</li>
+<li><a target="_blank" rel="noopener" href="https://my.oschina.net/hosee/blog/644618">https://my.oschina.net/hosee/blog/644618</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jvms/se8/html/index.html">https://docs.oracle.com/javase/specs/jvms/se8/html/index.html</a></li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__title"><span class="post-copyright-info"><h>Java垃圾回收</h></span></div><div class="post-copyright__type"><span class="post-copyright-info"><a href="https://www.lovebai.top/article/12705/">https://www.lovebai.top/article/12705/</a></span></div><div class="post-copyright-m"><div class="post-copyright-m-info"><div class="post-copyright-a"><h>作者</h><div class="post-copyright-cc-info"><h>baixxq</h></div></div><div class="post-copyright-c"><h>发布于</h><div class="post-copyright-cc-info"><h>2022-04-28</h></div></div><div class="post-copyright-u"><h>更新于</h><div class="post-copyright-cc-info"><h>2022-05-01</h></div></div><div class="post-copyright-c"><h>许可协议</h><div class="post-copyright-cc-info"><a class="icon" rel="noopener" target="_blank" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a><a rel="noopener" target="_blank" title="CC BY-NC-SA 4.0" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a></div></div></div></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6/">垃圾回收</a><a class="post-meta__tags" href="/tags/JVM/">JVM</a></div><div class="post_share"><div class="social-share" data-image="/imgs/6.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="/pluginsSrc/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="/pluginsSrc/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechat_pay.png" target="_blank"><img class="post-qr-code-img" src="/img/wechat_pay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/ali_pay.png" target="_blank"><img class="post-qr-code-img" src="/img/ali_pay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/article/44979/"><img class="prev-cover" src="/imgs/4.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JDBC笔记整理</div></div></a></div><div class="next-post pull-right"><a href="/article/35160/"><img class="next-cover" src="/imgs/8.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">MySQL数据库学习</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="twikoo-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">baixxq</div><div class="author-info__description">欢迎来到橙子味小白的博客</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">27</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">19</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">15</div></a></div><a id="card-info-btn" href="https://www.lovebai.top/"><i class="fab fa-github"></i><span>欢迎光临</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/baixxq" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:baixxq@163.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="http://tool.gljlw.com/qqq/?qq=719617466" target="_blank" title="QQ"><i class="fa-brands fa-qq"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">本站作为自己使用和测试，不对外开放。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM-%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6"><span class="toc-text">JVM 垃圾回收</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E8%8A%82%E5%B8%B8%E8%A7%81%E9%9D%A2%E8%AF%95%E9%A2%98"><span class="toc-text">本节常见面试题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AC%E6%96%87%E5%AF%BC%E7%81%AB%E7%B4%A2"><span class="toc-text">本文导火索</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%8F%AD%E5%BC%80-JVM-%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D%E4%B8%8E%E5%9B%9E%E6%94%B6%E7%9A%84%E7%A5%9E%E7%A7%98%E9%9D%A2%E7%BA%B1"><span class="toc-text">1 揭开 JVM 内存分配与回收的神秘面纱</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%AF%B9%E8%B1%A1%E4%BC%98%E5%85%88%E5%9C%A8-eden-%E5%8C%BA%E5%88%86%E9%85%8D"><span class="toc-text">1.1 对象优先在 eden 区分配</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%A4%A7%E5%AF%B9%E8%B1%A1%E7%9B%B4%E6%8E%A5%E8%BF%9B%E5%85%A5%E8%80%81%E5%B9%B4%E4%BB%A3"><span class="toc-text">1.2 大对象直接进入老年代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E9%95%BF%E6%9C%9F%E5%AD%98%E6%B4%BB%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%B0%86%E8%BF%9B%E5%85%A5%E8%80%81%E5%B9%B4%E4%BB%A3"><span class="toc-text">1.3 长期存活的对象将进入老年代</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%8A%A8%E6%80%81%E5%AF%B9%E8%B1%A1%E5%B9%B4%E9%BE%84%E5%88%A4%E5%AE%9A"><span class="toc-text">1.4 动态对象年龄判定</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AF%B9%E8%B1%A1%E5%B7%B2%E7%BB%8F%E6%AD%BB%E4%BA%A1%EF%BC%9F"><span class="toc-text">2 对象已经死亡？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%BC%95%E7%94%A8%E8%AE%A1%E6%95%B0%E6%B3%95"><span class="toc-text">2.1 引用计数法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8F%AF%E8%BE%BE%E6%80%A7%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="toc-text">2.2 可达性分析算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%86%8D%E8%B0%88%E5%BC%95%E7%94%A8"><span class="toc-text">2.3 再谈引用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E4%B8%8D%E5%8F%AF%E8%BE%BE%E7%9A%84%E5%AF%B9%E8%B1%A1%E5%B9%B6%E9%9D%9E%E2%80%9C%E9%9D%9E%E6%AD%BB%E4%B8%8D%E5%8F%AF%E2%80%9D"><span class="toc-text">2.4 不可达的对象并非“非死不可”</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E5%B8%B8%E9%87%8F%E6%98%AF%E5%BA%9F%E5%BC%83%E5%B8%B8%E9%87%8F"><span class="toc-text">2.5 如何判断一个常量是废弃常量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E4%B8%80%E4%B8%AA%E7%B1%BB%E6%98%AF%E6%97%A0%E7%94%A8%E7%9A%84%E7%B1%BB"><span class="toc-text">2.6 如何判断一个类是无用的类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="toc-text">3 垃圾收集算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A0%87%E8%AE%B0-%E6%B8%85%E9%99%A4%E7%AE%97%E6%B3%95"><span class="toc-text">3.1 标记-清除算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%A4%8D%E5%88%B6%E7%AE%97%E6%B3%95"><span class="toc-text">3.2 复制算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%A0%87%E8%AE%B0-%E6%95%B4%E7%90%86%E7%AE%97%E6%B3%95"><span class="toc-text">3.3 标记-整理算法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%88%86%E4%BB%A3%E6%94%B6%E9%9B%86%E7%AE%97%E6%B3%95"><span class="toc-text">3.4 分代收集算法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4 垃圾收集器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-Serial-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.1 Serial 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-ParNew-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.2 ParNew 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-Parallel-Scavenge-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.3 Parallel Scavenge 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-Serial-Old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.4.Serial Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-Parallel-Old-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.5 Parallel Old 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-CMS-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.6 CMS 收集器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-G1-%E6%94%B6%E9%9B%86%E5%99%A8"><span class="toc-text">4.7 G1 收集器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-text">参考</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/article/47200/" title="恋爱小语录"><img src="/imgs/27.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="恋爱小语录"/></a><div class="content"><a class="title" href="/article/47200/" title="恋爱小语录">恋爱小语录</a><time datetime="2023-04-12T15:56:44.000Z" title="发表于 2023-04-12 23:56:44">2023-04-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/4983/" title="如何搭建博客"><img src="/imgs/26.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="如何搭建博客"/></a><div class="content"><a class="title" href="/article/4983/" title="如何搭建博客">如何搭建博客</a><time datetime="2023-04-11T15:56:44.000Z" title="发表于 2023-04-11 23:56:44">2023-04-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/45037/" title="力扣"><img src="/imgs/25.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="力扣"/></a><div class="content"><a class="title" href="/article/45037/" title="力扣">力扣</a><time datetime="2022-08-20T12:03:44.000Z" title="发表于 2022-08-20 20:03:44">2022-08-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/45037/" title="剑指Offer"><img src="/imgs/24.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="剑指Offer"/></a><div class="content"><a class="title" href="/article/45037/" title="剑指Offer">剑指Offer</a><time datetime="2022-08-09T12:03:44.000Z" title="发表于 2022-08-09 20:03:44">2022-08-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/article/16233/" title="Java中Arrays和List的sort方法"><img src="/imgs/23.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Java中Arrays和List的sort方法"/></a><div class="content"><a class="title" href="/article/16233/" title="Java中Arrays和List的sort方法">Java中Arrays和List的sort方法</a><time datetime="2022-05-28T12:03:44.000Z" title="发表于 2022-05-28 20:03:44">2022-05-28</time></div></div></div></div></div></div></main><footer id="footer" style="background: transparent"><div id="footer-wrap"><div class="footer_custom_text"><p><a style="margin-inline:5px"target="_blank" href="https://hexo.io/"><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&logo=hexo" title="博客框架为 Hexo" alt="HEXO"></a><a style="margin-inline:5px"target="_blank" href="https://butterfly.js.org/"><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&logo=bitdefender" title="主题采用 Butterfly" alt="Butterfly"></a><a style="margin-inline:5px"target="_blank" href="https://cloud.tencent.com/"><img src="https://img.shields.io/badge/CDN-Tencent-orange?style=flat&logo=ReactOS" title="本站使用 腾讯CND 为静态资源提供CDN加速"></a><a style="margin-inline:5px"target="_blank" href="https://github.com/"><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&logo=GitHub" title="本站国外访问由 GitHub 托管" alt="GitHub"></a><a style="margin-inline:5px"target="_blank" href="https://cloud.tencent.com/"><img src="https://img.shields.io/badge/Source-Tencent-d12166?style=flat&logo=GTK" title="本站国内访问由 腾讯COS 托管" ></a></p><p><a style="margin-inline:5px"target="_blank" href="https://beian.miit.gov.cn/"><img src="https://img.shields.io/badge/京ICP备-2022015151号-yellow?style=flat&logo=AdGuard" title="本站已在工信部备案，备案编号 京ICP备2022015151号"></a><a style="margin-inline:5px"target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002019&token=8c90a668-7dcb-40ac-8f03-d95d72c9b74d/"><img src="https://img.shields.io/badge/京公安网备-11010802039604号-brightgreen?style=flat&logo=AdGuard" title="本站已在公安部备案，备案编号 京公安网备 11010802039604号"></a><a style="margin-inline:5px"target="_blank"href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&logo=Claris" alt="img" title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/pluginsSrc/@fancyapps/ui/dist/fancybox.umd.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>(()=>{
+  const init = () => {
+    twikoo.init(Object.assign({
+      el: '#twikoo-wrap',
+      envId: 'https://twikoo.lovebai.top/',
+      region: '',
+      onCommentLoaded: function () {
+        btf.loadLightbox(document.querySelectorAll('#twikoo .tk-content img:not(.tk-owo-emotion)'))
+      }
+    }, null))
+  }
+
+  const getCount = () => {
+    const countELement = document.getElementById('twikoo-count')
+    if(!countELement) return
+    twikoo.getCommentsCount({
+      envId: 'https://twikoo.lovebai.top/',
+      region: '',
+      urls: [window.location.pathname],
+      includeReply: false
+    }).then(function (res) {
+      countELement.innerText = res[0].count
+    }).catch(function (err) {
+      console.error(err);
+    });
+  }
+
+  const runFn = () => {
+    init()
+    
+  }
+
+  const loadTwikoo = () => {
+    if (typeof twikoo === 'object') {
+      setTimeout(runFn,0)
+      return
+    } 
+    getScript('https://cdn.staticfile.org/twikoo/1.6.17/twikoo.all.min.js').then(runFn)
+  }
+
+  if ('Twikoo' === 'Twikoo' || !true) {
+    if (true) btf.loadComment(document.getElementById('twikoo-wrap'), loadTwikoo)
+    else loadTwikoo()
+  } else {
+    window.loadOtherComment = () => {
+      loadTwikoo()
+    }
+  }
+})()</script></div><script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script><script async src="/js/weather.js"></script><script src="/js/sun_moon.js" async></script><script async src="//at.alicdn.com/t/font_2264842_3izu8i5eoc2.js"></script><link rel="stylesheet" href="/css/custom/twikoo_beautify.css"  media="defer" onload="this.media='all'"><script async src="/js/grayscale.js"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="/pluginsSrc/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/11984/" alt=""><img width="48" height="48" src="/imgs/20.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-22</span><a class="blog-slider__title" href="article/11984/" alt="">力扣热题100</a><div class="blog-slider__text">力扣热题100，二刷整理</div><a class="blog-slider__button" href="article/11984/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/45037/" alt=""><img width="48" height="48" src="/imgs/24.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-08-09</span><a class="blog-slider__title" href="article/45037/" alt="">剑指Offer</a><div class="blog-slider__text">剑指Offer整本，之前刷过精简版，现在刷一下整体</div><a class="blog-slider__button" href="article/45037/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/64676/" alt=""><img width="48" height="48" src="/imgs/21.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-15</span><a class="blog-slider__title" href="article/64676/" alt="">牛客面试必刷TOP101</a><div class="blog-slider__text">牛客面试必刷TOP101，这个感觉都比较简单，有空就随便做一两道玩玩</div><a class="blog-slider__button" href="article/64676/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="article/44374/" alt=""><img width="48" height="48" src="/imgs/19.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2022-05-22</span><a class="blog-slider__title" href="article/44374/" alt="">代码随想录整理</a><div class="blog-slider__text">之前刷过一遍，现在每天整理一下</div><a class="blog-slider__button" href="article/44374/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><div class="js-pjax"><script async="async">var arr = document.getElementsByClassName('recent-post-item');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '500ms');
+    arr[i].setAttribute('data-wow-delay', '200ms');
+    arr[i].setAttribute('data-wow-offset', '180');
+    arr[i].setAttribute('data-wow-iteration', '1');
+  }</script><script async="async">var arr = document.getElementsByClassName('card-widget');
+for(var i = 0;i<arr.length;i++){
+    arr[i].classList.add('wow');
+    arr[i].classList.add('animate__zoomIn');
+    arr[i].setAttribute('data-wow-duration', '');
+    arr[i].setAttribute('data-wow-delay', '');
+    arr[i].setAttribute('data-wow-offset', '');
+    arr[i].setAttribute('data-wow-iteration', '');
+  }</script></div><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow.min.js"></script><script defer src="https://unpkg.zhimg.com/hexo-butterfly-wowjs/lib/wow_init.js"></script><!-- hexo injector body_end end --></body></html>
