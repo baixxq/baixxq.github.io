@@ -1,0 +1,420 @@
+/* 对照老站 themes/butterfly/source/css/custom.css 的卡片/顶栏/页脚部分 */
+
+:root {
+  --card-bg: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme="dark"] {
+  --card-bg: rgba(0, 0, 0, 0.5);
+}
+
+/* Butterfly 5 背景图走 inline style；这里再写一份，避免配置格式不对时掉回默认灰底 */
+#web_bg {
+  background-image: url('/imgs/background.jpg') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* 首页文章卡片 */
+#recent-posts .recent-post-item {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 首页轮播卡片（插件默认用 --global-bg，会变成实心灰底） */
+.blog-slider {
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/*
+ * Butterfly 5 首页卡片是 flex + 固定高度 + overflow:hidden。
+ * 轮播插件仍按 4.x 的结构插入，内容会被裁成空白框，只剩右侧圆点。
+ */
+#recent-posts .recent-post-item:has(#swiper_container) {
+  display: block !important;
+  height: auto !important;
+  min-height: 200px;
+  overflow: hidden;
+}
+
+#swiper_container.blog-slider {
+  height: 200px;
+}
+
+#swiper_container .swiper-wrapper {
+  height: 100%;
+}
+
+#swiper_container .blog-slider__item {
+  height: 100%;
+}
+
+/* 淡入时只显示当前页，避免上一页文字叠在下一页上 */
+#swiper_container .blog-slider__item:not(.swiper-slide-active) {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+#swiper_container .blog-slider__item.swiper-slide-active {
+  opacity: 1 !important;
+}
+
+#swiper_container .blog-slider__item.swiper-slide-active .blog-slider__img img,
+#swiper_container .blog-slider__item.swiper-slide-active .blog-slider__content > * {
+  opacity: 1;
+  transform: none;
+}
+
+/* 首页侧栏卡片 */
+.card-widget {
+  background: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* 文章页面正文背景 */
+div#post {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 分页页面 */
+div#page {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 归档页面 */
+div#archive {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 标签页面 */
+div#tag {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 分类页面 */
+div#category {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+/* 页脚透明 */
+#footer {
+  background: transparent !important;
+}
+
+#footer::before {
+  background: transparent !important;
+}
+
+/* 首页全屏顶栏透明，透出彩色背景 */
+#page-header.full_page,
+#page-header.not-top-img {
+  background: transparent !important;
+}
+
+#page-header.full_page::before,
+#page-header.not-top-img::before {
+  background: transparent !important;
+}
+
+/*
+ * 文章页头图。老站 4.x 总会给 #page-header 加一层 ::before 遮罩。
+ * Butterfly 5 把遮罩做成 mask.header 开关，关掉后伪元素不存在；
+ * 再用 background: transparent 会把封面清掉，白标题叠在浅色底上等于看不见。
+ */
+#page-header.post-bg {
+  background-image: url('/imgs/background.jpg') !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-color: transparent !important;
+}
+
+#page-header.post-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(19, 22, 20, 0.425) !important;
+  pointer-events: none;
+}
+
+#page-header.post-bg #nav,
+#page-header.post-bg #post-info {
+  position: relative;
+  z-index: 1;
+}
+
+[data-theme="dark"] #footer::before,
+[data-theme="dark"] #page-header.full_page::before,
+[data-theme="dark"] #page-header.not-top-img::before {
+  background: transparent !important;
+}
+
+[data-theme="dark"] #recent-posts > .recent-post-item {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] #aside-content .card-widget {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+[data-theme="dark"] div#post,
+[data-theme="dark"] div#page,
+[data-theme="dark"] div#archive,
+[data-theme="dark"] div#tag,
+[data-theme="dark"] div#category {
+  background: rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 文章标题前风车：5.x 把图标钉在 left:0，老站是挂在标题左侧并按层级上色 */
+#article-container h1::before,
+#article-container h2::before,
+#article-container h3::before,
+#article-container h4::before,
+#article-container h5::before,
+#article-container h6::before {
+  left: auto;
+  top: 0.2em;
+  -webkit-animation: ccc 1.2s linear infinite;
+  animation: ccc 1.2s linear infinite;
+}
+
+@-webkit-keyframes ccc {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-1turn);
+    transform: rotate(-1turn);
+  }
+}
+
+@keyframes ccc {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(-1turn);
+    transform: rotate(-1turn);
+  }
+}
+
+#article-container h1::before {
+  color: #ef50a8;
+  margin-left: -2.8rem;
+  font-size: 2.2rem;
+}
+
+#article-container h2::before {
+  color: #fb7061;
+  margin-left: -2.3rem;
+  font-size: 1.85rem;
+}
+
+#article-container h3::before {
+  color: #ffbf00;
+  margin-left: -2rem;
+  font-size: 1.5rem;
+}
+
+#article-container h4::before {
+  color: #a9e000;
+  margin-left: -1.7rem;
+  font-size: 1.3rem;
+}
+
+#article-container h5::before {
+  color: #57c850;
+  margin-left: -1.3rem;
+  font-size: 1rem;
+}
+
+#article-container h6::before {
+  color: #5ec1e0;
+  margin-left: -1.1rem;
+  font-size: 0.9rem;
+}
+
+#article-container h1:hover,
+#article-container h2:hover,
+#article-container h3:hover,
+#article-container h4:hover,
+#article-container h5:hover,
+#article-container h6:hover {
+  color: #49b1f5;
+}
+
+#article-container h1:hover::before,
+#article-container h2:hover::before,
+#article-container h3:hover::before,
+#article-container h4:hover::before,
+#article-container h5:hover::before,
+#article-container h6:hover::before {
+  color: #49b1f5;
+  -webkit-animation: ccc 3.2s linear infinite;
+  animation: ccc 3.2s linear infinite;
+}
+
+#rightside_config i.fas.fa-cog.fa-spin {
+  animation: fa-spin 3s linear infinite;
+}
+
+/* 文末版权框：字号、间距、水印对照老站 */
+#post .post-copyright {
+  position: relative;
+  margin: 40px 0 10px;
+  padding: 10px 16px;
+  overflow: hidden;
+  border: 1px solid var(--light-grey);
+  border-radius: 12px !important;
+  background-color: rgb(239, 241, 243);
+  box-shadow: 2px 2px 5px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+#post .post-copyright:hover {
+  box-shadow: 0 0 8px 0 rgba(232, 237, 250, 0.6), 0 2px 4px 0 rgba(232, 237, 250, 0.5);
+}
+
+#post .post-copyright::before {
+  position: absolute !important;
+  top: -120px !important;
+  right: -26px !important;
+  z-index: 0;
+  display: block !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: inherit !important;
+  content: '\f25e' !important;
+  font-family: 'Font Awesome 6 Brands', 'Font Awesome 5 Brands', 'Font Awesome 7 Brands' !important;
+  font-size: 200px !important;
+  font-weight: 400 !important;
+  line-height: 1 !important;
+  opacity: 0.2 !important;
+}
+
+#post .post-copyright__title,
+#post .post-copyright__type,
+#post .post-copyright-m {
+  position: relative;
+  z-index: 1;
+}
+
+#post .post-copyright-info {
+  padding-left: 6px;
+}
+
+#post .post-copyright__title {
+  margin: 0;
+  color: var(--font-color);
+  font-size: 22px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+#post .post-copyright__type {
+  margin: 0;
+  font-size: 17px;
+}
+
+#post .post-copyright__type a {
+  color: #49b1f5;
+  text-decoration: none;
+  word-break: break-word;
+}
+
+#post .post-copyright-m-info {
+  display: block;
+}
+
+#post .post-copyright-m-info .post-copyright-a,
+#post .post-copyright-m-info .post-copyright-c,
+#post .post-copyright-m-info .post-copyright-u {
+  display: inline-block;
+  width: fit-content;
+  padding: 2px 5px;
+}
+
+#post .post-copyright-label {
+  display: block;
+  color: var(--font-color);
+  font-size: 17px;
+  font-weight: normal;
+  line-height: 1.5;
+}
+
+#post .post-copyright-cc-info {
+  color: #49b1f5;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+#post .post-copyright-cc-info a {
+  color: #49b1f5;
+  text-decoration: none;
+}
+
+#post .post-copyright-cc-info .icon {
+  margin-right: 2px;
+}
+
+[data-theme='dark'] #post .post-copyright {
+  background-color: #07080a;
+  border: 1px solid rgb(19 18 18 / 35%);
+  box-shadow: 0 0 5px rgb(20, 120, 210);
+}
+
+[data-theme='dark'] #post .post-copyright-info,
+[data-theme='dark'] #post .post-copyright__title {
+  color: #e0e0e4;
+}
+
+/* 打赏：对照老站，悬停出微信/支付宝二维码 */
+.post-reward .reward-button {
+  padding: 4px 24px;
+  border-radius: 4px;
+}
+
+.post-reward .reward-main .reward-all {
+  padding: 20px 10px;
+  border-radius: 4px;
+}
+
+.post-reward .reward-main .reward-item img {
+  width: 130px;
+  height: 130px;
+}
+
+/* 侧栏分类：对照老站，悬停不要变成白字；有子分类的项显示展开箭头 */
+#aside-content .card-categories a:hover {
+  color: var(--font-color);
+}
+
+/* 内容区稍微加宽：默认 1200 → 1300；超宽屏对照老站用 1500 */
+.layout {
+  max-width: 1300px;
+}
+
+@media screen and (min-width: 2000px) {
+  .layout {
+    max-width: 1500px;
+  }
+}
+
+#page-header #post-info > *,
+#footer-wrap {
+  max-width: 1300px;
+}
+
+@media screen and (min-width: 2000px) {
+  #page-header #post-info > *,
+  #footer-wrap {
+    max-width: 1500px;
+  }
+}

@@ -1,0 +1,54 @@
+@font-face {
+  font-family: 'Candyhome';
+  src: url('/fonts/Candy.ttf');
+  font-display: swap;
+}
+
+/* 导航搜索只留放大镜，不显示「搜索」二字 */
+#search-button .search span {
+  display: none;
+}
+
+/* 老站彩色 iconfont：固定 16px，和文字齐平（不要跟 #nav 的 1.3em 一起放大） */
+#nav .iconfont {
+  font-family: 'iconfont' !important;
+  font-size: 16px;
+  width: 1em;
+  vertical-align: -0.1em;
+}
+
+/*
+ * 点过的菜单（例如留言板）不要变成正文链接蓝。
+ * 浏览器对 :visited 不解析 color: var(--xxx)，会掉回全局 a / a:hover 的蓝色。
+ */
+#page-header.full_page:not(.nav-fixed) #nav .menus_items a.site-page:link,
+#page-header.full_page:not(.nav-fixed) #nav .menus_items a.site-page:visited {
+  color: #eee;
+}
+
+#page-header.full_page:not(.nav-fixed) #nav .menus_items a.site-page:hover,
+#page-header.full_page:not(.nav-fixed) #nav .menus_items a.site-page:focus {
+  color: #fff;
+}
+
+#page-header.not-top-img #nav .menus_items a.site-page:link,
+#page-header.not-top-img #nav .menus_items a.site-page:visited,
+#page-header.not-top-img #nav .menus_items a.site-page:hover,
+#page-header.not-top-img #nav .menus_items a.site-page:focus,
+#page-header.nav-fixed #nav .menus_items a.site-page:link,
+#page-header.nav-fixed #nav .menus_items a.site-page:visited,
+#page-header.nav-fixed #nav .menus_items a.site-page:hover,
+#page-header.nav-fixed #nav .menus_items a.site-page:focus {
+  color: #4c4948;
+}
+
+[data-theme='dark'] #page-header.not-top-img #nav .menus_items a.site-page:link,
+[data-theme='dark'] #page-header.not-top-img #nav .menus_items a.site-page:visited,
+[data-theme='dark'] #page-header.not-top-img #nav .menus_items a.site-page:hover,
+[data-theme='dark'] #page-header.not-top-img #nav .menus_items a.site-page:focus,
+[data-theme='dark'] #page-header.nav-fixed #nav .menus_items a.site-page:link,
+[data-theme='dark'] #page-header.nav-fixed #nav .menus_items a.site-page:visited,
+[data-theme='dark'] #page-header.nav-fixed #nav .menus_items a.site-page:hover,
+[data-theme='dark'] #page-header.nav-fixed #nav .menus_items a.site-page:focus {
+  color: rgba(255, 255, 255, 0.7);
+}
