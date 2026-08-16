@@ -21,6 +21,15 @@
   background: rgba(255, 255, 255, 0.9);
 }
 
+/*
+ * wowjs 会先把 .wow 设成 visibility:hidden，再等滚动/动画露出。
+ * 无痕冷启动时 init 与加类脚本容易抢跑，卡片会一直隐形；这里兜住。
+ */
+#recent-posts .recent-post-item.wow,
+.card-widget.wow {
+  visibility: visible !important;
+}
+
 /* 首页轮播卡片（插件默认用 --global-bg，会变成实心灰底） */
 .blog-slider {
   background: rgba(255, 255, 255, 0.9) !important;
@@ -104,14 +113,21 @@ div#category {
   background: transparent !important;
 }
 
-/* 首页全屏顶栏透明，透出彩色背景 */
+/*
+ * 顶栏透明，透出彩色背景（对照老站 #page-header { background: transparent }）。
+ * 不含 .post-bg：文章页要单独保留封面/遮罩，见下方规则。
+ * .not-home-page = 标签/分类/关于等独立页；漏掉就会变回主题默认蓝 #49b1f5。
+ */
 #page-header.full_page,
-#page-header.not-top-img {
+#page-header.not-top-img,
+#page-header.not-home-page {
   background: transparent !important;
+  background-color: transparent !important;
 }
 
 #page-header.full_page::before,
-#page-header.not-top-img::before {
+#page-header.not-top-img::before,
+#page-header.not-home-page::before {
   background: transparent !important;
 }
 
@@ -148,7 +164,8 @@ div#category {
 
 [data-theme="dark"] #footer::before,
 [data-theme="dark"] #page-header.full_page::before,
-[data-theme="dark"] #page-header.not-top-img::before {
+[data-theme="dark"] #page-header.not-top-img::before,
+[data-theme="dark"] #page-header.not-home-page::before {
   background: transparent !important;
 }
 
@@ -417,4 +434,37 @@ div#category {
   #footer-wrap {
     max-width: 1500px;
   }
+}
+
+/* 首页 GitHub 贡献图：高度和轮播卡片一样，图在卡片里居中放大 */
+#recent-posts .recent-post-item.github-calendar-card {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 200px !important;
+  min-height: 200px;
+  overflow: hidden;
+  padding: 16px 20px;
+}
+
+#recent-posts .recent-post-item.github-calendar-card a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+#recent-posts .recent-post-item.github-calendar-card .github-chart {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 4px;
+  background: #fff;
+}
+
+[data-theme="dark"] #recent-posts .recent-post-item.github-calendar-card .github-chart {
+  opacity: 0.92;
 }
