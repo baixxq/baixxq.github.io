@@ -1,6 +1,7 @@
 @font-face {
   font-family: 'Candyhome';
-  src: url('/fonts/Candy.ttf');
+  src: url('/fonts/Candy.woff2') format('woff2'),
+       url('/fonts/Candy.ttf') format('truetype');
   font-display: swap;
 }
 
